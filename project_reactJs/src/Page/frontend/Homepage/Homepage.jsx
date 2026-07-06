@@ -1,8 +1,15 @@
-import React from 'react'
-
+import Slider from '../Slider/Slider'
+import BodyHomePage from  "./BodyHomePage"
+import NextBodyHome from './NextBodyHome'
+import RatingStar from './RatingStar'
 const Homepage = () => {
   return (
-    <div>Homepage</div>
+    <>
+     <Slider />
+     <BodyHomePage />
+     <NextBodyHome />
+     <RatingStar />
+    </>
   )
 }
 
