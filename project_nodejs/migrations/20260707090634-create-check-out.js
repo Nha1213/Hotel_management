@@ -10,10 +10,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       reservation_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Reservations',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
       },
       employee_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Employees',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
       },
       checkout_time: {
         type: Sequelize.DATE

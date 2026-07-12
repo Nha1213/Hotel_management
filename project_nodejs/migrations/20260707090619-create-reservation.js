@@ -10,7 +10,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       customer_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Customers',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
       },
       reservation_date: {
         type: Sequelize.DATE

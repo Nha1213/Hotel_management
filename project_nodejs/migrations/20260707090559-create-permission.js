@@ -13,7 +13,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       group_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'PermissionGroups',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        
       },
       route_name: {
         type: Sequelize.STRING

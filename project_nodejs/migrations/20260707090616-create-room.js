@@ -13,7 +13,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       room_type_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: "RoomTypes",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
       floor: {
         type: Sequelize.INTEGER

@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      PermissionGroup.hasMany(models.Permission, {
+        foreignKey: 'group_id',
+        as: 'permissions'
+      })
       // define association here
     }
   }

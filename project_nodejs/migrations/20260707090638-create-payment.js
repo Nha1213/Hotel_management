@@ -10,7 +10,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       reservation_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Reservations',
+          key: 'id',
+          onDelete: 'CASCADE'
+        }
       },
       amount: {
         type: Sequelize.DECIMAL
