@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Ensure upload directory exists
-const uploadDir = path.join(__dirname, '../../public/image');
+const uploadDir = path.join(__dirname, '../public/image ');
 
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
@@ -63,7 +63,7 @@ const deleteImageFolder = (filePath) => {
   if (!filePath) return;
 
   // const cleanedPath = filePath.replace(/^\/image\//, '');
-  const clearnedPath = path.join(__dirname,  "../../public")
+  const clearnedPath = path.join(__dirname,  "../public")
   const fullPath = path.join(clearnedPath, filePath);
 
   if (fs.existsSync(fullPath)) {

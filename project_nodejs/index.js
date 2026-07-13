@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Serve images statically at /image
-app.use('/image', express.static(path.join(__dirname, 'public/image')));
+app.use('/image', express.static(path.join(__dirname, './public/image ')));
 
 const UserRouter = require("./router/user.route");
 UserRouter(app);

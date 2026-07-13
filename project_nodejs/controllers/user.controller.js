@@ -1,117 +1,137 @@
-const {User} = require("../models");
-const {logError} = require("../middlewares/logError");
-const invalid = require("../middlewares/prevent");
-const buildPhotoPath = (file)=>{
-    if(!file) return null;
-    return `/image/${file.filename}`
-}
+const { User, UserProfile } = require("../models");
+const { logError } = require("../middlewares/logError");
+const  { invalid } = require("../middlewares/prevent");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { Op } = require("sequelize");
+const buildPhotoPath = (file) => {
+  if (!file) return null;
+  return `/image/${file.filename}`;
+};
 
 const getAllUsers = async (req, res) => {
-    try {
-        const {search, id} = req.query;
+  try {
+    const { search, id } = req.query;
 
-        if(id){
-            const users = await User.findOne({
-                where: {
-                    id
-                }
-            });
+    if (id) {
+      const users = await User.findOne({
+        where: {
+          id,
+        },
+      });
 
-            return res.json({
-                success: true,
-                message: "Fetch User Successful",
-                data: users
-            });
-        }
-
-        if(search){
-            const users = await User.findAll({
-                where: {
-                    [Op.or]: [
-                        { username: { [Op.like]: `%${search}%` } },
-                    ],
-                },
-            })
-
-            return res.json({
-                success: true,
-                message: "Fetch User Successful",
-                data: users
-            });
-        }
-
-        const users = await User.findAll();
-        res.json({
-            success: true,
-            message: "Fetch User Successful",
-            data: users
-        });
-    } catch (error) {
-        logError("getAllUsers", error, res);
+      return res.json({
+        success: true,
+        message: "Fetch User Successful",
+        data: users,
+      });
     }
+
+    if (search) {
+      const users = await User.findAll({
+        where: {
+          [Op.or]: [{ username: { [Op.like]: `%${search}%` } }],
+        },
+      });
+
+      return res.json({
+        success: true,
+        message: "Fetch User Successful",
+        data: users,
+      });
+    }
+
+    const users = await User.findAll();
+    res.json({
+      success: true,
+      message: "Fetch User Successful",
+      data: users,
+    });
+  } catch (error) {
+    logError("getAllUsers", error, res);
+  }
 };
 
-const 
-const registerUser = async(req, res) => {
-    const t = await User.sequelize.transaction();
-    try{    
-        const {username, password, first_name, last_name,
-            gender, phone, address
-        } = req.body || {};
-        const file = req.files?.[0];
-        const image = buildPhotoPath(file);
+const registerUser = async (req, res) => {
+  const t = await User.sequelize.transaction();
 
-        if(invalid(username)){
-            return res.status(400).json({
-                success: false,
-                message: "Username is required"
-            });
-        }
+  try {
+    const {
+      username,
+      password,
+      first_name,
+      last_name,
+      gender,
+      phone,
+      address,
+    } = req.body;
 
-        if(invalid(password)){
-            return res.status(400).json({
-                success: false,
-                message: "Password is required"
-            });
-        }
+    const file = req.files?.[0];
+    const image = buildPhotoPath(file);
 
-        if(invalid(first_name)){
-            return res.status(400).json({
-                success: false,
-                message: "First name is required"
-            });
-        }
+    // Check if username already exists
+    const existingUser = await User.findOne({
+      where: { username },
+      transaction: t,
+    });
 
-        if(invalid(last_name)){
-            return res.status(400).json({
-                success: false,
-                message: "Last name is required"
-            });
-        }
+    if (existingUser) {
+      await t.rollback();
 
-        if(invalid(gender)){
-            return res.status(400).json({
-                success: false,
-                message: "Gender is required"
-            });
-        }
-
-        if(invalid(phone)){
-            return res.status(400).json({
-                success: false,
-                message: "Phone is required"
-            });
-        }
-
-
-
-    }catch(error){
-        logError("registerUser", error, res);
+      return res.status(400).json({
+        success: false,
+        message: "Username already exists",
+      });
     }
-}
 
+    // Encrypt password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Create User
+    const user = await User.create(
+      {
+        username,
+        password: hashedPassword,
+      },
+      {
+        transaction: t,
+      }
+    );
+
+    // Create User Profile
+    const profile = await UserProfile.create(
+      {
+        user_id: user.id,
+        first_name,
+        last_name,
+        gender,
+        phone,
+        address,
+        image,
+      },
+      {
+        transaction: t,
+      }
+    );
+
+    await t.commit();
+
+    return res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      data: {
+        user,
+        profile,
+      },
+    });
+  } catch (error) {
+    await t.rollback();
+    logError("registerUser", error, res);
+  }
+};
 
 module.exports = {
-    getAllUsers
+  getAllUsers,
+  registerUser,
 };
+        
