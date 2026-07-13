@@ -1,0 +1,3 @@
+module.exports = {
+    TOKEN_SECRET: process.env.SECRET_KEY || "afasdfasdfsakdfjdsfsfhasfsdfjk230798547-25-749587rtonaoagbhagheq4tw45agbgartj",
+};
