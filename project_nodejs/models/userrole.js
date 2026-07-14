@@ -1,9 +1,11 @@
 "use strict";
+
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class UserRole extends Model {
     static associate(models) {
+
       UserRole.belongsTo(models.User, {
         foreignKey: "user_id",
         as: "user",
@@ -13,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "role_id",
         as: "role",
       });
+
     }
   }
 

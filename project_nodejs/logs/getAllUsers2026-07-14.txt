@@ -1,0 +1,91 @@
+[14/07/2026 14:09:32] [getAllUsers] UserProfile is associated to User using an alias. You've included an alias (profile), but it does not match the alias(es) defined in your association (user_profile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (profile), but it does not match the alias(es) defined in your association (user_profile).
+    at User._getIncludedAssociation (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at async getAllUsers (D:\HotelManagement\Hotel_management\project_nodejs\controllers\user.controller.js:28:19)
+[14/07/2026 15:42:59] [getAllUsers] Role is not defined
+ReferenceError: Role is not defined
+    at getAllUsers (D:\HotelManagement\Hotel_management\project_nodejs\controllers\user.controller.js:39:22)
+    at Layer.handleRequest (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at next (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\route.js:117:3)
+    at handle (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:295:15
+    at processParams (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:582:12)
+    at next (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:291:5)
+    at read (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\body-parser\lib\read.js:62:5)
+[14/07/2026 15:43:41] [getAllUsers] Role is not associated to UserProfile!
+SequelizeEagerLoadingError: Role is not associated to UserProfile!
+    at UserProfile._getIncludedAssociation (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:565:13)
+    at UserProfile._validateIncludedElement (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at UserProfile._validateIncludedElements (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User._validateIncludedElement (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:557:38)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+[14/07/2026 15:43:43] [getAllUsers] Role is not associated to UserProfile!
+SequelizeEagerLoadingError: Role is not associated to UserProfile!
+    at UserProfile._getIncludedAssociation (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:565:13)
+    at UserProfile._validateIncludedElement (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at UserProfile._validateIncludedElements (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User._validateIncludedElement (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:557:38)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+[14/07/2026 15:43:52] [getAllUsers] Role is not associated to UserProfile!
+SequelizeEagerLoadingError: Role is not associated to UserProfile!
+    at UserProfile._getIncludedAssociation (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:565:13)
+    at UserProfile._validateIncludedElement (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at UserProfile._validateIncludedElements (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User._validateIncludedElement (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:557:38)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+[14/07/2026 15:46:29] [getAllUsers] Permission is not defined
+ReferenceError: Permission is not defined
+    at getAllUsers (D:\HotelManagement\Hotel_management\project_nodejs\controllers\user.controller.js:45:22)
+    at Layer.handleRequest (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at next (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\route.js:117:3)
+    at handle (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:295:15
+    at processParams (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:582:12)
+    at next (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:291:5)
+    at read (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\body-parser\lib\read.js:62:5)
+[14/07/2026 15:57:16] [getAllUsers] UserProfile is associated to User using an alias. You've included an alias (profile), but it does not match the alias(es) defined in your association (user_profile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (profile), but it does not match the alias(es) defined in your association (user_profile).
+    at User._getIncludedAssociation (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at async getAllUsers (D:\HotelManagement\Hotel_management\project_nodejs\controllers\user.controller.js:28:19)
+[14/07/2026 16:37:22] [getAllUsers] UserProfile is associated to User using an alias. You've included an alias (UserProfile), but it does not match the alias(es) defined in your association (profile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (UserProfile), but it does not match the alias(es) defined in your association (profile).
+    at User._getIncludedAssociation (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at async getAllUsers (D:\HotelManagement\Hotel_management\project_nodejs\controllers\user.controller.js:29:19)
+[14/07/2026 16:46:14] [getAllUsers] user is not defined
+ReferenceError: user is not defined
+    at getAllUsers (D:\HotelManagement\Hotel_management\project_nodejs\controllers\user.controller.js:64:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)

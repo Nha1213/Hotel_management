@@ -1,48 +1,77 @@
-const { User, UserProfile } = require("../models");
+const { User, UserProfile, Role, Permission } = require("../models");
 const { logError } = require("../middlewares/logError");
-const  { invalid } = require("../middlewares/prevent");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
+const jwt = require("jsonwebtoken");
+const  { TOKEN_SECRET } = require("../util/TOKEN_SECRET");
+const user = require("../models/user");
 const buildPhotoPath = (file) => {
   if (!file) return null;
   return `/image/${file.filename}`;
 };
 
+// ====================== GET USERS ======================
 const getAllUsers = async (req, res) => {
   try {
-    const { search, id } = req.query;
+    const { id, search } = req.query;
+
+    const where = {};
 
     if (id) {
-      const users = await User.findOne({
-        where: {
-          id,
-        },
-      });
-
-      return res.json({
-        success: true,
-        message: "Fetch User Successful",
-        data: users,
-      });
+      where.id = id;
     }
 
     if (search) {
-      const users = await User.findAll({
-        where: {
-          [Op.or]: [{ username: { [Op.like]: `%${search}%` } }],
-        },
-      });
-
-      return res.json({
-        success: true,
-        message: "Fetch User Successful",
-        data: users,
-      });
+      where.username = {
+        [Op.like]: `%${search}%`,
+      };
     }
 
-    const users = await User.findAll();
-    res.json({
+    const users = await User.findAll({
+      where,
+      attributes: {
+        exclude: ["password"],
+      },
+      include: [
+        {
+          model: Role,
+          as: "roles",
+          attributes: ["id", "role_name", "status"],
+          through: {
+            attributes: [],
+          },
+          include: [
+            {
+              model: Permission,
+              as: "permissions",
+              attributes: [
+                "id",
+                "permission_name",
+                "group_id",
+                "route_name",
+              ],
+              through: {
+                attributes: [],
+              },
+            },
+          ],
+        },
+      ],
+      order: [["id", "ASC"]],
+    });
+
+    // const userProfile =  [{...users}]
+
+    for (const user of users) {
+      const userProfile = await UserProfile.findOne({
+        where: { user_id: user.id },
+      });
+      if (userProfile) {
+        user.dataValues.user_profile = userProfile;
+      }
+    }
+
+    return res.status(200).json({
       success: true,
       message: "Fetch User Successful",
       data: users,
@@ -51,7 +80,7 @@ const getAllUsers = async (req, res) => {
     logError("getAllUsers", error, res);
   }
 };
-
+// ====================== REGISTER ======================
 const registerUser = async (req, res) => {
   const t = await User.sequelize.transaction();
 
@@ -69,7 +98,6 @@ const registerUser = async (req, res) => {
     const file = req.files?.[0];
     const image = buildPhotoPath(file);
 
-    // Check if username already exists
     const existingUser = await User.findOne({
       where: { username },
       transaction: t,
@@ -84,21 +112,16 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // Encrypt password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create User
     const user = await User.create(
       {
         username,
         password: hashedPassword,
       },
-      {
-        transaction: t,
-      }
+      { transaction: t },
     );
 
-    // Create User Profile
     const profile = await UserProfile.create(
       {
         user_id: user.id,
@@ -109,18 +132,19 @@ const registerUser = async (req, res) => {
         address,
         image,
       },
-      {
-        transaction: t,
-      }
+      { transaction: t },
     );
 
     await t.commit();
+
+    const result = user.toJSON();
+    delete result.password;
 
     return res.status(201).json({
       success: true,
       message: "User created successfully",
       data: {
-        user,
+        user: result,
         profile,
       },
     });
@@ -130,8 +154,225 @@ const registerUser = async (req, res) => {
   }
 };
 
+// ====================== UPDATE ======================
+const updateUser = async (req, res) => {
+  const t = await User.sequelize.transaction();
+
+  try {
+    const { id } = req.params;
+
+    const {
+      username,
+      password,
+      first_name,
+      last_name,
+      gender,
+      phone,
+      address,
+    } = req.body;
+
+    const file = req.files?.[0];
+
+    const user = await User.findByPk(id, {
+      transaction: t,
+    });
+
+    if (!user) {
+      await t.rollback();
+
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const updateUserData = {};
+
+    if (username) {
+      updateUserData.username = username;
+    }
+
+    if (password) {
+      updateUserData.password = await bcrypt.hash(password, 10);
+    }
+
+    await user.update(updateUserData, {
+      transaction: t,
+    });
+
+    const profile = await UserProfile.findOne({
+      where: {
+        user_id: id,
+      },
+      transaction: t,
+    });
+
+    const updateProfileData = {
+      first_name,
+      last_name,
+      gender,
+      phone,
+      address,
+    };
+
+    if (file) {
+      updateProfileData.image = buildPhotoPath(file);
+    }
+
+    await profile.update(updateProfileData, {
+      transaction: t,
+    });
+
+    await t.commit();
+
+    return res.json({
+      success: true,
+      message: "User updated successfully",
+    });
+  } catch (error) {
+    await t.rollback();
+    logError("updateUser", error, res);
+  }
+};
+
+// ====================== DELETE ======================
+const deleteUser = async (req, res) => {
+  const t = await User.sequelize.transaction();
+
+  try {
+    const { id } = req.params;
+
+    const user = await User.findByPk(id, {
+      transaction: t,
+    });
+
+    if (!user) {
+      await t.rollback();
+
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    await UserProfile.destroy({
+      where: {
+        user_id: id,
+      },
+      transaction: t,
+    });
+
+    await User.destroy({
+      where: {
+        id,
+      },
+      transaction: t,
+    });
+
+    await t.commit();
+
+    return res.json({
+      success: true,
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    await t.rollback();
+    logError("deleteUser", error, res);
+  }
+};
+
+const LoginUser = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({
+      where: { username },
+      include: [
+        {
+          model: UserProfile,
+          as: "userp_rofile", // must match your association
+        },
+        {
+          model: Role,
+          as: "roles",
+          attributes: ["id", "role_name", "status"],
+          through: {
+            attributes: [],
+          },
+          include: [
+            {
+              model: Permission,
+              as: "permissions",
+              attributes: ["id", "permission_name", "group_id", "route_name"],
+              through: {
+                attributes: [],
+              },
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid password",
+      });
+    }
+
+    // Flatten permissions
+    const permissions = [];
+
+    user.roles.forEach((role) => {
+      role.permissions.forEach((permission) => {
+        permissions.push(permission);
+      });
+    });
+
+    const uniquePermissions = [
+      ...new Map(permissions.map((p) => [p.id, p])).values(),
+    ];
+    
+    const ObjUser = {
+      id: user.id,
+      username: user.username,
+      status: user.status,
+      profile: user.userp_rofile,
+      roles: user.roles,
+      permissions: uniquePermissions,
+    };
+
+    return res.json({
+      success: true,
+      message: "Login successful",
+      data: ObjUser,
+      token: await getAccessToken(ObjUser),
+    });
+  } catch (error) {
+    logError("LoginUser", error, res);
+  }
+};
+
+const getAccessToken = async (paramData) => {
+  const access_token = await jwt.sign({ data: paramData }, TOKEN_SECRET, {
+    expiresIn: "1d",
+  });
+  return access_token;
+};
+
 module.exports = {
   getAllUsers,
   registerUser,
+  updateUser,
+  deleteUser,
+  LoginUser,
 };
-        

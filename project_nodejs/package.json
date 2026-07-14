@@ -59,6 +59,7 @@
     "multer": "^2.2.0",
     "mysql2": "^3.22.5",
     "node": "^26.5.0",
+    "nodemailer": "^9.0.3",
     "nodemon": "^3.1.14",
     "nopt": "^7.2.1",
     "package-json-from-dist": "^1.0.1",

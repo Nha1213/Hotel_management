@@ -16,6 +16,9 @@ app.use('/image', express.static(path.join(__dirname, './public/image ')));
 const UserRouter = require("./router/user.route");
 UserRouter(app);
 
+const roleRoute = require("./router/role.route");
+roleRoute(app);
+
 app.listen(PORT, () => {
     console.log(`Example app listening on PORT ${PORT}`);
 });

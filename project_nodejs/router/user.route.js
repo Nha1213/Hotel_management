@@ -2,9 +2,13 @@ const { body } = require("express-validator");
 const {
   getAllUsers,
   registerUser,
+  updateUser,
+  deleteUser,
+  LoginUser,
 } = require("../controllers/user.controller");
 const { validateCheck } = require("../middlewares/logError");
 const { uploadAny } = require("../uploads/upload");
+const { validate_token } = require("../middlewares/auth");
 
 const userValidation = [
   body("username")
@@ -36,13 +40,11 @@ const userValidation = [
 ];
 
 const UserRouter = (app) => {
-  app.get("/api/user", getAllUsers);
-
-  app.post(
-    "/api/user",
-    uploadAny,
-    registerUser
-  );
+  app.get("/api/user", validate_token(), getAllUsers);
+  app.post("/api/user",uploadAny ,userValidation, validateCheck, registerUser);
+  app.put("/api/user/:id",uploadAny ,userValidation, validateCheck, updateUser);
+  app.delete("/api/user/:id", deleteUser);
+  app.post("/api/user/login", LoginUser);
 };
 
 module.exports = UserRouter;

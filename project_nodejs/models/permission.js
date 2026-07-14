@@ -1,20 +1,27 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Permission extends Model {
     static associate(models) {
-      // A Permission belongs to one PermissionGroup
+
       Permission.belongsTo(models.PermissionGroup, {
-        foreignKey: 'group_id',
-        as: 'group'
+        foreignKey: "group_id",
+        as: "group",
       });
 
-      // A Permission has many PermissionRoles
       Permission.hasMany(models.PermissionRole, {
-        foreignKey: 'permission_id',
-        as: 'permission_roles'
+        foreignKey: "permission_id",
+        as: "role_permissions",
       });
+
+      Permission.belongsToMany(models.Role, {
+        through: models.PermissionRole,
+        foreignKey: "permission_id",
+        as: "roles",
+      });
+
     }
   }
 
@@ -22,11 +29,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       permission_name: DataTypes.STRING,
       group_id: DataTypes.INTEGER,
-      route_name: DataTypes.STRING
+      route_name: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: 'Permission',
+      modelName: "Permission",
     }
   );
 
