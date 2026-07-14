@@ -19,6 +19,9 @@ UserRouter(app);
 const roleRoute = require("./router/role.route");
 roleRoute(app);
 
+const permissionRoute = require("./router/permission.route");
+permissionRoute(app);
+
 app.listen(PORT, () => {
     console.log(`Example app listening on PORT ${PORT}`);
 });

@@ -1,14 +1,36 @@
 const { Op } = require("sequelize");
-const { Role, RolePermission, UserRole } = require("../models");
+const { Role, Permission, UserRole } = require("../models");
 const { logError } = require("../middlewares/logError");
 
 const getAllRoles = async (req, res) => {
   try {
-    const roles = await Role.findAll();
-    res.status(200).json(roles);
+    const {search} = req.query;
+
+    const where = {};
+
+    if (search) {
+      where.role_name = {
+        [Op.like]: `%${search}%`,
+      };
+    }
+
+    const roles = await Role.findAll({
+      where,
+      include: [
+        {
+          model: Permission,
+          as: "permissions",
+        },
+      ],
+      order:[["id", "DESC"]],
+    });
+    res.status(200).json({
+      success: true,
+      message: "fetched roles successfully",
+      data: roles
+    });
   } catch (error) {
-    logError(error);
-    res.status(500).json({ message: "Something went wrong" });
+    logError("getAllRoles", error, res);
   }
 };
 
@@ -17,6 +39,19 @@ const createRole = async (req, res) => {
   const t = await Role.sequelize.transaction();
   try {
     const { role_name, status, userId } = req.body || {};
+    if(!userId){
+      return res.status(400).json({
+        success: false,
+        message: "User id is required",
+      })
+    }
+
+    if(!role_name){
+      return res.status(400).json({
+        success: false,
+        message: "Role name is required",
+      })
+    }
 
     // 1. Create the Role (bound to transaction)
     const role = await Role.create({ role_name, status }, { transaction: t });
@@ -46,4 +81,83 @@ const createRole = async (req, res) => {
   }
 };
 
-module.exports = { getAllRoles, createRole };
+const updateRole = async (req, res) => {
+  const t = await Role.sequelize.transaction();
+  try{
+    const {id} = req.params;
+    const {role_name, status, userId} = req.body;
+
+    if(!id){
+      return res.status(400).json({
+        success: false,
+        message: "Role id is required",
+      })
+    }
+
+    if(!userId){
+      return res.status(400).json({
+        success: false,
+        message: "User id is required",
+      })
+    }
+
+    const role = await Role.findByPk(id);
+    if(!role){
+      return res.status(404).json({
+        success: false,
+        message: "Role not found",
+      })
+    }
+
+    const roleResult = await Role.update({role_name, status}, {where:{id}}, {transaction: t});
+
+    const userRole = await UserRole.findOne({where:{role_id: id}});
+    if(userRole){
+      await UserRole.update({user_id: userId}, {where:{role_id: id}}, {transaction: t});
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Role updated successfully",
+      data: [
+        roleResult,
+        userRole
+      ],
+    })
+
+  }catch(error){
+    logError("updateRole", error, res);
+  }
+};
+
+const deleteRole = async (req, res) =>{
+  try{
+    const {id} = req.params;
+
+    if(!id){
+      return res.status(400).json({
+        success: false,
+        message: "Role id is required",
+      })
+    }
+
+    const role = await Role.findByPk(id);
+    if(!role){
+      return res.status(404).json({
+        success: false,
+        message: "Role not found",
+      })
+    }
+
+    await Role.destroy({where:{id}});
+
+    return res.status(200).json({
+      success: true,
+      message: "Role deleted successfully",
+    })
+  }catch(error){
+    logError("deleteRole", error, res);
+  }
+}
+
+module.exports = { getAllRoles, createRole, updateRole, deleteRole };

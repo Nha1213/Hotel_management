@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Permission.belongsTo(models.PermissionGroup, {
         foreignKey: "group_id",
-        as: "group",
+        as: "permission_group",
       });
 
       Permission.hasMany(models.PermissionRole, {

@@ -1,0 +1,8 @@
+[14/07/2026 18:51:56] [updateRole] insert or update on table "UserRoles" violates foreign key constraint "UserRoles_user_id_fkey"
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.bulkUpdate (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:366:12)
+    at async UserRole.update (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2010:28)
+    at async updateRole (D:\React js\ProjectHotel\project_nodejs\controllers\role.controller.js:105:7)
