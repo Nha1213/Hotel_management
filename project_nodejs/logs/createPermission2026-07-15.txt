@@ -1,0 +1,12 @@
+[15/07/2026 19:25:47] [createPermission] PermissionsRole is not defined
+ReferenceError: PermissionsRole is not defined
+    at createPermission (D:\React js\ProjectHotel\project_nodejs\controllers\permission.controller.js:71:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+[15/07/2026 19:26:44] [createPermission] Cannot access 'PermissionRole' before initialization
+ReferenceError: Cannot access 'PermissionRole' before initialization
+    at createPermission (D:\React js\ProjectHotel\project_nodejs\controllers\permission.controller.js:71:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+[15/07/2026 19:27:02] [createPermission] Cannot access 'PermissionRole' before initialization
+ReferenceError: Cannot access 'PermissionRole' before initialization
+    at createPermission (D:\React js\ProjectHotel\project_nodejs\controllers\permission.controller.js:71:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)

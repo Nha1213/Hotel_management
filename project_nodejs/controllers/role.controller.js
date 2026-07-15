@@ -39,13 +39,6 @@ const createRole = async (req, res) => {
   const t = await Role.sequelize.transaction();
   try {
     const { role_name, status, userId } = req.body || {};
-    if(!userId){
-      return res.status(400).json({
-        success: false,
-        message: "User id is required",
-      })
-    }
-
     if(!role_name){
       return res.status(400).json({
         success: false,

@@ -1,0 +1,12 @@
+[15/07/2026 19:21:24] [getAllPermission] PermissionGroup is not defined
+ReferenceError: PermissionGroup is not defined
+    at getAllPermission (D:\React js\ProjectHotel\project_nodejs\controllers\permission.controller.js:21:18)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:117:3)
+    at handle (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:295:15
+    at processParams (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:582:12)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:291:5)
+    at read (D:\React js\ProjectHotel\project_nodejs\node_modules\body-parser\lib\read.js:42:5)
