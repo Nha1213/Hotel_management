@@ -3,7 +3,7 @@ const { logError } = require("../middlewares/logError");
 const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
-const  { TOKEN_SECRET } = require("../util/TOKEN_SECRET");
+const { TOKEN_SECRET } = require("../util/TOKEN_SECRET");
 const user = require("../models/user");
 const buildPhotoPath = (file) => {
   if (!file) return null;
@@ -44,12 +44,7 @@ const getAllUsers = async (req, res) => {
             {
               model: Permission,
               as: "permissions",
-              attributes: [
-                "id",
-                "permission_name",
-                "group_id",
-                "route_name",
-              ],
+              attributes: ["id", "permission_name", "group_id", "route_name"],
               through: {
                 attributes: [],
               },
@@ -341,7 +336,7 @@ const LoginUser = async (req, res) => {
     const uniquePermissions = [
       ...new Map(permissions.map((p) => [p.id, p])).values(),
     ];
-    
+
     const ObjUser = {
       id: user.id,
       username: user.username,
@@ -368,11 +363,48 @@ const getAccessToken = async (paramData) => {
   });
   return access_token;
 };
+const handleRefreshToken = async (req, res) => {
+  const refreshToken = req.cookies?.refreshToken || req.body.refreshToken;
 
+  if (!refreshToken) {
+    return res.status(401).json({ message: "Refresh Token Required" });
+  }
+
+  try {
+    const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+    // 1. Generate a new Access Token
+    const newAccessToken = await getAccessToken(decoded.data);
+
+    // 2. ROTATION: Generate a brand new Refresh Token
+    const newRefreshToken = await getRefreshToken(decoded.data);
+
+    // 3. OPTIONAL: If using database tracking, update it here:
+    // await TokenModel.replaceOldWithNew(refreshToken, newRefreshToken);
+
+    // 4. Send the new Refresh Token back in a secure cookie
+    // (or include it in the JSON body if you aren't using cookies)
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+      secure: true, // Requires HTTPS
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days matching JWT expiration
+    });
+
+    return res.json({ accessToken: newAccessToken });
+  } catch (error) {
+    return res  
+      .status(403)
+      .json({ message: "Invalid or Expired Refresh Token" });
+  }
+};
+
+// Export the functions correctly
 module.exports = {
   getAllUsers,
   registerUser,
   updateUser,
   deleteUser,
   LoginUser,
+  handleRefreshToken, // Exporting the function handler
 };

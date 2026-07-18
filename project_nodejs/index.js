@@ -22,6 +22,15 @@ roleRoute(app);
 const permissionRoute = require("./router/permission.route");
 permissionRoute(app);
 
+const permissionGroupRoute = require("./router/permissionGroup.route");
+permissionGroupRoute(app);
+
+const sentOtpRoute = require("./router/userSentOtp.route");
+sentOtpRoute(app);
+
+const roomTypeRoute = require("./router/roomType.route");
+roomTypeRoute(app);
+
 app.listen(PORT, () => {
     console.log(`Example app listening on PORT ${PORT}`);
 });

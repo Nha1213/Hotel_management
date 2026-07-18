@@ -1,0 +1,38 @@
+[18/07/2026 12:54:56] [deletePermissionGroup] update or delete on table "Permissions" violates foreign key constraint "PermissionRoles_permission_id_fkey" on table "PermissionRoles"
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.bulkDelete (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:403:12)
+    at async PermissionGroup.destroy (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1838:16)
+    at async deletePermissionGroup (D:\React js\ProjectHotel\project_nodejs\controllers\permissionGroup.controller.js:92:33)
+[18/07/2026 12:56:02] [deletePermissionGroup] update or delete on table "Permissions" violates foreign key constraint "PermissionRoles_permission_id_fkey" on table "PermissionRoles"
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.bulkDelete (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:403:12)
+    at async PermissionGroup.destroy (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1838:16)
+    at async deletePermissionGroup (D:\React js\ProjectHotel\project_nodejs\controllers\permissionGroup.controller.js:92:33)
+[18/07/2026 12:57:01] [deletePermissionGroup] update or delete on table "Permissions" violates foreign key constraint "PermissionRoles_permission_id_fkey" on table "PermissionRoles"
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.bulkDelete (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:403:12)
+    at async PermissionGroup.destroy (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1838:16)
+    at async deletePermissionGroup (D:\React js\ProjectHotel\project_nodejs\controllers\permissionGroup.controller.js:92:33)
+[18/07/2026 12:57:02] [deletePermissionGroup] update or delete on table "Permissions" violates foreign key constraint "PermissionRoles_permission_id_fkey" on table "PermissionRoles"
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at async PostgresQueryInterface.bulkDelete (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:403:12)
+    at async PermissionGroup.destroy (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1838:16)
+    at async deletePermissionGroup (D:\React js\ProjectHotel\project_nodejs\controllers\permissionGroup.controller.js:92:33)
+[18/07/2026 12:57:04] [deletePermissionGroup] update or delete on table "Permissions" violates foreign key constraint "PermissionRoles_permission_id_fkey" on table "PermissionRoles"
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at async PostgresQueryInterface.bulkDelete (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:403:12)
+    at async PermissionGroup.destroy (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1838:16)
+    at async deletePermissionGroup (D:\React js\ProjectHotel\project_nodejs\controllers\permissionGroup.controller.js:92:33)

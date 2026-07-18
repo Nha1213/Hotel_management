@@ -18,7 +18,7 @@ module.exports = {
           model: 'PermissionGroups',
           key: 'id'
         },
-        onDelete: 'CASCADE',
+        onDelete: 'set null',
         
       },
       route_name: {
