@@ -1,0 +1,12 @@
+[19/07/2026 10:37:13] [getAllRoom] RoomType is not defined
+ReferenceError: RoomType is not defined
+    at getAllRoom (D:\React js\ProjectHotel\project_nodejs\controllers\Room.controller.js:51:32)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:117:3)
+    at handle (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:295:15
+    at processParams (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:582:12)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:291:5)
+    at read (D:\React js\ProjectHotel\project_nodejs\node_modules\body-parser\lib\read.js:62:5)

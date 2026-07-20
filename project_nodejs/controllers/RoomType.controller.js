@@ -93,7 +93,7 @@ const update = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Room type updated successfully.",
-            data: roomType,
+            data: roomTypeCheck,
         });
     } catch (error) {
         logError("updateRoomType", error, res);

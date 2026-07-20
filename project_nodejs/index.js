@@ -31,6 +31,12 @@ sentOtpRoute(app);
 const roomTypeRoute = require("./router/roomType.route");
 roomTypeRoute(app);
 
+const roomRoute = require("./router/room.route");
+roomRoute(app);
+
+const serviceRoute = require("./router/service.route");
+serviceRoute(app);
+
 app.listen(PORT, () => {
     console.log(`Example app listening on PORT ${PORT}`);
 });
