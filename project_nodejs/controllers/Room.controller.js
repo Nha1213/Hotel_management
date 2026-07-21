@@ -33,6 +33,7 @@ function requireCheck (room_number, room_type_id, floor, status){
             });
         }
 }
+
 const getAllRoom = async (req, res) =>{
     try{
         const {search} = req.query;

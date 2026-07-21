@@ -80,6 +80,13 @@ const updateRole = async (req, res) => {
     const {id} = req.params;
     const {role_name, status, userId} = req.body;
 
+    if(!role_name){
+      return res.status(400).json({
+        success: false,
+        message: "Role name is required",
+      })
+    }
+
     if(!id){
       return res.status(400).json({
         success: false,

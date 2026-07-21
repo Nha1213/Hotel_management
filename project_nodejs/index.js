@@ -37,6 +37,12 @@ roomRoute(app);
 const serviceRoute = require("./router/service.route");
 serviceRoute(app);
 
+const  reservationRoute = require("./router/reservation.route");
+reservationRoute(app);
+
+const  paymentRoute = require("./router/payment.route");
+paymentRoute(app);
+
 app.listen(PORT, () => {
     console.log(`Example app listening on PORT ${PORT}`);
 });
