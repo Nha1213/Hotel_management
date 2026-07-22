@@ -43,6 +43,12 @@ reservationRoute(app);
 const  paymentRoute = require("./router/payment.route");
 paymentRoute(app);
 
+const  checkOutRoute = require("./router/checkOut.route");
+checkOutRoute(app);
+
+const  checkInRoute = require("./router/checkIn.route");
+checkInRoute(app);
+
 app.listen(PORT, () => {
     console.log(`Example app listening on PORT ${PORT}`);
 });

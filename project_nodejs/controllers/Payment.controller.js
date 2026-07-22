@@ -2,7 +2,7 @@ const {Payment} = require("../models");
 const {logError} = require("../middlewares/logError");
 const {Op} = require("sequelize");
 
-const getAllPayment = () =>{
+const getAllPayment = async (req, res) =>{
     try {
         const {payment_method, date} = req.query;
         
