@@ -8,11 +8,21 @@ const getAllEmployee = async (req, res) => {
         const where = {}
 
         if(search){
-            where.name = {
+            where.full_name = {
                 [Op.like]: `%${search}%`
             }
         }
+
+        const employees = await Employee.findAll({where});
+
+        return res.status(200).json({
+            success: true,
+            message: "fetched employees successfully",
+            data: employees
+        });
     }catch(error){
         logError("getAllEmployee", error, res);
     }
 }
+
+module.exports = {getAllEmployee}
