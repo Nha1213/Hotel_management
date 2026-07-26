@@ -25,4 +25,12 @@ const getAllEmployee = async (req, res) => {
     }
 }
 
+const createEmployee = async (req, res) => {
+    try{
+
+    }catch(error){
+        logError("createEmployee", error, res);
+    }
+}
+
 module.exports = {getAllEmployee}

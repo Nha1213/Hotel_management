@@ -1,10 +1,9 @@
-const { User, UserProfile, Role, Permission } = require("../models");
+const { User, UserProfile, Role, Permission, sequelize } = require("../models");
 const { logError } = require("../middlewares/logError");
 const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 const { TOKEN_SECRET } = require("../util/TOKEN_SECRET");
-const user = require("../models/user");
 const buildPhotoPath = (file) => {
   if (!file) return null;
   return `/image/${file.filename}`;
@@ -90,9 +89,11 @@ const registerUser = async (req, res) => {
       address,
     } = req.body;
 
+    // Get uploaded file
     const file = req.files?.[0];
     const image = buildPhotoPath(file);
 
+    // Check if username already exists
     const existingUser = await User.findOne({
       where: { username },
       transaction: t,
@@ -107,19 +108,24 @@ const registerUser = async (req, res) => {
       });
     }
 
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.create(
+    // Create user
+    const userOne = await User.create(
       {
         username,
         password: hashedPassword,
       },
-      { transaction: t },
+      {
+        transaction: t,
+      }
     );
 
+    // Create user profile
     const profile = await UserProfile.create(
       {
-        user_id: user.id,
+        user_id: userOne.id,
         first_name,
         last_name,
         gender,
@@ -127,27 +133,35 @@ const registerUser = async (req, res) => {
         address,
         image,
       },
-      { transaction: t },
+      {
+        transaction: t,
+      }
     );
 
+    // Commit transaction
     await t.commit();
 
-    const result = user.toJSON();
-    delete result.password;
+    // Remove password from response
+    const userResponse = userOne.toJSON();
+    delete userResponse.password;
 
     return res.status(201).json({
       success: true,
       message: "User created successfully",
       data: {
-        user: result,
+        user: userResponse,
         profile,
       },
     });
   } catch (error) {
-    await t.rollback();
+    // Rollback only if transaction is still active
+    if (!t.finished) {
+      await t.rollback();
+    }
+
     logError("registerUser", error, res);
   }
-};
+};  
 
 // ====================== UPDATE ======================
 const updateUser = async (req, res) => {
@@ -285,7 +299,7 @@ const LoginUser = async (req, res) => {
       include: [
         {
           model: UserProfile,
-          as: "userp_rofile", // must match your association
+          as: "profile", // must match your association
         },
         {
           model: Role,
@@ -341,7 +355,7 @@ const LoginUser = async (req, res) => {
       id: user.id,
       username: user.username,
       status: user.status,
-      profile: user.userp_rofile,
+      profile: user.profile,
       roles: user.roles,
       permissions: uniquePermissions,
     };

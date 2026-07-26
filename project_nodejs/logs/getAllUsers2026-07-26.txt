@@ -1,0 +1,12 @@
+[26/07/2026 08:27:06] [getAllUsers] database "hotel_management_dbict" does not exist
+SequelizeConnectionError: database "hotel_management_dbict" does not exist
+    at Client._connectionCallback (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\connection-manager.js:145:24)
+    at Client._handleErrorWhileConnecting (D:\React js\ProjectHotel\project_nodejs\node_modules\pg\lib\client.js:403:19)
+    at Client._handleErrorMessage (D:\React js\ProjectHotel\project_nodejs\node_modules\pg\lib\client.js:423:19)
+    at Connection.emit (node:events:509:20)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\pg\lib\connection.js:136:12
+    at Parser.parse (D:\React js\ProjectHotel\project_nodejs\node_modules\pg-protocol\dist\parser.js:38:17)
+    at Socket.<anonymous> (D:\React js\ProjectHotel\project_nodejs\node_modules\pg-protocol\dist\index.js:12:42)
+    at Socket.emit (node:events:509:20)
+    at addChunk (node:internal/streams/readable:568:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:519:3)

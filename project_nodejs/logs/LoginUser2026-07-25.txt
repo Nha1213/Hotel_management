@@ -1,0 +1,154 @@
+[25/07/2026 13:00:40] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:283:18)
+[25/07/2026 13:01:39] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:283:18)
+[25/07/2026 13:01:40] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:283:18)
+[25/07/2026 13:09:43] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:283:18)
+[25/07/2026 13:15:16] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:283:18)
+[25/07/2026 18:08:08] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:283:18)
+[25/07/2026 18:14:34] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:283:18)
+[25/07/2026 18:43:09] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:279:18)
+[25/07/2026 18:56:38] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (user_rofile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[25/07/2026 18:57:52] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (profile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (profile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[25/07/2026 18:57:55] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (profile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (profile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[25/07/2026 18:59:55] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (profile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (profile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[25/07/2026 19:01:10] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (profile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_rofile), but it does not match the alias(es) defined in your association (profile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[25/07/2026 19:01:58] [LoginUser] UserProfile is associated to User using an alias. You've included an alias (userp_profile), but it does not match the alias(es) defined in your association (profile).
+SequelizeEagerLoadingError: UserProfile is associated to User using an alias. You've included an alias (userp_profile), but it does not match the alias(es) defined in your association (profile).
+    at User._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at User._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at User._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)

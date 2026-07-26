@@ -21,6 +21,9 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+      password: {
+        type: Sequelize.STRING
+      },
       role: {
         type: Sequelize.STRING
       },
@@ -29,6 +32,9 @@ module.exports = {
       },
       hire_date: {
         type: Sequelize.DATE
+      },
+      image: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

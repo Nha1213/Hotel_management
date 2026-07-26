@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { Eye, EyeOff, SunMedium, Check } from "lucide-react";
 import { useNavigate } from "react-router";
 import "./style/Login.css";
+import HookUser from "./HookUser";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
 
   const navigate = useNavigate();
+
+  const { UserLogin } = HookUser();
 
   return (
     <div className="login-page">
@@ -75,7 +78,7 @@ const Login = () => {
           </div>
 
           {/* Login Button */}
-          <button type="submit" className="login-button">
+          <button type="submit" className="login-button" onClick={UserLogin}>
             Log In
           </button>
         </form>

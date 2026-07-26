@@ -51,7 +51,7 @@ const getAllRoom = async (req, res) =>{
                     {
                         model: RoomType,
                         as: "room_type",
-                        attributes: ["id", "name", "price_per_night", "max_guest", "description"],
+                        attributes: ["id", "name", "price_per_night", "max_guest", "description", "image"],
                     },
                 ]
             },

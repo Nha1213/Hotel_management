@@ -1,0 +1,225 @@
+[25/07/2026 13:10:28] [registerUser] column "user_id" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 13:12:11] [registerUser] column "user_id" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 13:14:21] [registerUser] column "user_id" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 13:18:29] [registerUser] column "user_id" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 13:21:36] [registerUser] column "user_id" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 13:22:57] [registerUser] column "user_id" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 13:23:16] [registerUser] column "user_id" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 13:31:54] [registerUser] column "user_id" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 18:05:35] [registerUser] column "user_id" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 18:14:39] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 18:15:36] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 18:15:51] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:96:26)
+[25/07/2026 18:17:05] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:28:09] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:29:29] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:31:06] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:34:16] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:36:46] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:37:01] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:37:10] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:38:10] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:38:35] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:39:19] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:49:35] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:95:26)
+[25/07/2026 18:53:30] [registerUser] Unknown column 'user_id' in 'field list'
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async registerUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:97:26)

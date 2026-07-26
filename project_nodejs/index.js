@@ -52,6 +52,9 @@ checkInRoute(app);
 const  employeeRoute = require("./router/employee.route");
 employeeRoute(app);
 
+const  customerRoute = require("./router/customer.route");
+customerRoute(app);
+
 app.listen(PORT, () => {
     console.log(`Example app listening on PORT ${PORT}`);
 });

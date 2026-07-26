@@ -1,0 +1,27 @@
+[26/07/2026 10:03:43] [createPermission] Cannot add or update a child row: a foreign key constraint fails (`hotel_management_db2`.`permissions`, CONSTRAINT `permissions_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `permissiongroups` (`id`) ON DELETE SET NULL)
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.insert (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Permission.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async Permission.create (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPermission (D:\React js\ProjectHotel\project_nodejs\controllers\permission.controller.js:62:24)
+[26/07/2026 10:04:48] [createPermission] Cannot add or update a child row: a foreign key constraint fails (`hotel_management_db2`.`permissions`, CONSTRAINT `permissions_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `permissiongroups` (`id`) ON DELETE SET NULL)
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.insert (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Permission.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async Permission.create (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPermission (D:\React js\ProjectHotel\project_nodejs\controllers\permission.controller.js:62:24)
+[26/07/2026 10:05:23] [createPermission] Cannot add or update a child row: a foreign key constraint fails (`hotel_management_db2`.`permissions`, CONSTRAINT `permissions_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `permissiongroups` (`id`) ON DELETE SET NULL)
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async MySQLQueryInterface.insert (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Permission.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async Permission.create (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1362:12)
+    at async createPermission (D:\React js\ProjectHotel\project_nodejs\controllers\permission.controller.js:62:24)
