@@ -55,6 +55,9 @@ employeeRoute(app);
 const  customerRoute = require("./router/customer.route");
 customerRoute(app);
 
+const  customerSentOtpRoute = require("./router/customerSentOtp.route");
+customerSentOtpRoute(app);
+
 app.listen(PORT, () => {
     console.log(`Example app listening on PORT ${PORT}`);
 });

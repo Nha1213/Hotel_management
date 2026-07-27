@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { Customer } = require("../models");
 const { Op } = require("sequelize");
 const { logError } = require("../middlewares/logError");
 const nodemailer = require("nodemailer");
@@ -11,24 +11,24 @@ const VERIFIED_EXPIRE_MS = 10 * 60 * 1000;
 
 const sendOTP = async (req, res) => {
   try {
-    const { username } = req.body || {};
-    if (!username) {
+    const { email } = req.body || {};
+    if (!email) {
       return res.status(400).json({
         success: false,
-        message: "username is required",
+        message: "email is required",
       });
     }
 
-    const uesr = await User.findOne({
+    const uesr = await Customer.findOne({
       where: {
-        username: username,
+        email: email,
       },
     });
 
     if (!uesr) {
       return res.status(404).json({
         success: false,
-        message: "User not found",
+        message: " Customer not found",
       });
     }
 
@@ -37,21 +37,21 @@ const sendOTP = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user:process.env.EMAIL_USER|| "Vothanarern@gmail.com",
-        pass: process.env.SEND_PASS || "ezhr tkbv meqp iige", // Use environment variable for security
+        user:  process.env.EMAIL_USER || "Vothanarern@gmail.com",
+        pass:  process.env.SEND_PASS || "ezhr tkbv meqp iige", // Use environment variable for security
       },
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER || "Vothanarern@gmail.com",
-      to: username,
+      from:  process.env.EMAIL_USER || "Vothanarern@gmail.com",
+      to: email,
       subject: "OTP Verification",
       text: `Your OTP is: ${otp}`,
     };
 
     await transporter.sendMail(mailOptions);
 
-    otpStore.set(username, {
+    otpStore.set(email, {
       otp: otp.toString(),
       otpExpireAt: Date.now() + OTP_EXPIRE_MS,
       verified: false,
@@ -70,16 +70,16 @@ const sendOTP = async (req, res) => {
 
 const verifyOtp = async (req, res) => {
   try {
-    const { username, otp } = req.body || {};
+    const { email, otp } = req.body || {};
 
-    if (!username || !otp) {
+    if (!email || !otp) {
       return res.status(400).json({
         success: false,
-        message: "username and OTP are required",
+        message: "email and OTP are required",
       });
     }
 
-    const user = await User.findOne({ where: { username: username } });
+    const user = await Customer.findOne({ where: { email: email } });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -87,7 +87,7 @@ const verifyOtp = async (req, res) => {
       });
     }
 
-    const otpData = otpStore.get(username);
+    const otpData = otpStore.get(email);
     if (!otpData) {
       return res.status(400).json({
         success: false,
@@ -96,7 +96,7 @@ const verifyOtp = async (req, res) => {
     }
 
     if (Date.now() > otpData.otpExpireAt) {
-      otpStore.delete(username);
+      otpStore.delete(email);
       return res.status(400).json({
         success: false,
         message: "OTP has expired. Please request a new OTP",
@@ -110,7 +110,7 @@ const verifyOtp = async (req, res) => {
       });
     }
 
-    otpStore.set(username, {
+    otpStore.set(email, {
       ...otpData,
       verified: true,
       verifiedExpireAt: Date.now() + VERIFIED_EXPIRE_MS,
@@ -127,16 +127,16 @@ const verifyOtp = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   try {
-    const { username, newPassword } = req.body || {};
+    const { email, newPassword } = req.body || {};
 
-    if (!username || !newPassword) {
+    if (!email || !newPassword) {
       return res.status(400).json({
         success: false,
-        message: "username and newPassword are required",
+        message: "email and newPassword are required",
       });
     }
 
-    const user = await User.findOne({ where: { username: username } });
+    const user = await Customer.findOne({ where: { email: email } });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -144,7 +144,7 @@ const resetPassword = async (req, res) => {
       });
     }
 
-    const otpData = otpStore.get(username);
+    const otpData = otpStore.get(email);
     if (!otpData || !otpData.verified) {
       return res.status(400).json({
         success: false,
@@ -153,7 +153,7 @@ const resetPassword = async (req, res) => {
     }
 
     if (!otpData.verifiedExpireAt || Date.now() > otpData.verifiedExpireAt) {
-      otpStore.delete(username);
+      otpStore.delete(email);
       return res.status(400).json({
         success: false,
         message: "OTP has expired. Please request a new OTP",
@@ -162,8 +162,8 @@ const resetPassword = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    await User.update({ password: hashedPassword }, { where: { username } });
-    otpStore.delete(username);
+    await Customer.update({ password: hashedPassword }, { where: { email } });
+    otpStore.delete(email);
 
     res.json({
       success: true,
