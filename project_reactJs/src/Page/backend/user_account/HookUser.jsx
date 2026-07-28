@@ -1,12 +1,17 @@
 import {alertError,alertSuccess} from "../../../swertalert/AlertSuccess"
-import request from "../util/request"
+import request from "../../util/request";
+import { useState } from "react";
 const HookUser = () => {
+    const [data, setData] = useState({
+        username: "",
+        password: ""
+    })
 
     const UserLogin =  async () => {
         try{
             const res = await request("/api/user/login", "POST", {
-                username: "vothanarern@gmail.com",
-                password: "12345678"
+                username:  data?.username,
+                password: data?.password
             })
             if(res){
                 alertSuccess({
@@ -25,7 +30,9 @@ const HookUser = () => {
 
   return (
     {
-        UserLogin
+        UserLogin,
+        data,
+        setData
     }
   )
 }

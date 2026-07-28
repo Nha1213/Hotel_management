@@ -1,0 +1,135 @@
+[28/07/2026 16:56:16] [LoginUser] relation "Users" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[28/07/2026 17:16:41] [LoginUser] relation "Users" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[28/07/2026 17:40:49] [LoginUser] relation "Users" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[28/07/2026 17:40:59] [LoginUser] relation "Users" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[28/07/2026 17:49:22] [LoginUser] relation "Users" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[28/07/2026 17:51:01] [LoginUser] WHERE parameter "username" has invalid "undefined" value
+Error: WHERE parameter "username" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1770:13)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1761:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1759:35)
+    at PostgresQueryGenerator.getWhereConditions (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:2108:19)
+    at PostgresQueryGenerator.selectQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1015:28)
+    at PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:59)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+[28/07/2026 17:51:16] [LoginUser] relation "Users" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[28/07/2026 17:54:39] [LoginUser] relation "Users" does not exist
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:21)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+    at async LoginUser (D:\React js\ProjectHotel\project_nodejs\controllers\user.controller.js:297:18)
+[28/07/2026 18:00:13] [LoginUser] WHERE parameter "username" has invalid "undefined" value
+Error: WHERE parameter "username" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1770:13)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1761:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1759:35)
+    at PostgresQueryGenerator.getWhereConditions (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:2108:19)
+    at PostgresQueryGenerator.selectQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1015:28)
+    at PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:59)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+[28/07/2026 18:00:36] [LoginUser] WHERE parameter "username" has invalid "undefined" value
+Error: WHERE parameter "username" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1770:13)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1761:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1759:35)
+    at PostgresQueryGenerator.getWhereConditions (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:2108:19)
+    at PostgresQueryGenerator.selectQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1015:28)
+    at PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:59)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+[28/07/2026 18:12:31] [LoginUser] WHERE parameter "username" has invalid "undefined" value
+Error: WHERE parameter "username" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1770:13)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1761:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1759:35)
+    at PostgresQueryGenerator.getWhereConditions (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:2108:19)
+    at PostgresQueryGenerator.selectQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1015:28)
+    at PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:59)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+[28/07/2026 18:13:25] [LoginUser] WHERE parameter "username" has invalid "undefined" value
+Error: WHERE parameter "username" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1770:13)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1761:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1759:35)
+    at PostgresQueryGenerator.getWhereConditions (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:2108:19)
+    at PostgresQueryGenerator.selectQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1015:28)
+    at PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:59)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)
+[28/07/2026 18:13:58] [LoginUser] WHERE parameter "username" has invalid "undefined" value
+Error: WHERE parameter "username" has invalid "undefined" value
+    at PostgresQueryGenerator.whereItemQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1770:13)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1761:25
+    at Array.forEach (<anonymous>)
+    at PostgresQueryGenerator.whereItemsQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1759:35)
+    at PostgresQueryGenerator.getWhereConditions (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:2108:19)
+    at PostgresQueryGenerator.selectQuery (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-generator.js:1015:28)
+    at PostgresQueryInterface.select (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:59)
+    at User.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1140:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async User.findOne (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1240:12)

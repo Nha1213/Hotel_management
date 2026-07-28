@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Eye, EyeOff, Camera, User } from "lucide-react";
 import { useNavigate } from "react-router";
 import "./style/register.css";
+import request from "../../util/request";
+import { alertError, alertSuccess } from "../../../swertalert/AlertSuccess";
 
 const Register = () => {
   // Show / Hide Password
@@ -57,11 +59,17 @@ const Register = () => {
   // HANDLE SUBMIT
   // =========================
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Register Data:");
-    console.log(formData);
+    try{
+        const res = await request("/api/user", "POST", formData);
+        if(res){
+          alertSuccess({text: res.message});
+          navigate("/login");
+        }
+    }catch(error){
+      alertError({title: "Error!", text: "Something went wrong"});
+    }
   };
 
   return (

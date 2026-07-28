@@ -292,7 +292,13 @@ const deleteUser = async (req, res) => {
 
 const LoginUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password } = req.body || {};
+    if(!username){
+      return res.status(400).json({
+        success: false,
+        message: "username is required",
+      })
+    }
 
     const user = await User.findOne({
       where: { username },
@@ -377,6 +383,7 @@ const getAccessToken = async (paramData) => {
   });
   return access_token;
 };
+
 const handleRefreshToken = async (req, res) => {
   const refreshToken = req.cookies?.refreshToken || req.body.refreshToken;
 

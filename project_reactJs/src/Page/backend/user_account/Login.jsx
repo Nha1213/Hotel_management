@@ -1,52 +1,99 @@
 import React, { useState } from "react";
-import { Eye, EyeOff, SunMedium, Check } from "lucide-react";
+import { Eye, EyeOff, Check } from "lucide-react";
 import { useNavigate } from "react-router";
 import "./style/Login.css";
-import HookUser from "./HookUser";
+import request from "../../util/request";
+import { alertError, alertSuccess } from "../../../swertalert/AlertSuccess";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const { UserLogin } = HookUser();
+  // Unified form state
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const UserLogin = async (e) => {
+    // 1. Prevent default form submission reload
+    e.preventDefault();
+
+    setLoading(true);
+
+    try {
+      const res = await request("/api/user/login", "POST", {
+        // Send email (or username depending on backend expectation)
+        username: data.email,
+        password: data.password,
+      });
+
+      if (res) {
+        alertSuccess({
+          title: "Login Success",
+          text: "Login successfully",
+        });
+        console.log(res);
+
+        // Save token and navigate home
+        if (res?.token) {
+          localStorage.setItem("accessToken", res.token);
+        }
+        navigate("/");
+      }
+    } catch (error) {
+      alertError({
+        title: "Error",
+        text: error?.response?.data?.message || "Login failed",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="login-page">
-      {/* Background Overlay */}
       <div className="overlay"></div>
 
-      {/* Login Card */}
       <div className="login-card">
-        {/* Logo */}
+        {/* Logo path fixed */}
         <div className="logo">
-          {/* <SunMedium size={42} strokeWidth={1.5} /> */}
-          <img src="../../../../public/imageCover/logoIct.jpg" />
+          <img src="/imageCover/logoIct.jpg" alt="Logo" />
         </div>
 
-        {/* Title */}
         <div className="header">
           <h1>Welcome back!</h1>
         </div>
 
-        {/* Form */}
-        <form>
+        {/* Bind submit to form */}
+        <form onSubmit={UserLogin}>
           {/* Email */}
           <div className="form-group">
             <label>Email</label>
-
-            <input type="email" placeholder="Enter your email" />
+            <input
+              type="email"
+              placeholder="Enter your email"
+              required
+              value={data.email}
+              disabled={loading}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+            />
           </div>
 
           {/* Password */}
           <div className="form-group">
             <label>Password</label>
-
             <div className="password-box">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
+                required
+                value={data.password}
+                disabled={loading}
+                onChange={(e) => setData({ ...data, password: e.target.value })}
               />
 
               <button
@@ -68,7 +115,6 @@ const Login = () => {
               <span className={`checkbox ${rememberMe ? "checked" : ""}`}>
                 {rememberMe && <Check size={14} />}
               </span>
-
               <span>Remember me</span>
             </div>
 
@@ -77,29 +123,28 @@ const Login = () => {
             </button>
           </div>
 
-          {/* Login Button */}
-          <button type="submit" className="login-button" onClick={UserLogin}>
-            Log In
+          {/* Submit Button */}
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? "Logging in..." : "Log In"}
           </button>
         </form>
 
-        {/* Divider */}
         <div className="divider">
           <span></span>
           <p>Or</p>
           <span></span>
         </div>
 
-        {/* Google Login */}
         <button type="button" className="google-button">
           <span className="google-icon">G</span>
           Sign In with Google
         </button>
 
-        {/* Sign Up */}
         <p className="signup">
-          Don't have an account?
-          <button type="button" onClick={() => {navigate("/register")}}>Sign Up</button>
+          Don't have an account?{" "}
+          <button type="button" onClick={() => navigate("/register")}>
+            Sign Up
+          </button>
         </p>
       </div>
     </div>
