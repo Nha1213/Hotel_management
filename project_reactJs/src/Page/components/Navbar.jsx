@@ -1,17 +1,20 @@
-
 import "../style/Navbar.css";
 import { NavLink } from "react-router-dom";
+import "./navbar2.css";
 const Navbar = () => {
-
   return (
     <nav className="navbarone">
-      <div className="navbarone-container" >
-        <div className="navbarone-brand">
-          <h2>Dashboard</h2>
-        </div>
+      <div className="navbarone-container">
+        <div className="navbarone-brand"><h2 className="text-black">Dashboard Overview</h2></div>
         <ul className="navbarone-menu">
           <li>
-            <NavLink to="/login" >
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </li>
+          <li>
+            <NavLink to="/login">
               <button className="Btn_logout">
                 <div className="sign">
                   <svg viewBox="0 0 512 512">
@@ -23,24 +26,6 @@ const Navbar = () => {
               </button>
             </NavLink>
           </li>
-          {/* <li>
-            <a href="/">Home</a>
-          </li> 
-          <li>
-            <a href="/dashboard">Dashboard</a>
-          </li>
-          <li>
-            <a href="/products">Products</a>
-          </li>
-          <li>
-            <a href="/sales">Sales</a>
-          </li>
-          <li>
-            <a href="/customers">Customers</a>
-          </li>
-          <li>
-            <a href="/reports">Reports</a>
-          </li> */}
         </ul>
       </div>
     </nav>

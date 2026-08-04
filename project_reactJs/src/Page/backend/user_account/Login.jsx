@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Eye, EyeOff, Check } from "lucide-react";
 import { useNavigate } from "react-router";
 import "./style/Login.css";
 import request from "../../util/request";
 import { alertError, alertSuccess } from "../../../swertalert/AlertSuccess";
+import {setStoreUser} from "../../localStorage/userStore";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,7 +41,7 @@ const Login = () => {
 
         // Save token and navigate home
         if (res?.token) {
-          localStorage.setItem("accessToken", res.token);
+          setStoreUser(res.token);
         }
         navigate("/");
       }

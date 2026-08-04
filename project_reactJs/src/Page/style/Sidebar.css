@@ -1,6 +1,7 @@
-.sidebar {
-  width: 250px;
-  background: linear-gradient(to right, #021760, #043e78);
+.sidebar{
+  /* background: radial-gradient(circle,rgba(33, 33, 33, 1) 0%, rgba(48, 48, 48, 1) 100%); */
+  background: #19233a;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   color: #e2e8f0;
   height: 100vh;
   overflow-y: auto;

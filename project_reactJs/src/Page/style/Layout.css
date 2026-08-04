@@ -16,8 +16,8 @@
   margin-left: 230px;
   flex: 1;
   overflow-y: auto;
-  background-color: #f7fafc;
-  padding:0px 0px 20px 20px;
+  background: radial-gradient(circle,rgba(217, 217, 217, 1) 0%, rgba(235, 235, 235, 1) 100%);
+  /* padding:0px 0px 20px 20px; */
   
 }
 
@@ -34,7 +34,7 @@
 
 .page-content {
   background: white;
-  padding: 20px;
+  padding: 20px;  
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

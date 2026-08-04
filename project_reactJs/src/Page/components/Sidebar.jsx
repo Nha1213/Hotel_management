@@ -7,30 +7,39 @@ const Sidebar = () => {
 
   const menuItems = [
 
-    { id: "dashboard", label: "📊 Dashboard", path: "/dashboard" },
+    { id: "dashboard", label: "📊 Dashboard", path: "/" },
 
     {
-      id: "products",
-      label: "📦 Product Management",
-      path: "/products",
+      id: "property",
+      label: "📦 Property",
+      path: "/property",
       submenu: [
-        { id: "brand", label: "Brand", path: "/brand" },
-        { id: "list-product", label: "Product List", path: "/products" },
-        { id: "categories", label: "Categories", path: "/category" },
+        { id: "room", label: "Room", path: "/room" },
+        { id: "room_type", label: "Room Type", path: "/room_type" },
+        { id: "Smart_lock", label: "Smart Lock", path: "/smart_lock" },
       ],
     },
 
     {
-      id: "sales",
-      label: "💳 Point of Sale",
-      path: "/salespos",
+      id: "guests",
+      label: "💳 Guests",
+      path: "/guests",
       submenu: [
-        { id: "new-sale", label: "New Sale", path: "/salepos" },
-        { id: "sales-list", label: "Sales History", path: "/salehistory" },
+        { id: "guests", label: "Guests", path: "/guests" },
+        { id: "walk_in_registration", label: "Walk-in Registration", path: "/walk_in_registration" },
       ],
     },
 
-    { id: "customers", label: "👥 Customers", path: "/customers" },
+    {
+      id: "Front_Office",
+      label: "💳 Front Office",
+      path: "/front_office",
+      submenu: [
+        { id: "complaints", label: "Complaints", path: "/complaints" },
+        { id: "night_audit", label: "Night Audit", path: "/night_audit" },
+        { id: "daily_summary", label: "Daily Summary", path: "/daily_summary" },
+      ],
+    },
 
     {
       id: "reports",
