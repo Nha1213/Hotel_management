@@ -2,7 +2,6 @@ const {RoomType} = require("../models");
 const {logError} = require("../middlewares/logError");
 const {Op} = require("sequelize");
 const {deleteImageFolder} = require("../uploads/upload");
-
 const buildPhotoUrl = (file) => {
     if(!file) return null;
     return `/image/${file.filename}`

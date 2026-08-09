@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./roomType.css";
 import LightMode from "../DartMode/LightMode";
-import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Upload, Dropdown } from "antd";
+import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Upload, Dropdown, Tag } from "antd";
 import { UploadOutlined, DownOutlined } from "@ant-design/icons";
 import request from "../../util/request";
 import { BaseUrl } from "../../util/BaseUrl";
@@ -14,6 +14,7 @@ const RoomType = () => {
 
   const [filteredRoomTypes, setFilteredRoomTypes] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -27,9 +28,9 @@ const RoomType = () => {
   const [form] = Form.useForm();
 
   const items = [
-    { key: "1", label: "All" },
-    { key: "2", label: "Available" },
-    { key: "3", label: "Unavailable" },
+    { key: "all", label: "All" },
+    { key: "1", label: "Active" },
+    { key: "0", label: "Inactive" },
   ];
 
   // Fetch data from backend
@@ -57,21 +58,29 @@ const RoomType = () => {
     fetchRoomType();
   }, []);
 
-  // Filter list when search key changes
+  // Filter list when search or dropdown filter changes
   useEffect(() => {
-    if (!searchKeyword.trim()) {
-      setFilteredRoomTypes(data);
-    } else {
-      const query = searchKeyword.toLowerCase();
-      const filtered = data.filter(
-        (item) =>
-          item.name?.toLowerCase().includes(query) ||
-          item.description?.toLowerCase().includes(query)
-      );
-      setFilteredRoomTypes(filtered);
-    }
+    const query = searchKeyword.toLowerCase().trim();
+
+    const filtered = data.filter((item) => {
+      const matchesSearch = !query
+        ? true
+        : (item.name?.toLowerCase() || "").includes(query) ||
+          (item.description?.toLowerCase() || "").includes(query);
+
+      const matchesStatus =
+        filterStatus === "all" || String(item.status) === String(filterStatus);
+
+      return matchesSearch && matchesStatus;
+    });
+
+    setFilteredRoomTypes(filtered);
     setCurrentPage(1);
-  }, [searchKeyword, data]);
+  }, [searchKeyword, data, filterStatus]);
+
+  const handleFilterChange = ({ key }) => {
+    setFilterStatus(key);
+  };
 
   // Open modal for adding a new item
   const handleAddNew = () => {
@@ -164,9 +173,9 @@ const RoomType = () => {
 
       <div className="d-flex justify-content-end align-items-center mb-3">
         <Space>
-          <Dropdown menu={{ items }}>
+          <Dropdown menu={{ items, onClick: handleFilterChange }}>
             <Button>
-              Filter <DownOutlined />
+              Filter: {items.find((item) => item.key === filterStatus)?.label || "All"} <DownOutlined />
             </Button>
           </Dropdown>
 
@@ -215,6 +224,8 @@ const RoomType = () => {
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Price per Night</th>
+                <th>Max Guest</th>
                 <th>Status</th>
                 <th>Image</th>
                 <th>Actions</th>
@@ -227,11 +238,13 @@ const RoomType = () => {
                     <td>{roomType.id}</td>
                     <td>{roomType.name || "-"}</td>
                     <td>{roomType.description || "-"}</td>
-                    <td>{roomType.status ? "Active" : "Inactive"}</td>
+                    <td>{roomType.price_per_night || "-"}</td>
+                    <td>{roomType.max_guest || "-"}</td>
+                    <td>{roomType.status ? <Tag color="green">"Active" </Tag>: <Tag color="red">Inactive</Tag>}</td>
                     <td>
                       {roomType.image ? (
                         <img
-                          src={BaseUrl + roomType.image}
+                          src={`${BaseUrl}${roomType.image}`}
                           alt={roomType.name || "Room"}
                           className="room-type-photo"
                         />
