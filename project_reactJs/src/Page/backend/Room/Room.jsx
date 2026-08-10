@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./room.css";
 import LightMode from "../DartMode/LightMode";
-import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Upload, Dropdown } from "antd";
+import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Upload, Dropdown, Select } from "antd";
 import { UploadOutlined, DownOutlined } from "@ant-design/icons";
 import request from "../../util/request";
 import { BaseUrl } from "../../util/BaseUrl";
@@ -11,6 +11,7 @@ const Room = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [editingId, setEditingId] = useState(null);
+  const [roomType, setRoomType] = useState([]);
 
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -158,6 +159,29 @@ const Room = () => {
     }
   };
 
+  //fetch data from roomType
+  const fetchRoomType = async () => {
+    try {
+      const res = await request("/api/roomtype", "get");
+      if (res) {
+        setLoading(true);
+        const list = res.data || [];
+        setRoomType(list);
+      }
+    } catch (error) {
+      alertError({
+        title: "Error",
+        text: error?.response?.data?.message || "Failed to load room types.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchRoomType();
+  }, [roomType]);
+
   return (
     <div className="dashboard">
       <LightMode title="Room" />
@@ -302,9 +326,9 @@ const Room = () => {
           Next
         </button>
       </div>
-
+          {/* model for add and edit room */}
       <Modal
-        title={editingId ? "Edit Room Type" : "Add New Room Type"}
+        title={editingId ? "Edit Room" : "Add New Room"}
         open={open}
         onCancel={() => {
           setOpen(false);
@@ -321,7 +345,7 @@ const Room = () => {
                 name="room_number"
                 rules={[{ required: true, message: "Please enter room number" }]}
               >
-                <InputNumber placeholder="Enter room number" />
+                <InputNumber placeholder="Enter room number" style={{ width: "100%" }} />
               </Form.Item>
             </Col>
 
@@ -339,21 +363,24 @@ const Room = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                label="Price Per Night"
-                name="price_per_night"
-                rules={[{ required: true, message: "Please enter price" }]}
+                label="Description"
+                name="description"
+                rules={[{ required: true, message: "Please enter description" }]}
               >
-                <InputNumber style={{ width: "100%" }} placeholder="Enter price" />
+                <Input style={{ width: "100%" }} placeholder="Enter description" />
               </Form.Item>
             </Col>
 
             <Col span={12}>
               <Form.Item
-                label="Max Guest"
-                name="max_guest"
-                rules={[{ required: true, message: "Please enter max guest" }]}
+                label="Status"
+                name="status"
+                rules={[{ required: true, message: "Please select status" }]}
               >
-                <InputNumber style={{ width: "100%" }} placeholder="Enter max guest" />
+                <Select placeholder="Select status">
+                  <Select.Option value="active">Active</Select.Option>
+                  <Select.Option value="inactive">Inactive</Select.Option>
+                </Select>
               </Form.Item>
             </Col>
           </Row>
@@ -361,25 +388,19 @@ const Room = () => {
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                label="Room Image"
-                name="image"
-                valuePropName="fileList"
-                getValueFromEvent={(e) => e?.fileList}
-                rules={[
-                  {
-                    required: !editingId,
-                    message: "Please upload a room image",
-                  },
-                ]}
+                label="RoomType ID"
+                name="Room_type_id"
+                rules={[{ required: true, message: "Please select RoomType_id" }]}
               >
-                <Upload
-                  listType="picture-card"
-                  beforeUpload={() => false}
-                  maxCount={1}
-                  accept="image/*"
-                >
-                  <Button icon={<UploadOutlined />}>Upload Image</Button>
-                </Upload>
+                <Select placeholder="Select RoomType ID">
+                  {
+                    roomType.map((roomType) => (
+                      <Select.Option key={roomType.id} value={roomType.id}>
+                        {roomType.name}
+                      </Select.Option>
+                    ))
+                  }
+                </Select>
               </Form.Item>
             </Col>
           </Row>

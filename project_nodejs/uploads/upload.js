@@ -26,12 +26,14 @@ const allowedTypes = ['.jpg', '.jpeg',
   '.webp',
   '.bmp',
   '.svg',
-  '.tiff'
+  '.tiff',
+  '.mp4',
+  '.mp3'
 ];
 const fileFilter = (req, file, cb) => {
   const ext = path.extname(file.originalname).toLowerCase();
   if (allowedTypes.includes(ext)) cb(null, true);
-  else cb(new Error('Only JPG, JPEG, PNG, GIF, and WEBP files are allowed'));
+  else cb(new Error('Only JPG, JPEG, PNG, GIF, BMP, SVG, TIFF, MP4, MP3 and WEBP files are allowed'));
 };
 
 const upload = multer({
