@@ -252,6 +252,14 @@ const RoomType = () => {
                         "-"
                       )}
                     </td>
+                    {/* <td>
+                      <video 
+                        width={200}
+                        src={BaseUrl + roomType.image}
+                        controls
+                        playsInline
+                      />
+                    </td> */}
                     <td className="actions">
                       <button
                         className="btn-edit"

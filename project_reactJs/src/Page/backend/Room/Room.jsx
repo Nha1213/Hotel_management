@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import "./room.css";
 import LightMode from "../DartMode/LightMode";
-import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Upload, Dropdown, Select } from "antd";
-import { UploadOutlined, DownOutlined } from "@ant-design/icons";
+import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Dropdown, Select } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import request from "../../util/request";
 import { BaseUrl } from "../../util/BaseUrl";
 import { alertSuccess, alertError, confirmDelete } from "../../../swertalert/AlertSuccess";
@@ -19,43 +19,59 @@ const Room = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
+  const [form] = Form.useForm();
+
   const totalPages = Math.ceil(filteredRooms.length / itemsPerPage) || 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedRooms = filteredRooms.slice(startIndex, endIndex);
 
-  // Attach Ant Design form instance
-  const [form] = Form.useForm();
-
   const items = [
     { key: "all", label: "All" },
-    { key: "1", label: "active" },
-    { key: "0", label: "inactive" },
+    { key: "1", label: "Active" },
+    { key: "0", label: "Inactive" },
   ];
 
-  // Fetch data from backend
+  // Fetch rooms
   const fetchRoom = async () => {
     setLoading(true);
     try {
       const res = await request("/api/room", "get");
       if (res) {
         const list = res.data || [];
+        console.log(res);
         setData(list);
         setFilteredRooms(list);
       }
     } catch (error) {
       alertError({
         title: "Error",
-        text: error?.response?.data?.message || "Failed to load room types.",
+        text: error?.response?.data?.message || "Failed to load rooms.",
       });
     } finally {
       setLoading(false);
     }
   };
 
-  // Run once on component mount
+  // Fetch room types
+  const fetchRoomType = async () => {
+    try {
+      const res = await request("/api/roomtype", "get");
+      if (res) {
+        setRoomType(res.data || []);
+        // console.log(res);
+      }
+    } catch (error) {
+      alertError({
+        title: "Error",
+        text: error?.response?.data?.message || "Failed to load room types.",
+      });
+    }
+  };
+
   useEffect(() => {
     fetchRoom();
+    fetchRoomType();
   }, []);
 
   // Filter list when search key changes
@@ -66,44 +82,33 @@ const Room = () => {
       const query = searchKeyword.toLowerCase();
       const filtered = data.filter(
         (item) =>
-          item.name?.toLowerCase().includes(query) ||
-          item.description?.toLowerCase().includes(query)
+          item.room_number?.toString().includes(query) ||
+          item.description?.toLowerCase().includes(query) ||
+          item.floor?.toString().toLowerCase().includes(query)
       );
       setFilteredRooms(filtered);
     }
     setCurrentPage(1);
   }, [searchKeyword, data]);
 
-  // Open modal for adding a new item
   const handleAddNew = () => {
     setEditingId(null);
     form.resetFields();
     setOpen(true);
   };
 
-  // Open modal and prefill data for editing
   const handleEdit = (item) => {
     setEditingId(item.id);
     form.setFieldsValue({
-      name: item.name,
+      room_number: item.room_number,
+      floor: item.floor,
       description: item.description,
-      price_per_night: item.price_per_night,
-      max_guest: item.max_guest,
-      image: item.image
-        ? [
-            {
-              uid: "-1",
-              name: item.image.split("/").pop(),
-              status: "done",
-              url: BaseUrl + item.image,
-            },
-          ]
-        : [],
+      status: item.status,
+      room_type_id: item.room_type_id || item.Room_type_id,
     });
     setOpen(true);
   };
 
-  // Delete handler
   const handleDelete = async (id) => {
     try {
       const ok = await confirmDelete(async () => {
@@ -115,29 +120,25 @@ const Room = () => {
     } catch (error) {
       alertError({
         title: "Error!",
-        text: error?.response?.data?.message || "Failed to delete room type.",
+        text: error?.response?.data?.message || "Failed to delete room.",
       });
     }
   };
 
-  // Submit handler for creating and updating
   const onFinish = async (values) => {
     try {
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("description", values.description);
-      formData.append("price_per_night", values.price_per_night);
-      formData.append("max_guest", values.max_guest);
-
-      // Append image file only if a new file object exists
-      if (values.image?.[0]?.originFileObj) {
-        formData.append("image", values.image[0].originFileObj);
-      }
-
       const url = editingId ? `/api/room/${editingId}` : "/api/room";
       const method = editingId ? "put" : "post";
 
-      const res = await request(url, method, formData);
+      const data = {
+        room_number: values.room_number,
+        floor: values.floor,
+        description: values.description,
+        status: values.status,
+        room_type_id: values.room_type_id,
+      };
+
+      const res = await request(url, method, data);
 
       if (res) {
         setOpen(false);
@@ -145,9 +146,7 @@ const Room = () => {
         setEditingId(null);
         alertSuccess({
           title: "Success!",
-          text: editingId
-            ? "Updated room type successfully"
-            : "Created room type successfully",
+          text: editingId ? "Updated room successfully" : "Created room successfully",
         });
         fetchRoom();
       }
@@ -158,29 +157,6 @@ const Room = () => {
       });
     }
   };
-
-  //fetch data from roomType
-  const fetchRoomType = async () => {
-    try {
-      const res = await request("/api/roomtype", "get");
-      if (res) {
-        setLoading(true);
-        const list = res.data || [];
-        setRoomType(list);
-      }
-    } catch (error) {
-      alertError({
-        title: "Error",
-        text: error?.response?.data?.message || "Failed to load room types.",
-      });
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchRoomType();
-  }, [roomType]);
 
   return (
     <div className="dashboard">
@@ -195,7 +171,7 @@ const Room = () => {
           </Dropdown>
 
           <Button type="primary" onClick={handleAddNew}>
-            + Add New Room Type
+            + Add New Room
           </Button>
         </Space>
       </div>
@@ -222,7 +198,7 @@ const Room = () => {
           <label>Search:</label>
           <input
             type="text"
-            placeholder="Search by name or description..."
+            placeholder="Search by room number or description..."
             value={searchKeyword}
             onChange={(e) => setSearchKeyword(e.target.value)}
           />
@@ -232,69 +208,50 @@ const Room = () => {
       {loading ? (
         <div className="loading">Loading...</div>
       ) : (
-        <>
-          <table className="room-type-table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Image</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedRooms.length > 0 ? (
-                paginatedRooms.map((room) => (
-                  <tr key={room.id}>
-                    <td>{room.id}</td>
-                    <td>{room.name || "-"}</td>
-                    <td>{room.description || "-"}</td>
-                    <td>{room.status ? "Active" : "Inactive"}</td>
-                    <td>
-                      {room.image ? (
-                        <img
-                          src={`${BaseUrl}${room.image}`}
-                          alt={room.name || "Room"}
-                          className="room-type-photo"
-                        />
-                      ) : (
-                        "-"
-                      )}
-                    </td>
-                    <td className="actions">
-                      <button
-                        className="btn-edit"
-                        onClick={() => handleEdit(room)}
-                      >
-                        ✎ Edit
-                      </button>
-                      <button
-                        className="btn-delete"
-                        onClick={() => handleDelete(room.id)}
-                      >
-                        🗑 Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6" className="no-data">
-                    No items found
+        <table className="room-type-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Room Number</th>
+              <th>Floor</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedRooms.length > 0 ? (
+              paginatedRooms.map((room) => (
+                <tr key={room.id}>
+                  <td>{room.id}</td>
+                  <td>{room.room_number || "-"}</td>
+                  <td>{room.floor || "-"}</td>
+                  <td>{room.description || "-"}</td>
+                  <td>{room.status === "active" || room.status === 1 ? "Active" : "Inactive"}</td>
+                  <td className="actions">
+                    <button className="btn-edit" onClick={() => handleEdit(room)}>
+                      ✎ Edit
+                    </button>
+                    <button className="btn-delete" onClick={() => handleDelete(room.id)}>
+                      🗑 Delete
+                    </button>
                   </td>
                 </tr>
-              )}
-            </tbody>
-          </table>
-        </>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="no-data" style={{ textAlign: "center" }}>
+                  No items found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       )}
 
       <div className="pagination-info">
         Showing {filteredRooms.length > 0 ? startIndex + 1 : 0} to{" "}
-        {Math.min(endIndex, filteredRooms.length)} of {filteredRooms.length}{" "}
-        items
+        {Math.min(endIndex, filteredRooms.length)} of {filteredRooms.length} items
       </div>
 
       <div className="pagination-controls">
@@ -318,15 +275,13 @@ const Room = () => {
         </div>
         <button
           className="btn-pagination"
-          onClick={() =>
-            setCurrentPage(Math.min(totalPages, currentPage + 1))
-          }
+          onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
         >
           Next
         </button>
       </div>
-          {/* model for add and edit room */}
+
       <Modal
         title={editingId ? "Edit Room" : "Add New Room"}
         open={open}
@@ -351,7 +306,7 @@ const Room = () => {
 
             <Col span={12}>
               <Form.Item
-                label="floor"
+                label="Floor"
                 name="floor"
                 rules={[{ required: true, message: "Please enter floor" }]}
               >
@@ -388,18 +343,16 @@ const Room = () => {
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                label="RoomType ID"
-                name="Room_type_id"
-                rules={[{ required: true, message: "Please select RoomType_id" }]}
+                label="Room Type"
+                name="room_type_id"
+                rules={[{ required: true, message: "Please select Room Type" }]}
               >
-                <Select placeholder="Select RoomType ID">
-                  {
-                    roomType.map((roomType) => (
-                      <Select.Option key={roomType.id} value={roomType.id}>
-                        {roomType.name}
-                      </Select.Option>
-                    ))
-                  }
+                <Select placeholder="Select Room Type">
+                  {roomType.map((item) => (
+                    <Select.Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Select.Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Col>

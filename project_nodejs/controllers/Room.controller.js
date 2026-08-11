@@ -4,7 +4,7 @@ const {Op} = require("sequelize");
 const { inc } = require("semver");
 
 
-function requireCheck (room_number, room_type_id, floor, status){
+function requireCheck(res, room_number, room_type_id, floor, status){
     if(!room_number){
             return res.status(400).json({
                 success: false,
@@ -72,7 +72,7 @@ const createRoom = async (req, res) => {
     try{
         const {room_number, room_type_id, floor, status, description} = req.body;
     
-        requireCheck(room_number, room_type_id, floor, status);
+        requireCheck(res, room_number, room_type_id, floor, status);
 
         const room = await Room.create({room_number, room_type_id, floor, status, description});
         return res.status(200).json({
@@ -88,7 +88,7 @@ const createRoom = async (req, res) => {
 const updateRoom = async (req, res) => {
     try{
         const {id} = req.params;
-        const {room_number, room_type_id, floor, status} = req.body;
+        const {room_number, room_type_id, floor, status, description} = req.body;
         if(!id){
             return res.status(400).json({
                 success: false,
@@ -103,9 +103,9 @@ const updateRoom = async (req, res) => {
             });
         }
 
-        requireCheck(room_number, room_type_id, floor, status);
+        requireCheck(res, room_number, room_type_id, floor, status);
 
-        const room = await Room.update({room_number, room_type_id, floor, status}, {where:{id}});
+        const room = await Room.update({room_number, room_type_id, floor, status, description}, {where:{id}});
 
         return res.status(200).json({
             success: true,

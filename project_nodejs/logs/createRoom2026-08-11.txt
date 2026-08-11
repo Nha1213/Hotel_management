@@ -1,0 +1,54 @@
+[11/08/2026 19:46:53] [createRoom] res is not defined
+ReferenceError: res is not defined
+    at requireCheck (D:\React js\ProjectHotel\project_nodejs\controllers\Room.controller.js:16:13)
+    at createRoom (D:\React js\ProjectHotel\project_nodejs\controllers\Room.controller.js:75:9)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:117:3)
+    at handle (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:295:15
+    at processParams (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:582:12)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:291:5)
+[11/08/2026 19:47:05] [createRoom] res is not defined
+ReferenceError: res is not defined
+    at requireCheck (D:\React js\ProjectHotel\project_nodejs\controllers\Room.controller.js:16:13)
+    at createRoom (D:\React js\ProjectHotel\project_nodejs\controllers\Room.controller.js:75:9)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:117:3)
+    at handle (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:295:15
+    at processParams (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:582:12)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:291:5)
+[11/08/2026 19:49:00] [createRoom] res is not defined
+ReferenceError: res is not defined
+    at requireCheck (D:\React js\ProjectHotel\project_nodejs\controllers\Room.controller.js:16:13)
+    at createRoom (D:\React js\ProjectHotel\project_nodejs\controllers\Room.controller.js:75:9)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\route.js:117:3)
+    at handle (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\React js\ProjectHotel\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:295:15
+    at processParams (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:582:12)
+    at next (D:\React js\ProjectHotel\project_nodejs\node_modules\router\index.js:291:5)
+[11/08/2026 19:51:59] [createRoom] invalid input syntax for type integer: "Et iure libero persp"
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.insert (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Room.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async Room.create (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1362:12)
+    at async createRoom (D:\React js\ProjectHotel\project_nodejs\controllers\Room.controller.js:77:22)
+[11/08/2026 19:52:12] [createRoom] invalid input syntax for type integer: "Sapiente modi quod v"
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.insert (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Room.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async Room.create (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1362:12)
+    at async createRoom (D:\React js\ProjectHotel\project_nodejs\controllers\Room.controller.js:77:22)
