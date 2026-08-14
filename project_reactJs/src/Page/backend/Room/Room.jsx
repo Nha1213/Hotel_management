@@ -12,6 +12,8 @@ const Room = () => {
   const [data, setData] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [roomType, setRoomType] = useState([]);
+  const [filterStatus, setFilterStatus] = useState("all");
+
 
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -76,20 +78,26 @@ const Room = () => {
 
   // Filter list when search key changes
   useEffect(() => {
-    if (!searchKeyword.trim()) {
-      setFilteredRooms(data);
-    } else {
+    let filtered = data;
+    
+    if (searchKeyword.trim()) {
       const query = searchKeyword.toLowerCase();
-      const filtered = data.filter(
+      filtered = data.filter(
         (item) =>
           item.room_number?.toString().includes(query) ||
           item.description?.toLowerCase().includes(query) ||
-          item.floor?.toString().toLowerCase().includes(query)
+          item.floor?.toString().toLowerCase().includes(query) ||
+          item.status?.toLowerCase().includes(query)
       );
-      setFilteredRooms(filtered);
     }
+    
+    if (filterStatus !== "all") {
+      filtered = filtered.filter((item) => item.status == filterStatus);
+    }
+    
+    setFilteredRooms(filtered);
     setCurrentPage(1);
-  }, [searchKeyword, data]);
+  }, [searchKeyword, data, filterStatus]);
 
   const handleAddNew = () => {
     setEditingId(null);
@@ -158,20 +166,24 @@ const Room = () => {
     }
   };
 
+  const handleFilterChange = ({ key }) => {
+    setFilterStatus(key);
+  };
+
   return (
     <div className="dashboard">
       <LightMode title="Room" />
 
       <div className="d-flex justify-content-end align-items-center mb-3">
         <Space>
-          <Dropdown menu={{ items }}>
+          <Dropdown menu={{ items, onClick: handleFilterChange }}>
             <Button>
-              Filter <DownOutlined />
+              Filter: {items.find((item) => item.key === filterStatus)?.label || "All"} <DownOutlined />
             </Button>
           </Dropdown>
 
           <Button type="primary" onClick={handleAddNew}>
-            + Add New Room
+            + Add New Room Type
           </Button>
         </Space>
       </div>
