@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Eye, EyeOff, Check } from "lucide-react";
 import { useNavigate } from "react-router";
 import "./style/Login.css";
-import request from "../../util/request";
+import Request from "../../util/Request";
 import { alertError, alertSuccess } from "../../../swertalert/AlertSuccess";
 import {setStoreUser} from "../../localStorage/userStore";
 
@@ -26,7 +26,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await request("/api/user/login", "POST", {
+      const res = await Request("/api/user/login", "POST", {
         // Send email (or username depending on backend expectation)
         username: data.email,
         password: data.password,
@@ -73,7 +73,7 @@ const Login = () => {
         <form onSubmit={UserLogin}>
           {/* Email */}
           <div className="form-group">
-            <label>Email</label>
+            <label style={{color: "white"}}>Email</label>
             <input
               type="email"
               placeholder="Enter your email"
@@ -86,7 +86,7 @@ const Login = () => {
 
           {/* Password */}
           <div className="form-group">
-            <label>Password</label>
+            <label style={{color: "white"}}>Password</label>
             <div className="password-box">
               <input
                 type={showPassword ? "text" : "password"}

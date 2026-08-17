@@ -197,14 +197,14 @@ body {
     border-radius: 15px;
 
     border:
-        1px solid rgba(255, 255, 255, 0.25);
+        1px solid rgba(255, 255, 255, 0.5);
 
     outline: none;
 
     background:
-        rgba(60, 60, 100, 0.25);
+        rgba(255, 255, 255, 0.22);
 
-    color: white;
+    color: #1d213d;
 
     font-size: 14px;
 
@@ -213,7 +213,7 @@ body {
 
 .form-group input::placeholder {
     color:
-        rgba(255, 255, 255, 0.5);
+        rgba(29, 33, 61, 0.7);
 }
 
 .form-group input:focus {
@@ -279,23 +279,36 @@ body {
     height: 48px;
 
     padding:
-        0 16px;
+        0 42px 0 16px;
 
     border-radius: 15px;
 
     border:
-        1px solid rgba(255, 255, 255, 0.25);
+        1px solid rgba(255, 255, 255, 0.5);
 
     outline: none;
 
     background:
-        rgba(60, 60, 100, 0.4);
+        rgba(255, 255, 255, 0.22);
 
-    color: white;
+    color: rgba(29, 33, 61, 0.9);
 
     font-size: 14px;
 
     cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, rgba(29, 33, 61, 0.8) 50%),
+        linear-gradient(135deg, rgba(29, 33, 61, 0.8) 50%, transparent 50%);
+    background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 12px) calc(50% - 3px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
 }
 
 .form-group select:focus {
@@ -306,11 +319,15 @@ body {
         0 0 0 3px rgba(156, 108, 255, 0.15);
 }
 
-.form-group select option {
+.two-column .form-group select option {
     background:
-        #35345d;
+        rgba(255, 255, 255, 0.242);
 
-    color: white;
+    color: #1d213d;
+}
+
+.two-column .form-group select:invalid {
+    color: rgba(29, 33, 61, 0.7);
 }
 
 
@@ -327,16 +344,16 @@ body {
     border-radius: 15px;
 
     border:
-        1px solid rgba(255, 255, 255, 0.25);
+        1px solid rgba(255, 255, 255, 0.5);
 
     outline: none;
 
     resize: none;
 
     background:
-        rgba(60, 60, 100, 0.25);
+        rgba(255, 255, 255, 0.22);
 
-    color: white;
+    color: #1d213d;
 
     font-family: inherit;
 
@@ -347,7 +364,7 @@ body {
 
 .form-group textarea::placeholder {
     color:
-        rgba(255, 255, 255, 0.5);
+        rgba(29, 33, 61, 0.7);
 }
 
 .form-group textarea:focus {

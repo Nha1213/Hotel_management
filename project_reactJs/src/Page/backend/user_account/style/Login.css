@@ -15,7 +15,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-    background-image: url("../../../../../public/imageCover/backgoroundHotel.gif");
+    background-image: url("/imageCover/backgoroundHotel.gif");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -27,6 +27,7 @@ body {
 .overlay {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background:
         linear-gradient(135deg,
             rgba(24, 27, 75, 0.45),
@@ -68,7 +69,7 @@ body {
     width: 55px;
     height: 55px;
     border-radius: 50px;
-    filter: saturate(20px);
+    filter: saturate(1.2);
 }
 
 /* Header */

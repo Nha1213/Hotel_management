@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Eye, EyeOff, Camera, User } from "lucide-react";
 import { useNavigate } from "react-router";
 import "./style/register.css";
-import request from "../../util/request";
+import Request from "../../util/Request";
 import { alertError, alertSuccess } from "../../../swertalert/AlertSuccess";
 
 const Register = () => {
@@ -62,13 +62,13 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-        const res = await request("/api/user", "POST", formData);
+        const res = await Request("/api/user", "POST", formData);
         if(res){
           alertSuccess({text: res.message});
           navigate("/login");
         }
     }catch(error){
-      alertError({title: "Error!", text: "Something went wrong"});
+      alertError({title: "Error!", text: error?.response?.data?.message});
     }
   };
 
@@ -137,7 +137,7 @@ const Register = () => {
             {/* Username */}
 
             <div className="form-group">
-              <label>Username</label>
+              <label style={{color: "white"}}>Username</label>
 
               <input
                 type="text"
@@ -152,7 +152,7 @@ const Register = () => {
             {/* Password */}
 
             <div className="form-group">
-              <label>Password</label>
+              <label style={{color: "white"}}>Password</label>
 
               <div className="password-box">
                 <input
@@ -183,7 +183,7 @@ const Register = () => {
             {/* First Name */}
 
             <div className="form-group">
-              <label>First Name</label>
+              <label style={{color: "white"}}>First Name</label>
 
               <input
                 type="text"
@@ -198,7 +198,7 @@ const Register = () => {
             {/* Last Name */}
 
             <div className="form-group">
-              <label>Last Name</label>
+              <label style={{color: "white"}}>Last Name</label>
 
               <input
                 type="text"
@@ -219,7 +219,7 @@ const Register = () => {
             {/* Gender */}
 
             <div className="form-group">
-              <label>Gender</label>
+              <label style={{color: "white"}}>Gender</label>
 
               <select
                 name="gender"
@@ -240,7 +240,7 @@ const Register = () => {
             {/* Phone */}
 
             <div className="form-group">
-              <label>Phone</label>
+              <label style={{color: "white"}}>Phone</label>
 
               <input
                 type="tel"
@@ -258,7 +258,7 @@ const Register = () => {
           ========================= */}
 
           <div className="form-group">
-            <label>Address</label>
+            <label style={{color: "white"}}>Address</label>
 
             <textarea
               name="address"

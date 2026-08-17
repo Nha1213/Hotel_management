@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import "./room.css";
 import LightMode from "../DartMode/LightMode";
-import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Dropdown, Select } from "antd";
+import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Dropdown, Select, Tag } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import request from "../../util/request";
+import Request from "../../util/Request";
 import { BaseUrl } from "../../util/BaseUrl";
 import { alertSuccess, alertError, confirmDelete } from "../../../swertalert/AlertSuccess";
 
@@ -30,15 +30,15 @@ const Room = () => {
 
   const items = [
     { key: "all", label: "All" },
-    { key: "1", label: "Active" },
-    { key: "0", label: "Inactive" },
+    { key: "active", label: "Active" },
+    { key: "inactive", label: "Inactive" },
   ];
 
   // Fetch rooms
   const fetchRoom = async () => {
     setLoading(true);
     try {
-      const res = await request("/api/room", "get");
+      const res = await Request("/api/room", "get");
       if (res) {
         const list = res.data || [];
         console.log(res);
@@ -58,7 +58,7 @@ const Room = () => {
   // Fetch room types
   const fetchRoomType = async () => {
     try {
-      const res = await request("/api/roomtype", "get");
+      const res = await Request("/api/roomtype", "get");
       if (res) {
         setRoomType(res.data || []);
         // console.log(res);
@@ -92,7 +92,7 @@ const Room = () => {
     }
     
     if (filterStatus !== "all") {
-      filtered = filtered.filter((item) => item.status == filterStatus);
+      filtered = filtered.filter((item) => item.status.toLocaleLowerCase() == filterStatus.toLocaleLowerCase());
     }
     
     setFilteredRooms(filtered);
@@ -120,7 +120,7 @@ const Room = () => {
   const handleDelete = async (id) => {
     try {
       const ok = await confirmDelete(async () => {
-        await request(`/api/room/${id}`, "delete");
+        await Request(`/api/room/${id}`, "delete");
       });
       if (ok) {
         fetchRoom();
@@ -146,7 +146,7 @@ const Room = () => {
         room_type_id: values.room_type_id,
       };
 
-      const res = await request(url, method, data);
+      const res = await Request(url, method, data);
 
       if (res) {
         setOpen(false);
@@ -227,6 +227,9 @@ const Room = () => {
               <th>Room Number</th>
               <th>Floor</th>
               <th>Description</th>
+              <th>Max Guests</th>
+              <th>Room Name</th>
+              <th>Price per night</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -239,7 +242,21 @@ const Room = () => {
                   <td>{room.room_number || "-"}</td>
                   <td>{room.floor || "-"}</td>
                   <td>{room.description || "-"}</td>
-                  <td>{room.status === "active" || room.status === 1 ? "Active" : "Inactive"}</td>
+                  <td>{room.room_type?.max_guest || "-"}</td>
+                  <td>{room.room_type?.name || "-"}</td>
+                  <td>{room.room_type?.price_per_night || "-"}</td>
+                  <td>{room.status === "active" || room.status === 1 ? <Tag color="green">Active</Tag> : <Tag color="red">Inactive</Tag>}</td>
+                  <td>
+                      {room.room_type.image ? (
+                        <img
+                          src={`${BaseUrl}${room.room_type.image}`}
+                          alt={room.room_type.name || "Room"}
+                          className="room-type-photo"
+                        />
+                      ) : (
+                        "-"
+                      )}
+                    </td>
                   <td className="actions">
                     <button className="btn-edit" onClick={() => handleEdit(room)}>
                       ✎ Edit

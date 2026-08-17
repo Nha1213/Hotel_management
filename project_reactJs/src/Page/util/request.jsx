@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BaseUrl } from "./BaseUrl";
 
-const request = async (path = "", method = "GET", data = {}) => {
+const Request = async (path = "", method = "GET", data = {}) => {
   const token = localStorage.getItem("accessToken");
   const token_client = "";
 
@@ -61,4 +61,4 @@ const request = async (path = "", method = "GET", data = {}) => {
   }
 };
 
-export default request;
+export default Request;

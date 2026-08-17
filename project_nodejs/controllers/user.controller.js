@@ -87,7 +87,7 @@ const registerUser = async (req, res) => {
       gender,
       phone,
       address,
-    } = req.body;
+    } = req.body || {};
 
     // Get uploaded file
     const file = req.files?.[0];

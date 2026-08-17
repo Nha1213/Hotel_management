@@ -3,7 +3,7 @@ import "./roomType.css";
 import LightMode from "../DartMode/LightMode";
 import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Upload, Dropdown, Tag } from "antd";
 import { UploadOutlined, DownOutlined } from "@ant-design/icons";
-import request from "../../util/request";
+import Request from "../../util/Request";
 import { BaseUrl } from "../../util/BaseUrl";
 import { alertSuccess, alertError, confirmDelete } from "../../../swertalert/AlertSuccess";
 
@@ -37,7 +37,7 @@ const RoomType = () => {
   const fetchRoomType = async () => {
     setLoading(true);
     try {
-      const res = await request("/api/roomtype", "get");
+      const res = await Request("/api/roomtype", "get");
       if (res) {
         const list = res.data || [];
         setData(list);
@@ -115,7 +115,7 @@ const RoomType = () => {
   const handleDelete = async (id) => {
     try {
       const ok = await confirmDelete(async () => {
-        await request(`/api/roomtype/${id}`, "delete");
+        await Request(`/api/roomtype/${id}`, "delete");
       });
       if (ok) {
         fetchRoomType();
@@ -145,7 +145,7 @@ const RoomType = () => {
       const url = editingId ? `/api/roomtype/${editingId}` : "/api/roomtype";
       const method = editingId ? "put" : "post";
 
-      const res = await request(url, method, formData);
+      const res = await Request(url, method, formData);
 
       if (res) {
         setOpen(false);
