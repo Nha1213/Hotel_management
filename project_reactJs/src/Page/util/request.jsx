@@ -1,12 +1,11 @@
 import axios from "axios";
 import { BaseUrl } from "./BaseUrl";
-
+import {getStoreUser, removeStoreUser} from ".././localStorage/userStore";
+import { useEffect } from "react";
 const Request = async (path = "", method = "GET", data = {}) => {
-  const token = localStorage.getItem("accessToken");
+  const token = getStoreUser();
   const token_client = "";
-
   let headers = {};
-
   try {
     if (data instanceof FormData) {
       headers = {
@@ -49,10 +48,9 @@ const Request = async (path = "", method = "GET", data = {}) => {
     console.error("Request Error:", error);
 
     if (error?.response?.status === 401) {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("profile");
+         removeStoreUser();
 
-      window.location.href = "/login";
+          window.location.href = "/login";
 
       throw new Error("Unauthorized. Please login again.");
     }

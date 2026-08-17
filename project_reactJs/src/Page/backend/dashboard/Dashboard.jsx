@@ -19,8 +19,18 @@ import {
 } from "lucide-react";
 import "./dashboard.css";
 import LightMode from "../DartMode/LightMode";
+import {getStoreUser} from "../../localStorage/userStore";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!getStoreUser()) {
+      navigate("/login");
+    }
+    console.log( "User: ", getStoreUser());    
+  }, [])
   const stats = [
     {
       title: "Occupancy",

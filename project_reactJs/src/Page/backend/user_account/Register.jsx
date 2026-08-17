@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Eye, EyeOff, Camera, User } from "lucide-react";
+import { useState } from "react";
+import { Eye, EyeOff, Camera } from "lucide-react";
 import { useNavigate } from "react-router";
 import "./style/register.css";
 import Request from "../../util/Request";
@@ -66,7 +66,7 @@ const Register = () => {
         if(res){
           alertSuccess({text: res.message});
           navigate("/login");
-        }
+        } 
     }catch(error){
       alertError({title: "Error!", text: error?.response?.data?.message});
     }

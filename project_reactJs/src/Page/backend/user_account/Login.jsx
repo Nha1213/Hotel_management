@@ -37,7 +37,6 @@ const Login = () => {
           title: "Login Success",
           text: "Login successfully",
         });
-        console.log(res);
 
         // Save token and navigate home
         if (res?.token) {
