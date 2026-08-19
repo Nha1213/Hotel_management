@@ -8,12 +8,14 @@ const Sidebar = () => {
   const menuItems = [
 
     { id: "dashboard", label: "📊 Dashboard", path: "/" },
+    { id: "pos_sale", label: "📊 POS_SALE", path: "/pos_sale" },
 
     {
       id: "property",
       label: "📦 Property",
       path: "/property",
       submenu: [
+        {id: "branches", label: "Branches", path: "/branches"},
         { id: "room", label: "Room", path: "/room" },
         { id: "room_type", label: "Room Type", path: "/room_type" },
         { id: "Smart_lock", label: "Smart Lock", path: "/smart_lock" },
@@ -56,6 +58,46 @@ const Sidebar = () => {
     },
 
     {
+      id: "reservations",
+      label: "📈 Reservations",
+      path: "/reservations",
+      submenu: [
+        { id: "sales-report", label: "Sales Report", path: "/sales" },
+        {
+          id: "customer-report",
+          label: "Customer Report",
+          path: "/customerReport",
+        },
+      ],
+    },
+    {
+      id: "operations",
+      label: "📈 Operations",
+      path: "/operations",
+      submenu: [
+        { id: "sales-report", label: "Sales Report", path: "/sales" },
+        {
+          id: "customer-report",
+          label: "Customer Report",
+          path: "/customerReport",
+        },
+      ],
+    },
+    {
+      id: "pos",
+      label: "📈 pos / Restaurant",
+      path: "/pos",
+      submenu: [
+        { id: "sales-report", label: "Sales Report", path: "/sales" },
+        {
+          id: "customer-report",
+          label: "Customer Report",
+          path: "/customerReport",
+        },
+      ],
+    },
+
+    {
       id: "settings",
       label: "⚙️ Settings",
       path: "/settings",
@@ -78,18 +120,31 @@ const Sidebar = () => {
         },
       ],
     },
-
-    {
-      id: "expense",
-      label: "💵 Expense",
-      path: "/expense",
-    },
-
     {
       id: "inventory",
-      label: "📦 Inventory",
+      label: "⚙️ Inventory / Purchase",
       path: "/inventory",
+      submenu: [
+        { id: "role", label: "Roles", path: "/role" },
+        {
+          id: "user-management",
+          label: "User",
+          path: "/manageuser",
+        },
+        {
+          id: "role-permission",
+          label: "Permission",
+          path: "/permission",
+        },
+        {
+          id: "low-stock-alert",
+          label: "Low Stock Alert",
+          path: "/lowstockalert",
+        },
+      ],
     },
+
+    
     {
       id: "index",
       label: "🌐 View Website",
