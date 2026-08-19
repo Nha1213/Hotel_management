@@ -30,8 +30,12 @@ const Room = () => {
 
   const items = [
     { key: "all", label: "All" },
-    { key: "active", label: "Active" },
-    { key: "inactive", label: "Inactive" },
+    { key: "available", label: "Available" },
+    { key: "cleaning", label: "Cleaning" },
+    { key: "occupied", label: "Occupied" },
+    { key: "reserved", label: "Reserved" },
+    { key: "maint", label: "Maint" },
+    { key: "blocked", label: "Blocked" },
   ];
 
   // Fetch rooms
@@ -178,7 +182,9 @@ const Room = () => {
         <Space>
           <Dropdown menu={{ items, onClick: handleFilterChange }}>
             <Button>
-              Filter: {items.find((item) => item.key === filterStatus)?.label || "All"} <DownOutlined />
+              Filter:{" "}
+              {items.find((item) => item.key === filterStatus)?.label || "All"}{" "}
+              <DownOutlined />
             </Button>
           </Dropdown>
 
@@ -231,6 +237,7 @@ const Room = () => {
               <th>Room Name</th>
               <th>Price per night</th>
               <th>Status</th>
+              <th>image</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -245,23 +252,45 @@ const Room = () => {
                   <td>{room.room_type?.max_guest || "-"}</td>
                   <td>{room.room_type?.name || "-"}</td>
                   <td>{room.room_type?.price_per_night || "-"}</td>
-                  <td>{room.status === "active" || room.status === 1 ? <Tag color="green">Active</Tag> : <Tag color="red">Inactive</Tag>}</td>
                   <td>
-                      {room.room_type.image ? (
-                        <img
-                          src={`${BaseUrl}${room.room_type.image}`}
-                          alt={room.room_type.name || "Room"}
-                          className="room-type-photo"
-                        />
-                      ) : (
-                        "-"
-                      )}
-                    </td>
+                    {room.status == "available" ? (
+                      <Tag color="green">Available</Tag>
+                    ) : room.status == "cleaning" ? (
+                      <Tag color="blue">Cleaning</Tag>
+                    ) : room.status == "occupied" ? (
+                      <Tag color="red">Occupied</Tag>
+                    ) : room.status == "reserved" ? (
+                      <Tag color="orange">Reserved</Tag>
+                    ) : room.status == "maint" ? (
+                      <Tag color="purple">Maintenance</Tag>
+                    ) : room.status == "blocked" ? (
+                      <Tag color="red">Blocked</Tag>
+                    ) : (
+                      "-"
+                    )}
+                  </td>
+                  <td>
+                    {room.room_type.image ? (
+                      <img
+                        src={`${BaseUrl}${room.room_type.image}`}
+                        alt={room.room_type.name || "Room"}
+                        className="room-type-photo"
+                      />
+                    ) : (
+                      "-"
+                    )}
+                  </td>
                   <td className="actions">
-                    <button className="btn-edit" onClick={() => handleEdit(room)}>
+                    <button
+                      className="btn-edit"
+                      onClick={() => handleEdit(room)}
+                    >
                       ✎ Edit
                     </button>
-                    <button className="btn-delete" onClick={() => handleDelete(room.id)}>
+                    <button
+                      className="btn-delete"
+                      onClick={() => handleDelete(room.id)}
+                    >
                       🗑 Delete
                     </button>
                   </td>
@@ -269,7 +298,11 @@ const Room = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="6" className="no-data" style={{ textAlign: "center" }}>
+                <td
+                  colSpan="6"
+                  className="no-data"
+                  style={{ textAlign: "center" }}
+                >
                   No items found
                 </td>
               </tr>
@@ -280,7 +313,8 @@ const Room = () => {
 
       <div className="pagination-info">
         Showing {filteredRooms.length > 0 ? startIndex + 1 : 0} to{" "}
-        {Math.min(endIndex, filteredRooms.length)} of {filteredRooms.length} items
+        {Math.min(endIndex, filteredRooms.length)} of {filteredRooms.length}{" "}
+        items
       </div>
 
       <div className="pagination-controls">
@@ -327,9 +361,14 @@ const Room = () => {
               <Form.Item
                 label="Room Number"
                 name="room_number"
-                rules={[{ required: true, message: "Please enter room number" }]}
+                rules={[
+                  { required: true, message: "Please enter room number" },
+                ]}
               >
-                <InputNumber placeholder="Enter room number" style={{ width: "100%" }} />
+                <InputNumber
+                  placeholder="Enter room number"
+                  style={{ width: "100%" }}
+                />
               </Form.Item>
             </Col>
 
@@ -349,9 +388,14 @@ const Room = () => {
               <Form.Item
                 label="Description"
                 name="description"
-                rules={[{ required: true, message: "Please enter description" }]}
+                rules={[
+                  { required: true, message: "Please enter description" },
+                ]}
               >
-                <Input style={{ width: "100%" }} placeholder="Enter description" />
+                <Input
+                  style={{ width: "100%" }}
+                  placeholder="Enter description"
+                />
               </Form.Item>
             </Col>
 
@@ -362,8 +406,12 @@ const Room = () => {
                 rules={[{ required: true, message: "Please select status" }]}
               >
                 <Select placeholder="Select status">
-                  <Select.Option value="active">Active</Select.Option>
-                  <Select.Option value="inactive">Inactive</Select.Option>
+                  <Select.Option value="available">Available</Select.Option>
+                  <Select.Option value="cleaning">Cleaning</Select.Option>
+                  <Select.Option value="occupied">Occupied</Select.Option>
+                  <Select.Option value="reserved">Reserved</Select.Option>
+                  <Select.Option value="maint">Maint</Select.Option>
+                  <Select.Option value="blocked">Blocked</Select.Option>
                 </Select>
               </Form.Item>
             </Col>
