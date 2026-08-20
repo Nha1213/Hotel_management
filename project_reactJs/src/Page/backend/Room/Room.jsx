@@ -6,14 +6,23 @@ import { DownOutlined } from "@ant-design/icons";
 import Request from "../../util/Request";
 import { BaseUrl } from "../../util/BaseUrl";
 import { alertSuccess, alertError, confirmDelete } from "../../../swertalert/AlertSuccess";
+import Reject from "../rejectRoute/Reject";
+import { useNavigate } from "react-router";
+import { getStoreUser } from "../../localStorage/userStore";
 
 const Room = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!getStoreUser()) {
+      navigate("/login");
+    }
+    console.log("User: ", getStoreUser());
+  }, []);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [roomType, setRoomType] = useState([]);
   const [filterStatus, setFilterStatus] = useState("all");
-
 
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -83,7 +92,7 @@ const Room = () => {
   // Filter list when search key changes
   useEffect(() => {
     let filtered = data;
-    
+
     if (searchKeyword.trim()) {
       const query = searchKeyword.toLowerCase();
       filtered = data.filter(
@@ -91,14 +100,17 @@ const Room = () => {
           item.room_number?.toString().includes(query) ||
           item.description?.toLowerCase().includes(query) ||
           item.floor?.toString().toLowerCase().includes(query) ||
-          item.status?.toLowerCase().includes(query)
+          item.status?.toLowerCase().includes(query),
       );
     }
-    
+
     if (filterStatus !== "all") {
-      filtered = filtered.filter((item) => item.status.toLocaleLowerCase() == filterStatus.toLocaleLowerCase());
+      filtered = filtered.filter(
+        (item) =>
+          item.status.toLocaleLowerCase() == filterStatus.toLocaleLowerCase(),
+      );
     }
-    
+
     setFilteredRooms(filtered);
     setCurrentPage(1);
   }, [searchKeyword, data, filterStatus]);
@@ -158,7 +170,9 @@ const Room = () => {
         setEditingId(null);
         alertSuccess({
           title: "Success!",
-          text: editingId ? "Updated room successfully" : "Created room successfully",
+          text: editingId
+            ? "Updated room successfully"
+            : "Created room successfully",
         });
         fetchRoom();
       }

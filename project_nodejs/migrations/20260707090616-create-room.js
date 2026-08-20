@@ -26,6 +26,9 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
+      // room_code: {
+      //   type: Sequelize.STRING
+      // },
       description: {
         type: Sequelize.TEXT
       },

@@ -32,12 +32,12 @@ const Request = async (path = "", method = "GET", data = {}) => {
       data,
       headers,
     });
-
     // Axios normally throws automatically for 4xx/5xx,
     // so this handles successful responses.
     if (res.data?.status === "error") {
       throw new Error(res.data.message);
     }
+
 
     if (res.data?.status === "fail") {
       throw new Error(res.data.message);

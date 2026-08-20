@@ -1,68 +1,44 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import LightMode from "../DartMode/LightMode";
 import "./Branches.css";
-
+import { alertError, alertSuccess } from "../../../swertalert/AlertSuccess";
+import Request from "../../util/Request";
 const mockRooms = [
   {
     id: "101",
     type: "Deluxe Double",
     status: "Occupied",
     guest: "Rajesh Sharma",
-    code: "4928",
-  },
-  {
-    id: "102",
-    type: "Standard Single",
-    status: "Occupied",
-    guest: "Amit Patel",
-    code: "1183",
-  },
-  {
-    id: "103",
-    type: "Standard Single",
-    status: "Blocked",
-    note: "Out of Order",
-    code: "7721",
-  },
-  {
-    id: "104",
-    type: "Deluxe Double",
-    status: "Available",
-    price: "₹4,500.00/nt",
-    code: "5839",
-  },
-  {
-    id: "105",
-    type: "Deluxe Double",
-    status: "Cleaning",
-    staff: "Ramesh Kumar",
-    code: "9012",
-  },
-  {
-    id: "106",
-    type: "Standard Single",
-    status: "Available",
-    price: "₹3,200.00/nt",
-    code: "3341",
-  },
-  {
-    id: "107",
-    type: "Family Suite",
-    status: "Occupied",
-    guest: "David & Lisa ...",
-    code: "8210",
-  },
-  {
-    id: "108",
-    type: "Standard Single",
-    status: "Maint",
-    note: "Under Repair",
-    code: "6102",
+    code: "",
   },
 ];
 
 const Branches = () => {
   const [filter, setFilter] = useState("All");
+  const [data, setData] = useState([]);
+  const [filteredRooms, setFilteredRooms] = useState([]);
+
+  useEffect(() => {
+    fetchRoom();
+  }, []);
+
+  // Fetch rooms
+  const fetchRoom = async () => {
+    try {
+      const res = await Request("/api/room", "get");
+      if (res) {
+        const list = res.data || [];
+        console.log(res);
+        setData(list);
+        setFilteredRooms(list);
+      }
+    } catch (error) {
+      alertError({
+        title: "Error",
+        text: error?.response?.data?.message || "Failed to load rooms.",
+      });
+    }
+  };
 
   return (
     <div className="dashboard-container">
@@ -142,8 +118,23 @@ const Branches = () => {
 
           return (
             <div key={room.id} className={`room-card card-${statusClass}`}>
-              <div style={{ width: "100%", height: "100%", overflow: "hidden", marginBottom: "10px" }}>
-                <img src="../../../../public/imageCover/backgoroundHotel.gif" alt="" style={{ width: "100%", height: "100%", borderRadius: "10px" }} />
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  overflow: "hidden",
+                  marginBottom: "10px",
+                }}
+              >
+                <img
+                  src="../../../../public/imageCover/backgoroundHotel.gif"
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "10px",
+                  }}
+                />
               </div>
               <div className="card-header">
                 <div>

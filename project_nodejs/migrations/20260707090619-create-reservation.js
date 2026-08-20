@@ -17,6 +17,9 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
+      guest_name: {
+        type: Sequelize.STRING
+      },
       reservation_date: {
         type: Sequelize.DATE
       },
