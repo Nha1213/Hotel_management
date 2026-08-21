@@ -1,7 +1,6 @@
 const {Room, RoomType} = require("../models");
 const {logError} = require("../middlewares/logError");
 const {Op} = require("sequelize");
-const { inc } = require("semver");
 
 
 function requireCheck(res, room_number, room_type_id, floor, status){
@@ -85,6 +84,46 @@ const createRoom = async (req, res) => {
     }
 };
 
+const updateStatusRoom = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        if (!id) {
+            return res.status(400).json({
+                success: false,
+                message: "Room id is required",
+            });
+        }
+
+        if (!status) {
+            return res.status(400).json({
+                success: false,
+                message: "Room status is required",
+            });
+        }
+
+        const room = await Room.findByPk(id);
+
+        if (!room) {
+            return res.status(404).json({
+                success: false,
+                message: "Room not found",
+            });
+        }
+
+        await room.update({ status });
+
+        return res.status(200).json({
+            success: true,
+            message: "Room status updated successfully",
+            data: room,
+        });
+
+    } catch (error) {
+        logError("updateStatusRoom", error, res);
+    }
+};
 const updateRoom = async (req, res) => {
     try{
         const {id} = req.params;
@@ -143,4 +182,4 @@ const deleteRoom = async (req, res) => {
     }
 }
 
-module.exports = {getAllRoom, createRoom, updateRoom, deleteRoom};
+module.exports = {getAllRoom, createRoom, updateRoom, deleteRoom, updateStatusRoom};

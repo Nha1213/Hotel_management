@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./style.css";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import { removeStoreUser } from "../../localStorage/userStore";
 
 const LightMode = (props) => {
@@ -26,13 +26,14 @@ const LightMode = (props) => {
           {darkMode ? "Light Mode" : "Dark Mode"}
         </button>
 
-        <NavLink to="/login">
-          <button className="live-btn" style={{ marginLeft: "10px" }}
-            onClick={() => removeStoreUser()}
-          >
+        <NavLink
+          className="live-btn"
+          style={{ marginLeft: "10px" }}
+          to="/login"
+          onClick={removeStoreUser}
+        >
             <span></span>
             LogOut
-          </button>
         </NavLink>
       </div>
     </div>
