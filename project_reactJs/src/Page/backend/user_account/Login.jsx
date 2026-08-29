@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Eye, EyeOff, Check } from "lucide-react";
 import { useNavigate } from "react-router";
 import "./style/Login.css";
 import Request from "../../util/Request";
 import { alertError, alertSuccess } from "../../../swertalert/AlertSuccess";
-import {setStoreUser} from "../../localStorage/userStore";
+import { setStoreUser } from "../../localStorage/userStore";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [forget, setForget] = useState(false);
 
   const navigate = useNavigate();
 
@@ -43,6 +44,11 @@ const Login = () => {
           setStoreUser(res.token);
         }
         navigate("/");
+      } else {
+        alertError({
+          title: "Error",
+          text: res?.message || "Login failed",
+        });
       }
     } catch (error) {
       alertError({
@@ -53,6 +59,19 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+
+  const ChangePassword = () => {
+    try{
+      const res = Request("/api/user/reset-password", "POST", data);
+    }catch(error){
+      alertError({title: "Error!", text: error?.response?.data?.message});
+    }
+  };
+
+  useEffect(() => {
+    ChangePassword();
+  }, []);
 
   return (
     <div className="login-page">
@@ -72,7 +91,7 @@ const Login = () => {
         <form onSubmit={UserLogin}>
           {/* Email */}
           <div className="form-group">
-            <label style={{color: "white"}}>Email</label>
+            <label style={{ color: "white" }}>Email</label>
             <input
               type="email"
               placeholder="Enter your email"
@@ -83,28 +102,36 @@ const Login = () => {
             />
           </div>
 
-          {/* Password */}
-          <div className="form-group">
-            <label style={{color: "white"}}>Password</label>
-            <div className="password-box">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                required
-                value={data.password}
-                disabled={loading}
-                onChange={(e) => setData({ ...data, password: e.target.value })}
-              />
+          {
+            forget ? (
+              ""
+            ) : (
+              <>
+                {/* Password */}
+                <div className="form-group">
+                  <label style={{ color: "white" }}>Password</label>
+                  <div className="password-box">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter your password"
+                      required
+                      value={data.password}
+                      disabled={loading}
+                      onChange={(e) => setData({ ...data, password: e.target.value })}
+                    />
 
-              <button
-                type="button"
-                className="eye-button"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
-            </div>
-          </div>
+                    <button
+                      type="button"
+                      className="eye-button"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
+                </div>
+              </>
+            )
+          }
 
           {/* Remember Me */}
           <div className="options">
@@ -118,7 +145,7 @@ const Login = () => {
               <span>Remember me</span>
             </div>
 
-            <button type="button" className="forgot">
+            <button type="button" className="forgot" onClick={() => setForget(!forget)}>
               Forgot password?
             </button>
           </div>
@@ -135,16 +162,34 @@ const Login = () => {
           <span></span>
         </div>
 
-        <button type="button" className="google-button">
-          <span className="google-icon">G</span>
-          Sign In with Google
-        </button>
+        {
+          forget ? (
+            ""
+          ) : (<>
+            <button type="button" className="google-button">
+              <span className="google-icon">G</span>
+              Sign In with Google
+            </button>
+          </>)
+        }
 
         <p className="signup">
           Don't have an account?{" "}
-          <button type="button" onClick={() => navigate("/register")}>
-            Sign Up
-          </button>
+          {
+            forget ? (
+              <>
+                <button type="button" onClick={() => window.location.reload()}>
+                  Sign In
+                </button>
+              </>
+            ) : (
+              <>
+                <button type="button" onClick={() => navigate("/register")}>
+                  Sign Up
+                </button>
+              </>
+            )
+          }
         </p>
       </div>
     </div>

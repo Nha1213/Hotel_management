@@ -7,6 +7,7 @@ import Dashboard from "./Page/backend/dashboard/Dashboard";
 import RoomType from './Page/backend/roomType/RoomType';
 import Room from "./Page/backend/Room/Room";
 import Branches from "./Page/backend/branches/Branches";
+import Protect from "./Page/backend/Protect/Protect";
 
 import LayoutPage from "./Page/frontend/layout/LayoutPage";
 import Homepage from "./Page/frontend/Homepage/Homepage";
@@ -16,14 +17,16 @@ const App = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/room" element={<Room />} />
-        <Route path="/room_type" element={<RoomType />} />
-        <Route path="/branches" element={<Branches />} />
+        <Route element={<Protect />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/room" element={<Room />} />
+          <Route path="/room_type" element={<RoomType />} />
+          <Route path="/branches" element={<Branches />} />
+        </Route>
       </Route>
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       <Route element={<LayoutPage />}>
         <Route path='/index' element={<Homepage />} />

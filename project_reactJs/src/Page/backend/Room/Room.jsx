@@ -38,13 +38,13 @@ const Room = () => {
   const paginatedRooms = filteredRooms.slice(startIndex, endIndex);
 
   const items = [
-    { key: "all", label: "All" },
-    { key: "available", label: "Available" },
-    { key: "cleaning", label: "Cleaning" },
-    { key: "occupied", label: "Occupied" },
-    { key: "reserved", label: "Reserved" },
-    { key: "maint", label: "Maint" },
-    { key: "blocked", label: "Blocked" },
+    { key: "All", label: "All" },
+    { key: "Available", label: "Available" },
+    { key: "Cleaning", label: "Cleaning" },
+    { key: "Occupied", label: "Occupied" },
+    { key: "Reserved", label: "Reserved" },
+    { key: "Maintenance", label: "Maint" },
+    { key: "Block", label: "Blocked" },
   ];
 
   // Fetch rooms
