@@ -121,6 +121,8 @@ const createReservation = async (req, res) => {
       total_guest,
       status,
       reservation_details,
+      email,
+      guest_name,
     } = req.body;
 
     // Call check: If validation fails, rollback transaction and stop execution
@@ -148,6 +150,8 @@ const createReservation = async (req, res) => {
         check_out_date,
         total_guest,
         status,
+        email,
+        guest_name,
       },
       { transaction: t },
     );

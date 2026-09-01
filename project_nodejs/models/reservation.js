@@ -47,6 +47,8 @@ module.exports = (sequelize, DataTypes) => {
       check_out_date: DataTypes.DATE,
       total_guest: DataTypes.INTEGER,
       status: DataTypes.STRING,
+      email: DataTypes.STRING,
+      guest_name: DataTypes.STRING,
       note: DataTypes.TEXT,
     },
     {

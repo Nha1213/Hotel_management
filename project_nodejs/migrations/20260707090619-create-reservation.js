@@ -23,6 +23,9 @@ module.exports = {
       reservation_date: {
         type: Sequelize.DATE
       },
+      email: {
+        type: Sequelize.STRING
+      },
       check_in_date: {
         type: Sequelize.DATE
       },
