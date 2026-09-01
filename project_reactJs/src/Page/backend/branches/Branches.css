@@ -105,7 +105,7 @@ body.dark-mode .dashboard-container .header-card {
   background-color: #4a4c4f;
 }
 
-.badge-block {
+.badge-blocked {
   background-color: #000000;
 }
 
@@ -267,7 +267,7 @@ body.dark-mode .dashboard-container .header-card {
   color: #334155;
 }
 
-.card-block {
+.card-blocked {
   border-color: #1e293b;
   background-color: #0f172a;
   color: #f8fafc;

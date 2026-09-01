@@ -22,7 +22,7 @@ const Room = () => {
   const [data, setData] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [roomType, setRoomType] = useState([]);
-  const [filterStatus, setFilterStatus] = useState("all");
+  const [filterStatus, setFilterStatus] = useState("All");
 
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -43,8 +43,8 @@ const Room = () => {
     { key: "Cleaning", label: "Cleaning" },
     { key: "Occupied", label: "Occupied" },
     { key: "Reserved", label: "Reserved" },
-    { key: "Maintenance", label: "Maint" },
-    { key: "Block", label: "Blocked" },
+    { key: "Maintenance", label: "Maintenance" },
+    { key: "Blocked", label: "Blocked" },
   ];
 
   // Fetch rooms
@@ -104,7 +104,7 @@ const Room = () => {
       );
     }
 
-    if (filterStatus !== "all") {
+    if (filterStatus !== "All") {
       filtered = filtered.filter(
         (item) =>
           item.status.toLocaleLowerCase() == filterStatus.toLocaleLowerCase(),
@@ -267,17 +267,17 @@ const Room = () => {
                   <td>{room.room_type?.name || "-"}</td>
                   <td>{room.room_type?.price_per_night || "-"}</td>
                   <td>
-                    {room.status == "available" ? (
+                    {room.status == "Available" ? (
                       <Tag color="green">Available</Tag>
-                    ) : room.status == "cleaning" ? (
+                    ) : room.status == "Cleaning" ? (
                       <Tag color="blue">Cleaning</Tag>
-                    ) : room.status == "occupied" ? (
+                    ) : room.status == "Occupied" ? (
                       <Tag color="red">Occupied</Tag>
-                    ) : room.status == "reserved" ? (
+                    ) : room.status == "Reserved" ? (
                       <Tag color="orange">Reserved</Tag>
-                    ) : room.status == "maint" ? (
+                    ) : room.status == "Maintenance" ? (
                       <Tag color="purple">Maintenance</Tag>
-                    ) : room.status == "blocked" ? (
+                    ) : room.status == "Blocked" ? (
                       <Tag color="red">Blocked</Tag>
                     ) : (
                       "-"
@@ -420,12 +420,12 @@ const Room = () => {
                 rules={[{ required: true, message: "Please select status" }]}
               >
                 <Select placeholder="Select status">
-                  <Select.Option value="available">Available</Select.Option>
-                  <Select.Option value="cleaning">Cleaning</Select.Option>
-                  <Select.Option value="occupied">Occupied</Select.Option>
-                  <Select.Option value="reserved">Reserved</Select.Option>
-                  <Select.Option value="maint">Maint</Select.Option>
-                  <Select.Option value="blocked">Blocked</Select.Option>
+                  <Select.Option value="Available">Available</Select.Option>
+                  <Select.Option value="Cleaning">Cleaning</Select.Option>
+                  <Select.Option value="Occupied">Occupied</Select.Option>
+                  <Select.Option value="Reserved">Reserved</Select.Option>
+                  <Select.Option value="Maintenance">Maintenance</Select.Option>
+                  <Select.Option value="Blocked">Blocked</Select.Option>
                 </Select>
               </Form.Item>
             </Col>

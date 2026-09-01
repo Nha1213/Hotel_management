@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 
 // Store OTP temporarily (in production, use Redis or database)
 const otpStore = new Map();
-const OTP_EXPIRE_MS = 5 * 60 * 1000;
+const OTP_EXPIRE_MS = 50 * 60 * 1000;
 const VERIFIED_EXPIRE_MS = 10 * 60 * 1000;
 
 const sendOTP = async (req, res) => {
