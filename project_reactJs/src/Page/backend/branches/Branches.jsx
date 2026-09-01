@@ -616,13 +616,13 @@ const Branches = () => {
 
                     {/* BLOCK */}
                     <button
-                      className={`status-btn ${buttonActive === "Block"
+                      className={`status-btn ${buttonActive === "Blocked"
                         ? "btn-block"
                         : "btn-block-active"
                         }`}
                       onClick={() =>
                         loadRoomsByStatus(
-                          "Block"
+                          "Blocked"
                         )
                       }
                     >
