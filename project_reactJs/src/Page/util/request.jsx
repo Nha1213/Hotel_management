@@ -1,7 +1,6 @@
 import axios from "axios";
 import { BaseUrl } from "./BaseUrl";
 import {getStoreUser, removeStoreUser} from ".././localStorage/userStore";
-import { useEffect } from "react";
 const Request = async (path = "", method = "GET", data = {}) => {
   const token = getStoreUser();
   const token_client = "";

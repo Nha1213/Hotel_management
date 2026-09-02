@@ -315,9 +315,8 @@ const Room = () => {
                 <td
                   colSpan="6"
                   className="no-data"
-                  style={{ textAlign: "center" }}
                 >
-                  No items found
+                  <span style={{ display: "flex", justifyContent: "center"}}>No items found</span>
                 </td>
               </tr>
             )}

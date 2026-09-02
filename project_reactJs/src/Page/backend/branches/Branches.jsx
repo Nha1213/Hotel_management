@@ -4,7 +4,9 @@ import "./Branches.css";
 import { alertError } from "../../../swertalert/AlertSuccess";
 import Request from "../../util/Request";
 import { BaseUrl } from "../../util/BaseUrl";
+import "./staff.css";
 
+import Hook from "./Hook";
 const Branches = () => {
   const [filter, setFilter] = useState("All");
   const [data, setData] = useState([]);
@@ -12,6 +14,9 @@ const Branches = () => {
   const [activeTab, setActiveTab] = useState("Room & Guest");
   const [filterFloor, setFilterFloor] = useState("All");
   const [buttonActive, setButtonActive] = useState("Available");
+  const [openFunStaff, setOpenFunStaff] = useState("");
+
+  const { dataStaff } = Hook();
 
   // =========================================================
   // LOAD ALL ROOMS
@@ -36,8 +41,9 @@ const Branches = () => {
           : Array.isArray(res.rooms)
             ? res.rooms
             : [];
-
+            console.log("Rooms loaded:", rooms);
         setData(rooms);
+
       }
     } catch (error) {
       console.error("Load rooms error:", error);
@@ -53,6 +59,16 @@ const Branches = () => {
     }
   };
 
+  useEffect(() => {
+    data.map((room) => {
+      if (room.status === "Cleaning") {
+        setOpenFunStaff("Cleaning");
+      } else {
+        setOpenFunStaff("");
+      }
+    });
+  }, [openFunStaff, data]);
+
   // =========================================================
   // LOAD ROOMS WHEN PAGE LOADS
   // =========================================================
@@ -64,6 +80,7 @@ const Branches = () => {
   // UPDATE ROOM STATUS
   // =========================================================
   const loadRoomsByStatus = async (status) => {
+    setOpenFunStaff(status);
     if (!selectedRoom?.id) {
       console.log("No room selected");
       return;
@@ -442,14 +459,13 @@ const Branches = () => {
               width: "100%",
               padding: "40px",
               textAlign: "center",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
             }}
           >
-            <h3>No rooms found</h3>
-
-            <p>
-              There are no rooms matching your
-              current filters.
-            </p>
+            <p>No rooms found</p>
           </div>
         )}
       </div>
@@ -564,7 +580,34 @@ const Branches = () => {
               ================================================= */}
               {activeTab === "Room & Guest" && (
                 <>
-                  <label className="section-label">
+                  {
+                      openFunStaff === "Cleaning" ? (
+                        <>
+                          <div className="staff-Cleaning">
+                            <div className="staff-Cleaning-title">
+                              <i></i>
+                              <span>Room Needs Cleaning</span>
+                            </div>
+                            <div className="fs-6" >Room marked dirty for housekeeping inspection</div>
+                            <div className="staff-Cleaning-btn">
+                              <div><button>Mark Clean & Available</button></div>
+                              <div>
+                                <select name="" id="">
+                                  <option value="">Select Staff</option>
+                                  {
+                                    dataStaff?.map((staff) => (
+                                      <option key={staff?.id} value={staff?.id}>{staff?.name}</option>
+                                    ))
+                                    
+                                  }
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      ):("")
+                  }
+                  <label className="section-label mt-1">
                     Change Room Status:
                   </label>
 
@@ -693,7 +736,6 @@ const Branches = () => {
               {activeTab ===
                 "+ Quick Check-In" && (
                   <div className="tab-content-placeholder">
-
                     <div className="guest-info">
                       <div>
                         <label htmlFor="">Guest Full name</label>

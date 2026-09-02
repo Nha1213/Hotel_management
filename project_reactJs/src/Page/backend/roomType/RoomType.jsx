@@ -279,7 +279,7 @@ const RoomType = () => {
               ) : (
                 <tr>
                   <td colSpan="6" className="no-data">
-                    No items found
+                   <span style={{ display: "flex", justifyContent: "center"}}>No items found</span>
                   </td>
                 </tr>
               )}
