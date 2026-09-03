@@ -10,7 +10,7 @@ const Hook = () => {
             const res = await Request('/api/staffs', "get");
             if(res){
                 setStaff(res.data);
-                console.log("Fetched Staff Data:", res.data);
+                // console.log("Fetched Staff Data:", res.data);
             }
         }catch(error){
             alertError({

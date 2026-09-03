@@ -1,0 +1,16 @@
+[04/09/2026 01:30:23] [unRelationship] invalid input syntax for type integer: ""
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.update (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:355:12)
+    at async Staff.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async unRelationshipStaffRoom (D:\React js\ProjectHotel\project_nodejs\controllers\staff.controller.js:174:5)
+[04/09/2026 01:30:36] [unRelationship] invalid input syntax for type integer: ""
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.update (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:355:12)
+    at async Staff.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async unRelationshipStaffRoom (D:\React js\ProjectHotel\project_nodejs\controllers\staff.controller.js:174:5)

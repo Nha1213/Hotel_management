@@ -1,4 +1,4 @@
-const {Room, RoomType} = require("../models");
+const {Room, RoomType, Staff} = require("../models");
 const {logError} = require("../middlewares/logError");
 const {Op} = require("sequelize");
 
@@ -52,6 +52,11 @@ const getAllRoom = async (req, res) =>{
                         as: "room_type",
                         attributes: ["id", "name", "price_per_night", "max_guest", "description", "image"],
                     },
+                    {
+                        model: Staff,
+                        as: "staffs",
+                        attributes: ["id", "name", "position", "gender", "age", "phone"],
+                    }
                 ]
             },
             {where, order:[["id", "DESC"]]}

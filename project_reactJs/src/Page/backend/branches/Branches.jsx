@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import LightMode from "../DartMode/LightMode";
 import "./Branches.css";
 import { alertError } from "../../../swertalert/AlertSuccess";
@@ -15,17 +15,20 @@ const Branches = () => {
   const [filterFloor, setFilterFloor] = useState("All");
   const [buttonActive, setButtonActive] = useState("Available");
   const [openFunStaff, setOpenFunStaff] = useState("");
+  const [selectStaff, setSelectStaff] = useState("");
+  const [makeClean, setMakeClean] = useState("");
+  const [roomId, setRoomId] = useState("");
 
   const { dataStaff } = Hook();
 
   // =========================================================
   // LOAD ALL ROOMS
   // =========================================================
-  const loadRooms = async () => {
+  const loadRooms = useCallback(async () => {
     try {
       const res = await Request("/api/room", "get");
 
-      console.log("Room API Response:", res);
+      console.log(res);
 
       if (res) {
         /*
@@ -41,7 +44,7 @@ const Branches = () => {
           : Array.isArray(res.rooms)
             ? res.rooms
             : [];
-            console.log("Rooms loaded:", rooms);
+        // console.log("Rooms loaded:", rooms);
         setData(rooms);
 
       }
@@ -57,24 +60,57 @@ const Branches = () => {
 
       setData([]);
     }
-  };
+  }, []);
 
-  useEffect(() => {
-    data.map((room) => {
-      if (room.status === "Cleaning") {
-        setOpenFunStaff("Cleaning");
-      } else {
-        setOpenFunStaff("");
-      }
-    });
-  }, [openFunStaff, data]);
+  const handleSelectStaff = async (staffId) => {
+    if (!selectedRoom?.id || !staffId) {
+      setSelectStaff("");
+      return;
+    }
+
+    try {
+      await Request(
+        `/api/staffs/relationship/${staffId}`,
+        "put",
+        { room_id: selectedRoom.id }
+      );
+      setSelectStaff(String(staffId));
+      const selectedStaff = dataStaff.find(
+        (staff) => String(staff.id) === String(staffId)
+      );
+      setSelectedRoom((room) => ({
+        ...room,
+        staffs: selectedStaff,
+      }));
+      setMakeClean(String(staffId));
+    } catch (error) {
+      alertError({
+        title: "Error",
+        text:
+          error?.response?.data?.message ||
+          "Failed to assign staff to room.",
+      });
+    }
+  };
 
   // =========================================================
   // LOAD ROOMS WHEN PAGE LOADS
   // =========================================================
   useEffect(() => {
-    loadRooms();
-  }, []);
+    let isMounted = true;
+
+    const initializeRooms = async () => {
+      if (isMounted) {
+        await loadRooms();
+      }
+    };
+
+    initializeRooms();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [loadRooms]);
 
   // =========================================================
   // UPDATE ROOM STATUS
@@ -87,7 +123,7 @@ const Branches = () => {
     }
 
     try {
-      const res = await Request(
+      await Request(
         `/api/room/status/${selectedRoom.id}`,
         "put",
         {
@@ -95,7 +131,6 @@ const Branches = () => {
         }
       );
 
-      console.log("Update Status Response:", res);
 
       // -----------------------------------------------------
       // Update room in the main list
@@ -196,9 +231,49 @@ const Branches = () => {
   // =========================================================
   const openRoom = (room) => {
     setSelectedRoom(room);
+    setSelectStaff(room?.staffs?.id ? String(room.staffs.id) : "");
+    setOpenFunStaff(room.status === "Cleaning" ? "Cleaning" : "");
     setButtonActive(room.status || "Available");
     setActiveTab("Room & Guest");
+    setMakeClean(room?.staffs?.id ? String(room.staffs.id) : "");
+    setRoomId(room?.id);
   };
+
+  const handleMarkClean = async (id) => {
+    const staffId = id || selectedRoom?.staffs?.id;
+    const selectedRoomId = roomId || selectedRoom?.id;
+
+    if (!staffId || !selectedRoomId) {
+      return;
+    }
+
+    try {
+      await Request(`/api/staffs/unrelationship/${staffId}`, "put");
+      setButtonActive("Available");
+      await Request(`/api/room/status/${selectedRoomId}`, "put", {
+        status: "Available",
+      });
+      setMakeClean("");
+      setSelectStaff("");
+      setSelectedRoom((room) => (
+        room ? { ...room, status: "Available", staffs: null } : room
+      ));
+      setData((rooms) => rooms.map((room) => (
+        room.id === selectedRoomId
+          ? { ...room, status: "Available", staffs: null }
+          : room
+      )));
+      await loadRooms();
+      setOpenFunStaff("Available");
+    } catch (error) {
+      alertError({
+        title: "Error",
+        text:
+          error?.response?.data?.message ||
+          "Failed to load rooms.",
+      })
+    }
+  }
 
   return (
     <div className="dashboard-container">
@@ -333,13 +408,13 @@ const Branches = () => {
       ===================================================== */}
       <div className="room-grid">
         {filteredRoomsByFloor.length > 0 ? (
-          filteredRoomsByFloor.map((room) => {
+          filteredRoomsByFloor.map((room, roomIndex) => {
             const statusClass =
               room.status?.toLowerCase() || "available";
 
             return (
               <div
-                key={room.id}
+                key={`${room.id}-${roomIndex}`}
                 className={`room-card card-${statusClass}`}
                 onClick={() => openRoom(room)}
               >
@@ -398,8 +473,7 @@ const Branches = () => {
                     </h3>
 
                     <div className="room-type">
-                      {room.room_type?.name ||
-                        "Unknown Room"}
+                      {room.room_type?.name || "-"}
                     </div>
                   </div>
 
@@ -581,31 +655,30 @@ const Branches = () => {
               {activeTab === "Room & Guest" && (
                 <>
                   {
-                      openFunStaff === "Cleaning" ? (
-                        <>
-                          <div className="staff-Cleaning">
-                            <div className="staff-Cleaning-title">
-                              <i></i>
-                              <span>Room Needs Cleaning</span>
-                            </div>
-                            <div className="fs-6" >Room marked dirty for housekeeping inspection</div>
-                            <div className="staff-Cleaning-btn">
-                              <div><button>Mark Clean & Available</button></div>
-                              <div>
-                                <select name="" id="">
-                                  <option value="">Select Staff</option>
-                                  {
-                                    dataStaff?.map((staff) => (
-                                      <option key={staff?.id} value={staff?.id}>{staff?.name}</option>
-                                    ))
-                                    
-                                  }
-                                </select>
-                              </div>
+                    openFunStaff === "Cleaning" ? (
+                      <>
+                        <div className="staff-Cleaning">
+                          <div className="staff-Cleaning-title">
+                            <i></i>
+                            <span>Room Needs Cleaning</span>
+                          </div>
+                          <div className="fs-6" >Room marked dirty for housekeeping inspection</div>
+                          <div className="staff-Cleaning-btn">
+                            <div><button onClick={() => handleMarkClean(makeClean)}>Mark Clean & Available</button></div>
+                            <div>
+                              <select name="" id="" onChange={(e) => handleSelectStaff(e.target.value)} value={selectStaff}>
+                                {
+                                  dataStaff?.map((staff, staffIndex) => (
+                                    <option key={`${staff?.id}-${staffIndex}`} value={staff?.id}>{staff?.name}</option>
+                                  ))
+
+                                }
+                              </select>
                             </div>
                           </div>
-                        </>
-                      ):("")
+                        </div>
+                      </>
+                    ) : ("")
                   }
                   <label className="section-label mt-1">
                     Change Room Status:

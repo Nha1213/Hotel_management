@@ -1,4 +1,4 @@
-const { Staff } = require("../models");
+const { Staff, Room } = require("../models");
 const { logError } = require("../middlewares/logError");
 const { Op } = require("sequelize");
 
@@ -34,13 +34,6 @@ const createStaff = async (req, res) => {
   try {
     const { room_id, name, position, gender, age, phone } = req.body;
 
-    if (!room_id) {
-      return res.status(400).json({
-        success: false,
-        message: "Room ID is required",
-      });
-    }
-
     if (!name) {
       return res.status(400).json({
         success: false,
@@ -61,8 +54,19 @@ const createStaff = async (req, res) => {
       });
     }
 
+    const roomId = room_id === "" || room_id === undefined ? null : room_id;
+    if (roomId !== null) {
+      const room = await Room.findByPk(roomId);
+      if (!room) {
+        return res.status(404).json({
+          success: false,
+          message: "Room not found",
+        });
+      }
+    }
+
     const newStaff = await Staff.create({
-      room_id,
+      room_id: roomId,
       name,
       position,
       gender,
@@ -151,9 +155,16 @@ const deleteStaff = (req, res) => {
 const unRelationshipStaffRoom = async (req, res) => {
   try {
     const { id } = req.params;
-    const staff = await Staff.findByPk(id);
-    if (staff) {
+    if (!id) {
       return res.status(400).json({
+        success: false,
+        message: "Staff id is required",
+      });
+    }
+
+    const staff = await Staff.findByPk(id);
+    if (!staff) {
+      return res.status(404).json({
         success: false,
         message: "Staff not found",
       });
@@ -171,10 +182,48 @@ const unRelationshipStaffRoom = async (req, res) => {
   }
 };
 
+const updateStaffRoomID = async (req, res) => {
+  try{
+    const {id} = req.params;
+    const {room_id} = req.body;
+
+    if(!id){
+      return res.status(400).json({
+        success: false,
+        message: "Room id is required",
+      });
+    }
+    if (!room_id) {
+      return res.status(400).json({
+        success: false,
+        message: "Room id is required",
+      });
+    }
+
+    const staff = await Staff.findByPk(id);
+    if(!staff){
+      return res.status(404).json({
+        success: false,
+        message: "Room not found",
+      });
+    }
+    await Staff.update({ room_id: null }, { where: { room_id, id: { [Op.ne]: id } } });
+    await staff.update({ room_id });
+    return res.status(200).json({
+      success: true,
+      message: "staff updated successfully",
+      data: staff
+    });
+  }catch(error){
+    logError("updateStatusRoom", error, res);
+  }
+};
+
 module.exports = {
   getAllStaffs,
   createStaff,
   updateStaff,
   deleteStaff,
   unRelationshipStaffRoom,
+  updateStaffRoomID
 };
