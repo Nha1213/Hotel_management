@@ -1,6 +1,7 @@
-const { Staff, Room } = require("../models");
+const { Staff, Room, StaffRoom } = require("../models");
 const { logError } = require("../middlewares/logError");
 const { Op } = require("sequelize");
+const { sequelize } = require("../models");
 
 const getAllStaffs = async (req, res) => {
   try {
@@ -31,8 +32,9 @@ const getAllStaffs = async (req, res) => {
 };
 
 const createStaff = async (req, res) => {
+  const t = await sequelize.transaction();
   try {
-    const { room_id, name, position, gender, age, phone } = req.body;
+    const { room_id, name, position, gender, age, phone, } = req.body;
 
     if (!name) {
       return res.status(400).json({
@@ -72,7 +74,14 @@ const createStaff = async (req, res) => {
       gender,
       age,
       phone,
-    });
+    }, { transaction: t });
+
+    const staffRoom = await StaffRoom.create({
+      staff_id: newStaff.id,
+      room_id: roomId,
+    }, { transaction: t });
+
+    await t.commit();
 
     return res.status(200).json({
       success: true,
@@ -153,6 +162,7 @@ const deleteStaff = (req, res) => {
 };
 
 const unRelationshipStaffRoom = async (req, res) => {
+  const t = await sequelize.transaction();
   try {
     const { id } = req.params;
     if (!id) {
@@ -170,6 +180,15 @@ const unRelationshipStaffRoom = async (req, res) => {
       });
     }
 
+    const staffRoom = await StaffRoom.findOne({ where: { staff_id: id } });
+    if (!staffRoom) {
+      return res.status(404).json({
+        success: false,
+        message: "Staff room not found",
+      });
+    }
+
+    await StaffRoom.destroy({ where: { staff_id: id }, transaction: t });
     staff.room_id = null;
     await staff.save();
     return res.status(200).json({

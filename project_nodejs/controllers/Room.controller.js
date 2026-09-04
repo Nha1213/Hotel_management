@@ -1,4 +1,4 @@
-const {Room, RoomType, Staff} = require("../models");
+const {Room, RoomType, Staff, StaffRoom, sequelize} = require("../models");
 const {logError} = require("../middlewares/logError");
 const {Op} = require("sequelize");
 
@@ -73,20 +73,30 @@ const getAllRoom = async (req, res) =>{
 }
 
 const createRoom = async (req, res) => {
-    try{
-        const {room_number, room_type_id, floor, status, description} = req.body;
-    
-        requireCheck(res, room_number, room_type_id, floor, status);
+    const t = await sequelize.transaction();
+  try {
+    const { room_number, room_type_id, floor, status, description } = req.body;
 
-        const room = await Room.create({room_number, room_type_id, floor, status, description});
-        return res.status(200).json({
-            success: true,
-            message: "Room created successfully",
-            data: room
-        });
-    }catch(error){
-        logError("createRoom", error, res);
-    }
+    requireCheck(res, room_number, room_type_id, floor, status);
+
+    const room = await Room.create({
+      room_number,
+      room_type_id,
+      floor,
+      status,
+      description,
+    }, {transaction: t});
+
+    await t.commit();
+
+    return res.status(200).json({
+      success: true,
+      message: "Room created successfully",
+      data: room,
+    });
+  } catch (error) {
+    logError("createRoom", error, res);
+  }
 };
 
 const updateStatusRoom = async (req, res) => {
