@@ -204,7 +204,7 @@ const unRelationshipStaffRoom = async (req, res) => {
 const updateStaffRoomID = async (req, res) => {
   try{
     const {id} = req.params;
-    const {room_id} = req.body;
+    const {room_id, staff_id} = req.body;
 
     if(!id){
       return res.status(400).json({
@@ -218,6 +218,8 @@ const updateStaffRoomID = async (req, res) => {
         message: "Room id is required",
       });
     }
+
+    const staffRoom = await StaffRoom.update({room_id, staff_id}, {where: {id}});
 
     const staff = await Staff.findByPk(id);
     if(!staff){

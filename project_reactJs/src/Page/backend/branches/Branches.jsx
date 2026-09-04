@@ -46,16 +46,13 @@ const Branches = () => {
             : [];
         // console.log("Rooms loaded:", rooms);
         setData(rooms);
-
       }
     } catch (error) {
       console.error("Load rooms error:", error);
 
       alertError({
         title: "Error",
-        text:
-          error?.response?.data?.message ||
-          "Failed to load rooms.",
+        text: error?.response?.data?.message || "Failed to load rooms.",
       });
 
       setData([]);
@@ -69,14 +66,13 @@ const Branches = () => {
     }
 
     try {
-      await Request(
-        `/api/staffs/relationship/${staffId}`,
-        "put",
-        { room_id: selectedRoom.id }
-      );
+      await Request(`/api/staffRoom`, "post", {
+        room_id: selectedRoom.id,
+        staff_id: staffId,
+      });
       setSelectStaff(String(staffId));
       const selectedStaff = dataStaff.find(
-        (staff) => String(staff.id) === String(staffId)
+        (staff) => String(staff.id) === String(staffId),
       );
       setSelectedRoom((room) => ({
         ...room,
@@ -87,8 +83,7 @@ const Branches = () => {
       alertError({
         title: "Error",
         text:
-          error?.response?.data?.message ||
-          "Failed to assign staff to room.",
+          error?.response?.data?.message || "Failed to assign staff to room.",
       });
     }
   };
@@ -123,14 +118,9 @@ const Branches = () => {
     }
 
     try {
-      await Request(
-        `/api/room/status/${selectedRoom.id}`,
-        "put",
-        {
-          status: status,
-        }
-      );
-
+      await Request(`/api/room/status/${selectedRoom.id}`, "put", {
+        status: status,
+      });
 
       // -----------------------------------------------------
       // Update room in the main list
@@ -143,10 +133,10 @@ const Branches = () => {
         return prev.map((room) =>
           room.id === selectedRoom.id
             ? {
-              ...room,
-              status: status,
-            }
-            : room
+                ...room,
+                status: status,
+              }
+            : room,
         );
       });
 
@@ -173,9 +163,7 @@ const Branches = () => {
 
       alertError({
         title: "Error",
-        text:
-          error?.response?.data?.message ||
-          "Failed to update room status.",
+        text: error?.response?.data?.message || "Failed to update room status.",
       });
     }
   };
@@ -189,10 +177,8 @@ const Branches = () => {
     filter === "All"
       ? rooms
       : rooms.filter(
-        (room) =>
-          room.status?.toLowerCase() ===
-          filter.toLowerCase()
-      );
+          (room) => room.status?.toLowerCase() === filter.toLowerCase(),
+        );
 
   // =========================================================
   // FLOOR RANGE
@@ -212,13 +198,13 @@ const Branches = () => {
   const filteredRoomsByFloor = !selectedFloorRange
     ? filteredRooms
     : filteredRooms.filter((room) => {
-      const roomNumber = Number(room.room_number);
+        const roomNumber = Number(room.room_number);
 
-      return (
-        roomNumber >= selectedFloorRange[0] &&
-        roomNumber <= selectedFloorRange[1]
-      );
-    });
+        return (
+          roomNumber >= selectedFloorRange[0] &&
+          roomNumber <= selectedFloorRange[1]
+        );
+      });
 
   // =========================================================
   // ROOM COUNT
@@ -255,25 +241,25 @@ const Branches = () => {
       });
       setMakeClean("");
       setSelectStaff("");
-      setSelectedRoom((room) => (
-        room ? { ...room, status: "Available", staffs: null } : room
-      ));
-      setData((rooms) => rooms.map((room) => (
-        room.id === selectedRoomId
-          ? { ...room, status: "Available", staffs: null }
-          : room
-      )));
+      setSelectedRoom((room) =>
+        room ? { ...room, status: "Available", staffs: null } : room,
+      );
+      setData((rooms) =>
+        rooms.map((room) =>
+          room.id === selectedRoomId
+            ? { ...room, status: "Available", staffs: null }
+            : room,
+        ),
+      );
       await loadRooms();
       setOpenFunStaff("Available");
     } catch (error) {
       alertError({
         title: "Error",
-        text:
-          error?.response?.data?.message ||
-          "Failed to load rooms.",
-      })
+        text: error?.response?.data?.message || "Failed to load rooms.",
+      });
     }
-  }
+  };
 
   return (
     <div className="dashboard-container">
@@ -286,12 +272,8 @@ const Branches = () => {
         <div className="header-top">
           <h1 className="dashboard-title">
             <span className="title-icon">⣿</span>
-
             Room Status Board{" "}
-
-            <span className="room-count">
-              ({totalRooms} rooms)
-            </span>
+            <span className="room-count">({totalRooms} rooms)</span>
           </h1>
 
           {/* =================================================
@@ -357,40 +339,35 @@ const Branches = () => {
             <span>Floors:</span>
 
             <button
-              className={`floor-btn ${filterFloor === "All" ? "active" : ""
-                }`}
+              className={`floor-btn ${filterFloor === "All" ? "active" : ""}`}
               onClick={() => setFilterFloor("All")}
             >
               All Floors
             </button>
 
             <button
-              className={`floor-btn ${filterFloor === "101" ? "active" : ""
-                }`}
+              className={`floor-btn ${filterFloor === "101" ? "active" : ""}`}
               onClick={() => setFilterFloor("101")}
             >
               Floor 1 (101-110)
             </button>
 
             <button
-              className={`floor-btn ${filterFloor === "201" ? "active" : ""
-                }`}
+              className={`floor-btn ${filterFloor === "201" ? "active" : ""}`}
               onClick={() => setFilterFloor("201")}
             >
               Floor 2 (201-210)
             </button>
 
             <button
-              className={`floor-btn ${filterFloor === "301" ? "active" : ""
-                }`}
+              className={`floor-btn ${filterFloor === "301" ? "active" : ""}`}
               onClick={() => setFilterFloor("301")}
             >
               Floor 3 (301-310)
             </button>
 
             <button
-              className={`floor-btn ${filterFloor === "401" ? "active" : ""
-                }`}
+              className={`floor-btn ${filterFloor === "401" ? "active" : ""}`}
               onClick={() => setFilterFloor("401")}
             >
               Floor 4 Suites (401-410)
@@ -409,8 +386,7 @@ const Branches = () => {
       <div className="room-grid">
         {filteredRoomsByFloor.length > 0 ? (
           filteredRoomsByFloor.map((room, roomIndex) => {
-            const statusClass =
-              room.status?.toLowerCase() || "available";
+            const statusClass = room.status?.toLowerCase() || "available";
 
             return (
               <div
@@ -431,14 +407,8 @@ const Branches = () => {
                 >
                   {room.room_type?.image ? (
                     <img
-                      src={
-                        BaseUrl +
-                        room.room_type.image
-                      }
-                      alt={
-                        room.room_type?.name ||
-                        "Room"
-                      }
+                      src={BaseUrl + room.room_type.image}
+                      alt={room.room_type?.name || "Room"}
                       style={{
                         width: "100%",
                         height: "100%",
@@ -468,18 +438,14 @@ const Branches = () => {
                 ================================================= */}
                 <div className="card-header">
                   <div>
-                    <h3 className="room-number">
-                      {room.room_number}
-                    </h3>
+                    <h3 className="room-number">{room.room_number}</h3>
 
                     <div className="room-type">
                       {room.room_type?.name || "-"}
                     </div>
                   </div>
 
-                  <span
-                    className={`status-tag badge-${statusClass}`}
-                  >
+                  <span className={`status-tag badge-${statusClass}`}>
                     {room.status}
                   </span>
                 </div>
@@ -490,29 +456,19 @@ const Branches = () => {
                 <div className="card-body">
                   {room.room_type?.price_per_night && (
                     <div className="price-tag">
-                      $
-                      {Number(
-                        room.room_type
-                          .price_per_night
-                      ).toFixed(2)}
+                      ${Number(room.room_type.price_per_night).toFixed(2)}
                       /nt
                     </div>
                   )}
 
-                  {room.note && (
-                    <div className="note-text">
-                      🚫 {room.note}
-                    </div>
-                  )}
+                  {room.note && <div className="note-text">🚫 {room.note}</div>}
                 </div>
 
                 {/* =================================================
                     CARD FOOTER
                 ================================================= */}
                 <div className="card-footer">
-                  <span className="room-code">
-                    🔑 {room.code}
-                  </span>
+                  <span className="room-code">🔑 {room.code}</span>
 
                   <button
                     className="manage-btn"
@@ -548,14 +504,8 @@ const Branches = () => {
           MODAL
       ===================================================== */}
       {selectedRoom && (
-        <div
-          className="modal-overlay"
-          onClick={() => setSelectedRoom(null)}
-        >
-          <div
-            className="modal-container"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="modal-overlay" onClick={() => setSelectedRoom(null)}>
+          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
             {/* =================================================
                 MODAL HEADER
             ================================================= */}
@@ -567,27 +517,21 @@ const Branches = () => {
 
                 <div>
                   <div className="modal-title-row">
-                    <h2>
-                      {selectedRoom.room_type?.name}
-                    </h2>
+                    <h2>{selectedRoom.room_type?.name}</h2>
 
                     <span
-                      className={`status-pill badge-${selectedRoom.status?.toLowerCase() ||
-                        "available"
-                        }`}
+                      className={`status-pill badge-${
+                        selectedRoom.status?.toLowerCase() || "available"
+                      }`}
                     >
                       {selectedRoom.status}
                     </span>
                   </div>
 
                   <p className="modal-subtitle">
-                    Floor{" "}
-                    {selectedRoom.floor || 1} • Base
-                    Rate $
-
+                    Floor {selectedRoom.floor || 1} • Base Rate $
                     {Number(
-                      selectedRoom.room_type
-                        ?.price_per_night || 0
+                      selectedRoom.room_type?.price_per_night || 0,
                     ).toFixed(2)}
                     /night
                   </p>
@@ -596,9 +540,7 @@ const Branches = () => {
 
               <button
                 className="modal-close-btn"
-                onClick={() =>
-                  setSelectedRoom(null)
-                }
+                onClick={() => setSelectedRoom(null)}
               >
                 ✕
               </button>
@@ -609,37 +551,28 @@ const Branches = () => {
             ================================================= */}
             <div className="modal-tabs">
               <button
-                className={`tab-btn ${activeTab === "Room & Guest"
-                  ? "active"
-                  : ""
-                  }`}
-                onClick={() =>
-                  setActiveTab("Room & Guest")
-                }
+                className={`tab-btn ${
+                  activeTab === "Room & Guest" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("Room & Guest")}
               >
                 Room & Guest
               </button>
 
               <button
-                className={`tab-btn ${activeTab === "+ Quick Check-In"
-                  ? "active"
-                  : ""
-                  }`}
-                onClick={() =>
-                  setActiveTab("+ Quick Check-In")
-                }
+                className={`tab-btn ${
+                  activeTab === "+ Quick Check-In" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("+ Quick Check-In")}
               >
                 + Quick Check-In
               </button>
 
               <button
-                className={`tab-btn ${activeTab === "Smart Lock"
-                  ? "active"
-                  : ""
-                  }`}
-                onClick={() =>
-                  setActiveTab("Smart Lock")
-                }
+                className={`tab-btn ${
+                  activeTab === "Smart Lock" ? "active" : ""
+                }`}
+                onClick={() => setActiveTab("Smart Lock")}
               >
                 Smart Lock
               </button>
@@ -654,32 +587,47 @@ const Branches = () => {
               ================================================= */}
               {activeTab === "Room & Guest" && (
                 <>
-                  {
-                    openFunStaff === "Cleaning" ? (
-                      <>
-                        <div className="staff-Cleaning">
-                          <div className="staff-Cleaning-title">
-                            <i></i>
-                            <span>Room Needs Cleaning</span>
+                  {openFunStaff === "Cleaning" ? (
+                    <>
+                      <div className="staff-Cleaning">
+                        <div className="staff-Cleaning-title">
+                          <i></i>
+                          <span>Room Needs Cleaning</span>
+                        </div>
+                        <div className="fs-6">
+                          Room marked dirty for housekeeping inspection
+                        </div>
+                        <div className="staff-Cleaning-btn">
+                          <div>
+                            <button onClick={() => handleMarkClean(makeClean)}>
+                              Mark Clean & Available
+                            </button>
                           </div>
-                          <div className="fs-6" >Room marked dirty for housekeeping inspection</div>
-                          <div className="staff-Cleaning-btn">
-                            <div><button onClick={() => handleMarkClean(makeClean)}>Mark Clean & Available</button></div>
-                            <div>
-                              <select name="" id="" onChange={(e) => handleSelectStaff(e.target.value)} value={selectStaff}>
-                                {
-                                  dataStaff?.map((staff, staffIndex) => (
-                                    <option key={`${staff?.id}-${staffIndex}`} value={staff?.id}>{staff?.name}</option>
-                                  ))
-
-                                }
-                              </select>
-                            </div>
+                          <div>
+                            <select
+                              name=""
+                              id=""
+                              onChange={(e) =>
+                                handleSelectStaff(e.target.value)
+                              }
+                              value={selectStaff}
+                            >
+                              {dataStaff?.map((staff, staffIndex) => (
+                                <option
+                                  key={`${staff?.id}-${staffIndex}`}
+                                  value={staff?.id}
+                                >
+                                  {staff?.name}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
-                      </>
-                    ) : ("")
-                  }
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
                   <label className="section-label mt-1">
                     Change Room Status:
                   </label>
@@ -687,89 +635,71 @@ const Branches = () => {
                   <div className="status-grid">
                     {/* AVAILABLE */}
                     <button
-                      className={`status-btn ${buttonActive === "Available"
-                        ? "btn-available"
-                        : "btn-available-active"
-                        }`}
-                      onClick={() =>
-                        loadRoomsByStatus(
-                          "Available"
-                        )
-                      }
+                      className={`status-btn ${
+                        buttonActive === "Available"
+                          ? "btn-available"
+                          : "btn-available-active"
+                      }`}
+                      onClick={() => loadRoomsByStatus("Available")}
                     >
                       Available
                     </button>
 
                     {/* CLEANING */}
                     <button
-                      className={`status-btn ${buttonActive === "Cleaning"
-                        ? "btn-cleaning"
-                        : "btn-cleaning-active"
-                        }`}
-                      onClick={() =>
-                        loadRoomsByStatus(
-                          "Cleaning"
-                        )
-                      }
+                      className={`status-btn ${
+                        buttonActive === "Cleaning"
+                          ? "btn-cleaning"
+                          : "btn-cleaning-active"
+                      }`}
+                      onClick={() => loadRoomsByStatus("Cleaning")}
                     >
                       Cleaning
                     </button>
 
                     {/* MAINTENANCE */}
                     <button
-                      className={`status-btn ${buttonActive === "Maintenance"
-                        ? "btn-maintenance"
-                        : "btn-maintenance-active"
-                        }`}
-                      onClick={() =>
-                        loadRoomsByStatus(
-                          "Maintenance"
-                        )
-                      }
+                      className={`status-btn ${
+                        buttonActive === "Maintenance"
+                          ? "btn-maintenance"
+                          : "btn-maintenance-active"
+                      }`}
+                      onClick={() => loadRoomsByStatus("Maintenance")}
                     >
                       Maintenance
                     </button>
 
                     {/* BLOCK */}
                     <button
-                      className={`status-btn ${buttonActive === "Blocked"
-                        ? "btn-block"
-                        : "btn-block-active"
-                        }`}
-                      onClick={() =>
-                        loadRoomsByStatus(
-                          "Blocked"
-                        )
-                      }
+                      className={`status-btn ${
+                        buttonActive === "Blocked"
+                          ? "btn-block"
+                          : "btn-block-active"
+                      }`}
+                      onClick={() => loadRoomsByStatus("Blocked")}
                     >
                       Block Room
                     </button>
 
                     {/* RESERVED */}
                     <button
-                      className={`status-btn ${buttonActive === "Reserved"
-                        ? "btn-reserved"
-                        : "btn-reserved-active"
-                        }`}
-                      onClick={() =>
-                        loadRoomsByStatus(
-                          "Reserved"
-                        )
-                      }
+                      className={`status-btn ${
+                        buttonActive === "Reserved"
+                          ? "btn-reserved"
+                          : "btn-reserved-active"
+                      }`}
+                      onClick={() => loadRoomsByStatus("Reserved")}
                     >
                       Reserved
                     </button>
                     {/* OCCUPIED */}
                     <button
-                      className={`status-btn ${buttonActive === "Occupied"
-                        ? "btn-occupied"
-                        : "btn-occupied-active"
-                        }`}
-                      onClick={() =>
-                        loadRoomsByStatus(
-                          "Occupied"
-                        )
-                      }
+                      className={`status-btn ${
+                        buttonActive === "Occupied"
+                          ? "btn-occupied"
+                          : "btn-occupied-active"
+                      }`}
+                      onClick={() => loadRoomsByStatus("Occupied")}
                     >
                       Occupied
                     </button>
@@ -788,17 +718,11 @@ const Branches = () => {
                   </label>
 
                   <div className="amenities-list">
-                    <span className="amenity-chip">
-                      ✓ Queen Bed
-                    </span>
+                    <span className="amenity-chip">✓ Queen Bed</span>
 
-                    <span className="amenity-chip">
-                      ✓ Work Desk
-                    </span>
+                    <span className="amenity-chip">✓ Work Desk</span>
 
-                    <span className="amenity-chip">
-                      ✓ Smart TV
-                    </span>
+                    <span className="amenity-chip">✓ Smart TV</span>
                   </div>
                 </>
               )}
@@ -806,74 +730,75 @@ const Branches = () => {
               {/* =================================================
                   QUICK CHECK-IN
               ================================================= */}
-              {activeTab ===
-                "+ Quick Check-In" && (
-                  <div className="tab-content-placeholder">
-                    <div className="guest-info">
-                      <div>
-                        <label htmlFor="">Guest Full name</label>
-                        <input type="text" placeholder="e.g. Vikram Malhotra" />
-                      </div>
-                      <div>
-                        <label htmlFor="">Employees Name</label>
-                        <select name="" id="">
-                          <option value="">Select Employee</option>
-                          <option value="">Vikram Malhotra</option>
-                        </select>
-                      </div>
+              {activeTab === "+ Quick Check-In" && (
+                <div className="tab-content-placeholder">
+                  <div className="guest-info">
+                    <div>
+                      <label htmlFor="">Guest Full name</label>
+                      <input type="text" placeholder="e.g. Vikram Malhotra" />
                     </div>
-
-                    <div className="guest-info">
-                      <div>
-                        <label htmlFor="">Phone Number*</label>
-                        <input type="tel" placeholder="+855 123 456 789" />
-                      </div>
-                      <div>
-                        <label htmlFor="">Email</label><br />
-                        <input type="email" placeholder="e.g. 7eVYX@example.com" />
-                      </div>
+                    <div>
+                      <label htmlFor="">Employees Name</label>
+                      <select name="" id="">
+                        <option value="">Select Employee</option>
+                        <option value="">Vikram Malhotra</option>
+                      </select>
                     </div>
-
-                    <div className="guest-info">
-                      <div>
-                        <label htmlFor="">Check-Out Date</label><br />
-                        <input placeholder="+855 123 456 789" type="date" />
-                      </div>
-                      <div>
-                        <label htmlFor="">Number of Guests</label>
-                        <select name="" id="">
-                          <option value="">1 Adult</option>
-                          <option value="">Vikram Malhotra</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="placement">
-                      <div className="room-rate">
-                        <span>Room Rate (1 Night):</span>
-                        <span>120.00 USD</span>
-                      </div>
-                      <div className="tax">
-                        <span>Estimated Tax (5% GST):</span>
-                        <span>150.00 USD</span>
-                      </div>
-                      <div className="ruler">
-
-                      </div>
-                      <div className="total-payable mb-1">
-                        <span>Total Payable:</span>
-                        <span>270.00 USD</span>
-                      </div>
-                    </div>
-
-                    <div className="btn-walk-in">
-                      <button className="walk-btn">
-                        Complete Walk-In Check-In
-                      </button>
-                    </div>
-
                   </div>
-                )}
+
+                  <div className="guest-info">
+                    <div>
+                      <label htmlFor="">Phone Number*</label>
+                      <input type="tel" placeholder="+855 123 456 789" />
+                    </div>
+                    <div>
+                      <label htmlFor="">Email</label>
+                      <br />
+                      <input
+                        type="email"
+                        placeholder="e.g. 7eVYX@example.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="guest-info">
+                    <div>
+                      <label htmlFor="">Check-Out Date</label>
+                      <br />
+                      <input placeholder="+855 123 456 789" type="date" />
+                    </div>
+                    <div>
+                      <label htmlFor="">Number of Guests</label>
+                      <select name="" id="">
+                        <option value="">1 Adult</option>
+                        <option value="">Vikram Malhotra</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="placement">
+                    <div className="room-rate">
+                      <span>Room Rate (1 Night):</span>
+                      <span>120.00 USD</span>
+                    </div>
+                    <div className="tax">
+                      <span>Estimated Tax (5% GST):</span>
+                      <span>150.00 USD</span>
+                    </div>
+                    <div className="ruler"></div>
+                    <div className="total-payable mb-1">
+                      <span>Total Payable:</span>
+                      <span>270.00 USD</span>
+                    </div>
+                  </div>
+
+                  <div className="btn-walk-in">
+                    <button className="walk-btn">
+                      Complete Walk-In Check-In
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* =================================================
                   SMART LOCK
@@ -890,22 +815,14 @@ const Branches = () => {
                         <h5>1234</h5>
                       </div>
                       <div>
-                        <button>
-                          Regenerate PIN
-                        </button>
+                        <button>Regenerate PIN</button>
                       </div>
                     </div>
-                    <div className="smart-lock-ruler">
-
-                    </div>
+                    <div className="smart-lock-ruler"></div>
                     <div className="smart-lock-footer">
+                      <span>last Opened: Never</span>
                       <span>
-                        last Opened: Never
-                      </span>
-                      <span>
-                        <button>
-                          Lock (Click to Unlock)
-                        </button>
+                        <button>Lock (Click to Unlock)</button>
                       </span>
                     </div>
                   </div>
