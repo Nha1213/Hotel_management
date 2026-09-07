@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { ConfigProvider, notification } from 'antd';
 import { CheckCircleFilled } from '@ant-design/icons';
 import { createStyles } from 'antd-style';

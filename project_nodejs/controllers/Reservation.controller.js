@@ -290,6 +290,16 @@ const deleteReservation = async (req, res) => {
       });
     }
 
+    const relatedDetails = await ReservationDetail.findAll({
+      where: { reservation_id: id },
+    });
+
+    if (relatedDetails.length > 0) {
+      await ReservationDetail.destroy({
+        where: { reservation_id: id },
+      });
+    }
+
     await checkById.destroy();
 
     return res.status(200).json({

@@ -64,6 +64,9 @@ staffRoute(app);
 const staffRoomRoute = require("./router/staffRoom.route");
 staffRoomRoute(app);
 
+const ReservationDetailRoute = require("./router/reservationDetail.route");
+ReservationDetailRoute(app);
+
 app.listen(PORT, () => {
     console.log(`Example app listening on PORT ${PORT}`);
 });

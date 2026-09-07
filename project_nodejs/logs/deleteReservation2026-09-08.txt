@@ -1,0 +1,8 @@
+[08/09/2026 00:45:58] [deleteReservation] update or delete on table "Reservations" violates foreign key constraint "ReservationDetails_reservation_id_fkey" on table "ReservationDetails"
+Error
+    at Query.run (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.delete (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:393:12)
+    at async Reservation.destroy (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\sequelize\lib\model.js:2627:16)
+    at async deleteReservation (D:\HotelManagement\Hotel_management\project_nodejs\controllers\Reservation.controller.js:293:5)

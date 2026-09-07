@@ -1,6 +1,4 @@
-import React from "react";
 import "./RatingStar.css";
-import { FaStar } from "react-icons/fa";
 import hotelImage from "../../../.././public/imageCover/cover.webp"; // change to your image
 
 const RatingStars = () => {

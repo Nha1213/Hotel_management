@@ -1,6 +1,5 @@
-import React from 'react'
-import { getStoreUser } from '../../localStorage/userStore'
 import { useEffect } from 'react'
+import { getStoreUser } from '../../localStorage/userStore'
 
 
 const Reject = () => {

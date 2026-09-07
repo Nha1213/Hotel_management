@@ -29,8 +29,8 @@ const Dashboard = () => {
     if (!getStoreUser()) {
       navigate("/login");
     }
-    console.log( "User: ", getStoreUser());    
-  }, [])
+    console.log("User: ", getStoreUser());
+  }, [navigate]);
   const stats = [
     {
       title: "Occupancy",

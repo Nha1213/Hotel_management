@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../style/Sidebar.css";
 const Sidebar = () => {
@@ -61,40 +61,19 @@ const Sidebar = () => {
       id: "reservations",
       label: "📈 Reservations",
       path: "/reservations",
-      submenu: [
-        { id: "sales-report", label: "Sales Report", path: "/sales" },
-        {
-          id: "customer-report",
-          label: "Customer Report",
-          path: "/customerReport",
-        },
-      ],
     },
     {
-      id: "operations",
-      label: "📈 Operations",
+      id: "Housekeeping",
+      label: "📈 Housekeeping & Services",
       path: "/operations",
       submenu: [
-        { id: "sales-report", label: "Sales Report", path: "/sales" },
-        {
-          id: "customer-report",
-          label: "Customer Report",
-          path: "/customerReport",
-        },
+        { id: "Housekeeping_board", label: "Housekeeping Board", path: "/housekeeping_board" },
       ],
     },
     {
       id: "pos",
       label: "📈 pos / Restaurant",
-      path: "/pos",
-      submenu: [
-        { id: "sales-report", label: "Sales Report", path: "/sales" },
-        {
-          id: "customer-report",
-          label: "Customer Report",
-          path: "/customerReport",
-        },
-      ],
+      path: "/pos_restaurant",
     },
 
     {
@@ -122,26 +101,8 @@ const Sidebar = () => {
     },
     {
       id: "inventory",
-      label: "⚙️ Inventory / Purchase",
+      label: "⚙️ Inventory / Folios",
       path: "/inventory",
-      submenu: [
-        { id: "role", label: "Roles", path: "/role" },
-        {
-          id: "user-management",
-          label: "User",
-          path: "/manageuser",
-        },
-        {
-          id: "role-permission",
-          label: "Permission",
-          path: "/permission",
-        },
-        {
-          id: "low-stock-alert",
-          label: "Low Stock Alert",
-          path: "/lowstockalert",
-        },
-      ],
     },
 
     

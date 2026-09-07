@@ -6,6 +6,8 @@ import { useState } from 'react';
 const Hook = () => {
     const [dataStaff, setStaff] = useState([]);
     const [reservations, setReservations] = useState([]);
+    const [pricePerNight, setPricePerNight] = useState(0);
+    const [loadingReservation, setLoadingReservation] = useState(true);
     const [state, setState] = useState({
         customer_id: "",
         reservation_date: "",
@@ -60,6 +62,7 @@ const Hook = () => {
         const checkInDate = state.check_in_date || today;
         const checkOutDate = state.check_out_date;
         const roomPrice = Number(room?.room_type?.price_per_night || 0);
+        setPricePerNight(roomPrice);
         const nights = checkOutDate
             ? Math.ceil(
                 (new Date(`${checkOutDate}T00:00:00`) -
@@ -116,6 +119,12 @@ const Hook = () => {
                     title: "Success",
                     text: res.message || "Reservation created successfully.",
                 });
+                
+                await Request(`/api/room/status/${room?.id}`, "put", {
+                    status: "Reserved",
+                });
+
+                setLoadingReservation(false);
 
                 setState({
                     customer_id: "",
@@ -131,12 +140,14 @@ const Hook = () => {
                     employee_id: "",
                 });
             }
+
         } catch (error) {
             alertError({
                 title: "Error",
                 text: error?.response?.data?.message || error?.message || "Failed to create reservation.",
             });
         }
+
     }
     return (
         {
@@ -145,7 +156,9 @@ const Hook = () => {
             state,
             setState,
             reservation_quick,
-            make_reservation_quick
+            make_reservation_quick,
+            pricePerNight,
+            loadingReservation,
         }
     )
 }

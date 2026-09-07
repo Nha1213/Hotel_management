@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import "./roomType.css";
 import LightMode from "../DartMode/LightMode";
 import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Upload, Dropdown, Tag } from "antd";
@@ -12,12 +12,27 @@ const RoomType = () => {
   const [data, setData] = useState([]);
   const [editingId, setEditingId] = useState(null);
 
-  const [filteredRoomTypes, setFilteredRoomTypes] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const filteredRoomTypes = useMemo(() => {
+    const query = searchKeyword.toLowerCase().trim();
+
+    return data.filter((item) => {
+      const matchesSearch = !query
+        ? true
+        : (item.name?.toLowerCase() || "").includes(query) ||
+          (item.description?.toLowerCase() || "").includes(query);
+
+      const matchesStatus =
+        filterStatus === "all" || String(item.status) === String(filterStatus);
+
+      return matchesSearch && matchesStatus;
+    });
+  }, [data, searchKeyword, filterStatus]);
 
   const totalPages = Math.ceil(filteredRoomTypes.length / itemsPerPage) || 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -34,14 +49,13 @@ const RoomType = () => {
   ];
 
   // Fetch data from backend
-  const fetchRoomType = async () => {
+  const fetchRoomType = useCallback(async () => {
     setLoading(true);
     try {
       const res = await Request("/api/roomtype", "get");
       if (res) {
         const list = res.data || [];
         setData(list);
-        setFilteredRoomTypes(list);
       }
     } catch (error) {
       alertError({
@@ -51,35 +65,18 @@ const RoomType = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  // Run once on component mount
-  useEffect(() => {
-    fetchRoomType();
   }, []);
 
-  // Filter list when search or dropdown filter changes
+  // Run once on component mount
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    const query = searchKeyword.toLowerCase().trim();
-
-    const filtered = data.filter((item) => {
-      const matchesSearch = !query
-        ? true
-        : (item.name?.toLowerCase() || "").includes(query) ||
-          (item.description?.toLowerCase() || "").includes(query);
-
-      const matchesStatus =
-        filterStatus === "all" || String(item.status) === String(filterStatus);
-
-      return matchesSearch && matchesStatus;
-    });
-
-    setFilteredRoomTypes(filtered);
-    setCurrentPage(1);
-  }, [searchKeyword, data, filterStatus]);
+    void fetchRoomType();
+  }, [fetchRoomType]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const handleFilterChange = ({ key }) => {
     setFilterStatus(key);
+    setCurrentPage(1);
   };
 
   // Open modal for adding a new item
@@ -209,7 +206,10 @@ const RoomType = () => {
             type="text"
             placeholder="Search by name or description..."
             value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
+            onChange={(e) => {
+              setSearchKeyword(e.target.value);
+              setCurrentPage(1);
+            }}
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import "./room.css";
 import LightMode from "../DartMode/LightMode";
 import { Modal, Form, Input, Button, Space, Row, Col, InputNumber, Dropdown, Select, Tag } from "antd";
@@ -6,8 +6,7 @@ import { DownOutlined } from "@ant-design/icons";
 import Request from "../../util/Request";
 import { BaseUrl } from "../../util/BaseUrl";
 import { alertSuccess, alertError, confirmDelete } from "../../../swertalert/AlertSuccess";
-import Reject from "../rejectRoute/Reject";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { getStoreUser } from "../../localStorage/userStore";
 
 const Room = () => {
@@ -17,20 +16,43 @@ const Room = () => {
       navigate("/login");
     }
     console.log("User: ", getStoreUser());
-  }, []);
+  }, [navigate]);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [roomType, setRoomType] = useState([]);
   const [filterStatus, setFilterStatus] = useState("All");
 
-  const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   const [form] = Form.useForm();
+
+  const filteredRooms = useMemo(() => {
+    let filtered = data;
+
+    if (searchKeyword.trim()) {
+      const query = searchKeyword.toLowerCase();
+      filtered = data.filter(
+        (item) =>
+          item.room_number?.toString().includes(query) ||
+          item.description?.toLowerCase().includes(query) ||
+          item.floor?.toString().toLowerCase().includes(query) ||
+          item.status?.toLowerCase().includes(query),
+      );
+    }
+
+    if (filterStatus !== "All") {
+      filtered = filtered.filter(
+        (item) =>
+          item.status.toLocaleLowerCase() === filterStatus.toLocaleLowerCase(),
+      );
+    }
+
+    return filtered;
+  }, [data, searchKeyword, filterStatus]);
 
   const totalPages = Math.ceil(filteredRooms.length / itemsPerPage) || 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -48,7 +70,7 @@ const Room = () => {
   ];
 
   // Fetch rooms
-  const fetchRoom = async () => {
+  const fetchRoom = useCallback(async () => {
     setLoading(true);
     try {
       const res = await Request("/api/room", "get");
@@ -56,7 +78,6 @@ const Room = () => {
         const list = res.data || [];
         console.log(res);
         setData(list);
-        setFilteredRooms(list);
       }
     } catch (error) {
       alertError({
@@ -66,10 +87,10 @@ const Room = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Fetch room types
-  const fetchRoomType = async () => {
+  const fetchRoomType = useCallback(async () => {
     try {
       const res = await Request("/api/roomtype", "get");
       if (res) {
@@ -82,38 +103,14 @@ const Room = () => {
         text: error?.response?.data?.message || "Failed to load room types.",
       });
     }
-  };
-
-  useEffect(() => {
-    fetchRoom();
-    fetchRoomType();
   }, []);
 
-  // Filter list when search key changes
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    let filtered = data;
-
-    if (searchKeyword.trim()) {
-      const query = searchKeyword.toLowerCase();
-      filtered = data.filter(
-        (item) =>
-          item.room_number?.toString().includes(query) ||
-          item.description?.toLowerCase().includes(query) ||
-          item.floor?.toString().toLowerCase().includes(query) ||
-          item.status?.toLowerCase().includes(query),
-      );
-    }
-
-    if (filterStatus !== "All") {
-      filtered = filtered.filter(
-        (item) =>
-          item.status.toLocaleLowerCase() == filterStatus.toLocaleLowerCase(),
-      );
-    }
-
-    setFilteredRooms(filtered);
-    setCurrentPage(1);
-  }, [searchKeyword, data, filterStatus]);
+    void fetchRoom();
+    void fetchRoomType();
+  }, [fetchRoom, fetchRoomType]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const handleAddNew = () => {
     setEditingId(null);
@@ -186,6 +183,7 @@ const Room = () => {
 
   const handleFilterChange = ({ key }) => {
     setFilterStatus(key);
+    setCurrentPage(1);
   };
 
   return (
@@ -232,7 +230,10 @@ const Room = () => {
             type="text"
             placeholder="Search by room number or description..."
             value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
+            onChange={(e) => {
+              setSearchKeyword(e.target.value);
+              setCurrentPage(1);
+            }}
           />
         </div>
       </div>

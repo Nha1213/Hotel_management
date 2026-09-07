@@ -1,0 +1,687 @@
+body.dark-mode .dashboard {
+  /* background: #0f172a; */
+   background: #172036;
+}
+
+body.dark-mode .dashboard .room-type-table tbody tr:hover {
+  background: #1e293b;
+}
+
+body.light-mode .dashboard {
+  background: #f1f3f6;
+}
+
+/* =========================================
+   Reservation Page
+========================================= */
+
+.reservation-page {
+  min-height: 100vh;
+  background: #f4f6fa;
+  color: #10213a;
+}
+
+.reservation-container {
+  width: calc(100% - 40px);
+  /* max-width: 1230px; */
+  margin: 0 auto;
+  padding: 18px 0 50px;
+}
+
+
+/* =========================================
+   Header
+========================================= */
+
+.reservation-header {
+  min-height: 74px;
+  background: #ffffff;
+  border: 1px solid #dce3ed;
+  border-radius: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 16px;
+  margin-bottom: 16px;
+
+  box-shadow: 0 1px 2px rgba(16, 33, 58, 0.03);
+}
+
+.reservation-title {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.title-icon {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #00a58a;
+}
+
+.reservation-title h1 {
+  margin: 0;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+
+  color: #10213a;
+}
+
+.reservation-title p {
+  margin: 3px 0 0;
+
+  font-size: 16px;
+  line-height: 16px;
+
+  color: #657895;
+}
+
+
+/* =========================================
+   Create Booking Button
+========================================= */
+
+.create-booking-btn {
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 0 17px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #009f83;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 7px rgba(0, 159, 131, 0.22);
+
+  transition: all 0.2s ease;
+}
+
+.create-booking-btn:hover {
+  background: #008b73;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================
+   Filter
+========================================= */
+
+.reservation-filter {
+  min-height: 57px;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ed;
+  border-radius: 13px;
+
+  padding: 9px 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+}
+
+.filter-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: #58708e;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.status-buttons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.filter-btn {
+  height: 25px;
+
+  border: none;
+  border-radius: 9px;
+
+  padding: 0 12px;
+
+  background: #f1f5f9;
+  color: #173353;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: #e5edf5;
+}
+
+.filter-btn.active {
+  background: #172940;
+  color: #ffffff;
+}
+
+
+/* =========================================
+   Channel
+========================================= */
+
+.channel-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #7a8ca5;
+
+  font-size: 16px;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 106px;
+}
+
+.select-wrapper select {
+  width: 100%;
+  height: 33px;
+
+  appearance: none;
+
+  border: 1px solid #dce4ee;
+  border-radius: 9px;
+
+  background: #f8fafc;
+
+  padding: 0 28px 0 11px;
+
+  color: #203957;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  outline: none;
+  cursor: pointer;
+}
+
+.select-wrapper svg {
+  position: absolute;
+  right: 8px;
+  top: 9px;
+
+  pointer-events: none;
+
+  color: #344d6b;
+}
+
+
+/* =========================================
+   Table Container
+========================================= */
+
+.reservation-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ed;
+  border-radius: 13px;
+
+  box-shadow: 0 1px 2px rgba(16, 33, 58, 0.03);
+}
+
+
+/* =========================================
+   Table
+========================================= */
+
+.reservation-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 1050px;
+}
+
+.reservation-table thead {
+  background: #f8fafc;
+}
+
+.reservation-table th {
+  height: 40px;
+
+  padding: 0 15px;
+
+  border-bottom: 1px solid #dce3ed;
+
+  text-align: left;
+
+  color: #173353;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.reservation-table td {
+  height: 57px;
+
+  padding: 7px 15px;
+
+  border-bottom: 1px solid #e5eaf0;
+
+  vertical-align: middle;
+
+  font-size: 16px;
+}
+
+.reservation-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reservation-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.reservation-table tbody tr:hover {
+  background: #fbfcfe;
+}
+
+
+/* =========================================
+   Booking ID
+========================================= */
+
+.booking-id {
+  color: #102b4a;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   Guest
+========================================= */
+
+.guest-info,
+.room-info,
+.stay-info,
+.amount-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.guest-info strong {
+  color: #132b48;
+  font-size: 16px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.guest-info span {
+  margin-top: 2px;
+
+  color: #8191a8;
+
+  font-size: 16px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   Room
+========================================= */
+
+.room-info strong {
+  color: #132b48;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.room-info span {
+  margin-top: 2px;
+
+  color: #70839e;
+
+  font-size: 16px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   Stay Dates
+========================================= */
+
+.stay-info strong {
+  color: #526d8d;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+.stay-info span {
+  margin-top: 2px;
+
+  color: #8292a9;
+
+  font-size: 16x;
+}
+
+
+/* =========================================
+   Status
+========================================= */
+
+.status {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 67px;
+  height: 20px;
+
+  padding: 0 9px;
+
+  border-radius: 10px;
+
+  font-size: 16x;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.status.checked-in {
+  background: #c9f8df;
+  color: #007c59;
+}
+
+.status.checked-out {
+  background: #e5eaf0;
+  color: #50627a;
+}
+
+.status.confirmed {
+  background: #fff0b8;
+  color: #a45a00;
+}
+
+.status.cancelled {
+  background: #ffe0e5;
+  color: #c52342;
+}
+
+
+/* =========================================
+   Source
+========================================= */
+
+.source-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 20px;
+
+  padding: 0 9px;
+
+  border-radius: 6px;
+
+  background: #f3f6fa;
+  border: 1px solid #dce4ed;
+
+  color: #36506e;
+
+  font-size: 16x;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   Amount
+========================================= */
+
+.amount-info {
+  align-items: flex-end;
+}
+
+.amount-info strong {
+  color: #102c4b;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.amount-info span {
+  margin-top: 2px;
+
+  color: #00a078;
+
+  font-size: 16x;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   Actions
+========================================= */
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 9px;
+
+  white-space: nowrap;
+}
+
+.action-btn {
+  height: 24px;
+
+  border: none;
+  border-radius: 9px;
+
+  padding: 0 12px;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.action-btn.check-in {
+  background: #009f83;
+}
+
+.action-btn.check-in:hover {
+  background: #008b73;
+}
+
+.action-btn.check-out {
+  background: #f00046;
+}
+
+.action-btn.check-out:hover {
+  background: #d9003f;
+}
+
+
+/* =========================================
+   Action Icons
+========================================= */
+
+.icon-action {
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+
+  color: #263f5d;
+
+  cursor: pointer;
+
+  border-radius: 5px;
+
+  transition: all 0.2s ease;
+}
+
+.icon-action:hover {
+  background: #f0f4f8;
+}
+
+.icon-action.cancel {
+  color: #ff1744;
+  border: 1px solid #ff1744;
+  border-radius: 50%;
+}
+
+.icon-action.cancel:hover {
+  background: #fff0f3;
+}
+
+
+/* =========================================
+   Empty State
+========================================= */
+
+.empty-reservation {
+  height: 180px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #8191a8;
+
+  font-size: 16px;
+}
+
+
+/* =========================================
+   Responsive
+========================================= */
+
+@media (max-width: 1000px) {
+  .reservation-container {
+    width: calc(100% - 24px);
+  }
+
+  .reservation-filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 12px;
+  }
+
+  .filter-left {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .status-buttons {
+    flex-shrink: 0;
+  }
+
+  .channel-filter {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+
+@media (max-width: 650px) {
+  .reservation-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .create-booking-btn {
+    width: 100%;
+  }
+
+  .reservation-title h1 {
+    font-size: 16px;
+  }
+
+  .filter-left {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .status-buttons {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 3px;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+  }
+
+  .channel-filter {
+    justify-content: space-between;
+  }
+
+  .select-wrapper {
+    width: 130px;
+  }
+}
