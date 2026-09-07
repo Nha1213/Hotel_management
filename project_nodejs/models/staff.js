@@ -10,15 +10,28 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      Staff.belongsTo(models.Room, { 
-        foreignKey: 'room_id',
-        as: 'room'
+      // Staff.belongsToMany(models.Room, {
+      //   through: models.StaffRoom,
+      //   foreignKey: 'staff_id',
+      //   otherKey: 'room_id',
+      //   as: 'room'
+      // });
+
+      Staff.belongsToMany(models.Room, {
+        through: models.StaffRoom,
+        foreignKey: 'staff_id',
+        otherKey: 'room_id',
+        as: 'rooms'
       });
+
+
+      Staff.hasMany(models.StaffRoom, {
+        foreignKey: 'staff_id',
+        as: 'staff_rooms'
+      })
     }
   }
   Staff.init({
-    room_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     position: DataTypes.STRING,
     gender: DataTypes.STRING,

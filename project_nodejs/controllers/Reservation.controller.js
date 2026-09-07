@@ -19,24 +19,24 @@ function requireCheck(
   status,
   reservation_details,
 ) {
-  if (!customer_id) {
-    res
-      .status(400)
-      .json({ success: false, message: "Customer id is required" });
-    return false;
-  }
+  // if (!customer_id) {
+  //   res
+  //     .status(400)
+  //     .json({ success: false, message: "Customer id is required" });
+  //   return false;
+  // }
   if (!reservation_date) {
     res
       .status(400)
       .json({ success: false, message: "Reservation date is required" });
     return false;
   }
-  if (!check_in_date) {
-    res
-      .status(400)
-      .json({ success: false, message: "Check in date is required" });
-    return false;
-  }
+  // if (!check_in_date) {
+  //   res
+  //     .status(400)
+  //     .json({ success: false, message: "Check in date is required" });
+  //   return false;
+  // }
   if (!check_out_date) {
     res
       .status(400)
@@ -73,8 +73,8 @@ const getReservation = async (req, res) => {
 
     if (check_in && check_out) {
       whereClause[Op.and] = [
-        { check_in: { [Op.gte]: check_in } },
-        { check_out: { [Op.lte]: check_out } },
+        { check_in_date: { [Op.gte]: check_in } },
+        { check_out_date: { [Op.lte]: check_out } },
       ];
     }
 
@@ -144,7 +144,7 @@ const createReservation = async (req, res) => {
 
     const reservation = await Reservation.create(
       {
-        customer_id,
+        customer_id: customer_id || null,
         reservation_date,
         check_in_date,
         check_out_date,
@@ -234,7 +234,7 @@ const updateReservation = async (req, res) => {
 
     await checkById.update(
       {
-        customer_id,
+        customer_id: customer_id || null,
         reservation_date,
         check_in_date,
         check_out_date,

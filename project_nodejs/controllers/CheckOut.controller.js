@@ -1,4 +1,4 @@
-const { CheckOut } = require("../models");
+const { CheckOut, Reservation, Employee } = require("../models");
 const { logError } = require("../middlewares/logError");
 const { Op, or } = require("sequelize");
 
@@ -13,24 +13,20 @@ const GetAllCheckOut = async (req, res) => {
       };
     }
 
-    const checkOut = await CheckOut.findAll(
-      {
-        where,
-        include: [
-          {
-            model: CheckOut,
-            as: "reservation",
-            include: [
-              {
-                model: CheckOut,
-                as: "employee",
-              },
-            ],
-          },
-        ],
-      },
-      (order = [["id", "DESC"]]),
-    );
+    const checkOut = await CheckOut.findAll({
+      where,
+      include: [
+        {
+          model: Reservation,
+          as: "reservation",
+        },
+        {
+          model: Employee,
+          as: "employee",
+        },
+      ],
+      order: [["id", "DESC"]],
+    });
 
     res.status(200).json({
       success: true,

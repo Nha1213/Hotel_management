@@ -9,13 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      room_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Rooms',
-          key: 'id'
-        }
-      },
       name: {
         type: Sequelize.STRING
       },

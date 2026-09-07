@@ -105,7 +105,7 @@ body.dark-mode .dashboard-container .header-card {
   background-color: #4a4c4f;
 }
 
-.badge-blocked {
+.badge-block {
   background-color: #000000;
 }
 
@@ -369,7 +369,7 @@ body.dark-mode .dashboard-container .header-card {
   background-color: #6b7280;
 }
 
-.status-pill.badge-block {
+.status-pill.badge-block{
   background-color: #374151;
 }
 

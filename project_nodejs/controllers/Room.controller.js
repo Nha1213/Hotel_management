@@ -1,91 +1,115 @@
-const {Room, RoomType, Staff, StaffRoom, sequelize} = require("../models");
-const {logError} = require("../middlewares/logError");
-const {Op} = require("sequelize");
+const { Room, RoomType, Staff, StaffRoom, sequelize } = require("../models");
+const { logError } = require("../middlewares/logError");
+const { Op } = require("sequelize");
 
+function requireCheck(res, room_number, room_type_id, floor, status) {
+  if (!room_number) {
+    return res.status(400).json({
+      success: false,
+      message: "Room number is required",
+    });
+  }
 
-function requireCheck(res, room_number, room_type_id, floor, status){
-    if(!room_number){
-            return res.status(400).json({
-                success: false,
-                message: "Room number is required",
-            });
-        }
+  if (!room_type_id) {
+    return res.status(400).json({
+      success: false,
+      message: "Room type id is required",
+    });
+  }
 
-        if(!room_type_id){
-            return res.status(400).json({
-                success: false,
-                message: "Room type id is required",
-            });
-        }
+  if (!floor) {
+    return res.status(400).json({
+      success: false,
+      message: "Floor is required",
+    });
+  }
 
-        if(!floor){
-            return res.status(400).json({
-                success: false,
-                message: "Floor is required",
-            });
-        }
-
-        if(!status){
-            return res.status(400).json({
-                success: false,
-                message: "Status is required",
-            });
-        }
+  if (!status) {
+    return res.status(400).json({
+      success: false,
+      message: "Status is required",
+    });
+  }
 }
 
-const getAllRoom = async (req, res) =>{
-    try{
-        const {search} = req.query;
-        const where = {};
+const getAllRoom = async (req, res) => {
+  try {
+    const { search } = req.query;
+    const where = {};
 
-        if(search?.trim()){
-            where.room_number = {
-                [Op.like]: `%${search.trim()}%`,
-            };
-        }
-
-        const rooms = await Room.findAll(
-            {
-                include: [
-                    {
-                        model: RoomType,
-                        as: "room_type",
-                        attributes: ["id", "name", "price_per_night", "max_guest", "description", "image"],
-                    },
-                    {
-                        model: Staff,
-                        as: "staffs",
-                        attributes: ["id", "name", "position", "gender", "age", "phone"],
-                    }
-                ]
-            },
-            {where, order:[["id", "DESC"]]}
-        );
-
-        return res.status(200).json({
-            success: true,
-            message: "fetched rooms successfully",
-            data: rooms
-        });
-    }catch(error){
-        logError("getAllRoom", error, res);
+    if (search?.trim()) {
+      where.room_number = {
+        [Op.like]: `%${search.trim()}%`,
+      };
     }
-}
+
+    const rooms = await Room.findAll({
+      where,
+      include: [
+        {
+          model: RoomType,
+          as: "room_type",
+          attributes: [
+            "id",
+            "name",
+            "price_per_night",
+            "max_guest",
+            "description",
+            "image",
+          ],
+        },
+        {
+          model: StaffRoom,
+          as: "staff_rooms",
+          attributes: ["id", "staff_id", "room_id"],
+          include: [
+            {
+              model: Staff,
+              as: "staff",
+              attributes: ["id", "name", "position", "gender", "age", "phone"],
+            },
+          ],
+        },
+      ],
+      order: [["id", "DESC"]],
+    });
+    // Ensure frontend compatibility with room.staffs.id
+    const formattedRooms = rooms.map((room) => {
+      const plain = room.toJSON();
+      const firstStaff = plain.staff_rooms?.[0]?.staff || null;
+      return {
+        ...plain,
+        staffs: firstStaff,
+      };
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "fetched rooms successfully",
+      data: formattedRooms,
+    });
+  } catch (error) {
+    logError("getAllRoom", error, res);
+  }
+};
 
 const createRoom = async (req, res) => {
-    const t = await sequelize.transaction();
+  const t = await sequelize.transaction();
   try {
     const { room_number, room_type_id, floor, status, description } = req.body;
 
     requireCheck(res, room_number, room_type_id, floor, status);
 
-    const room = await Room.create({
-      room_number,
-      room_type_id,
-      floor,
-      status,
-      description,
-    }, {transaction: t});
+    const room = await Room.create(
+      {
+        room_number,
+        room_type_id,
+        floor,
+        status,
+        description,
+      },
+      { transaction: t },
+    );
 
     await t.commit();
 
@@ -100,101 +124,109 @@ const createRoom = async (req, res) => {
 };
 
 const updateStatusRoom = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { status } = req.body;
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
 
-        if (!id) {
-            return res.status(400).json({
-                success: false,
-                message: "Room id is required",
-            });
-        }
-
-        if (!status) {
-            return res.status(400).json({
-                success: false,
-                message: "Room status is required",
-            });
-        }
-
-        const room = await Room.findByPk(id);
-
-        if (!room) {
-            return res.status(404).json({
-                success: false,
-                message: "Room not found",
-            });
-        }
-
-        await room.update({ status });
-
-        return res.status(200).json({
-            success: true,
-            message: "Room status updated successfully",
-            data: room,
-        });
-
-    } catch (error) {
-        logError("updateStatusRoom", error, res);
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "Room id is required",
+      });
     }
+
+    if (!status) {
+      return res.status(400).json({
+        success: false,
+        message: "Room status is required",
+      });
+    }
+
+    const room = await Room.findByPk(id);
+
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        message: "Room not found",
+      });
+    }
+
+    await room.update({ status });
+
+    return res.status(200).json({
+      success: true,
+      message: "Room status updated successfully",
+      data: room,
+    });
+  } catch (error) {
+    logError("updateStatusRoom", error, res);
+  }
 };
 const updateRoom = async (req, res) => {
-    try{
-        const {id} = req.params;
-        const {room_number, room_type_id, floor, status, description} = req.body;
-        if(!id){
-            return res.status(400).json({
-                success: false,
-                message: "Room id is required",
-            });
-        }
-        const checkById = await Room.findByPk(id);
-        if(!checkById){
-            return res.status(404).json({
-                success: false,
-                message: "Room not found",
-            });
-        }
-
-        requireCheck(res, room_number, room_type_id, floor, status);
-
-        const room = await Room.update({room_number, room_type_id, floor, status, description}, {where:{id}});
-
-        return res.status(200).json({
-            success: true,
-            message: "Room updated successfully",
-            data: checkById
-        });
-    }catch(error){
-        logError("updateRoom", error, res);
+  try {
+    const { id } = req.params;
+    const { room_number, room_type_id, floor, status, description } = req.body;
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "Room id is required",
+      });
     }
-}
+    const checkById = await Room.findByPk(id);
+    if (!checkById) {
+      return res.status(404).json({
+        success: false,
+        message: "Room not found",
+      });
+    }
+
+    requireCheck(res, room_number, room_type_id, floor, status);
+
+    const room = await Room.update(
+      { room_number, room_type_id, floor, status, description },
+      { where: { id } },
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Room updated successfully",
+      data: checkById,
+    });
+  } catch (error) {
+    logError("updateRoom", error, res);
+  }
+};
 
 const deleteRoom = async (req, res) => {
-    try{
-        const {id} = req.params;
-        if(!id){
-            return res.status(400).json({
-                success: false,
-                message: "Room id is required",
-            });
-        }
-        const room = await Room.destroy({where:{id}});
-        if(!room){
-            return res.status(404).json({
-                success: false,
-                message: "Room not found",
-            });
-        }
-        return res.status(200).json({
-            success: true,
-            message: "Room deleted successfully",
-            data: room
-        });
-    }catch(error){
-        logError("deleteRoom", error, res);
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "Room id is required",
+      });
     }
-}
+    const room = await Room.destroy({ where: { id } });
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        message: "Room not found",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      message: "Room deleted successfully",
+      data: room,
+    });
+  } catch (error) {
+    logError("deleteRoom", error, res);
+  }
+};
 
-module.exports = {getAllRoom, createRoom, updateRoom, deleteRoom, updateStatusRoom};
+module.exports = {
+  getAllRoom,
+  createRoom,
+  updateRoom,
+  deleteRoom,
+  updateStatusRoom,
+};

@@ -1,0 +1,36 @@
+[07/09/2026 12:42:43] [createReservation] invalid input syntax for type integer: ""
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.insert (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Reservation.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async Reservation.create (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1362:12)
+    at async createReservation (D:\React js\ProjectHotel\project_nodejs\controllers\Reservation.controller.js:145:25)
+[07/09/2026 12:43:26] [createReservation] invalid input syntax for type integer: ""
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.insert (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Reservation.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async Reservation.create (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1362:12)
+    at async createReservation (D:\React js\ProjectHotel\project_nodejs\controllers\Reservation.controller.js:145:25)
+[07/09/2026 12:50:13] [createReservation] invalid input syntax for type integer: ""
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.insert (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Reservation.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async Reservation.create (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1362:12)
+    at async createReservation (D:\React js\ProjectHotel\project_nodejs\controllers\Reservation.controller.js:145:25)
+[07/09/2026 12:54:35] [createReservation] invalid input syntax for type integer: ""
+Error
+    at Query.run (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async PostgresQueryInterface.insert (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)
+    at async Reservation.save (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:2490:35)
+    at async Reservation.create (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1362:12)
+    at async createReservation (D:\React js\ProjectHotel\project_nodejs\controllers\Reservation.controller.js:145:25)

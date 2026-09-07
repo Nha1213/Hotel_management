@@ -1,0 +1,10 @@
+[07/09/2026 07:58:00] [getAllStaffs] Room is associated to Staff using an alias. You've included an alias (staff_rooms), but it does not match the alias(es) defined in your association (rooms).
+SequelizeEagerLoadingError: Room is associated to Staff using an alias. You've included an alias (staff_rooms), but it does not match the alias(es) defined in your association (rooms).
+    at Staff._getIncludedAssociation (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:574:15)
+    at Staff._validateIncludedElement (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:502:53)
+    at D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:421:37
+    at Array.map (<anonymous>)
+    at Staff._validateIncludedElements (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:417:39)
+    at Staff.findAll (D:\React js\ProjectHotel\project_nodejs\node_modules\sequelize\lib\model.js:1124:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async getAllStaffs (D:\React js\ProjectHotel\project_nodejs\controllers\staff.controller.js:21:20)

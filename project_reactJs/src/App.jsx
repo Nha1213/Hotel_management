@@ -9,6 +9,8 @@ import Room from "./Page/backend/Room/Room";
 import Branches from "./Page/backend/branches/Branches";
 import Protect from "./Page/backend/Protect/Protect";
 import ResetPassword from './Page/backend/user_account/resetPassword';
+import Staff from "./Page/backend/Staff/Staff";
+import Walk_inAndReg from "./Page/backend/Guest/Walk_inAndReg";
 
 import LayoutPage from "./Page/frontend/layout/LayoutPage";
 import Homepage from "./Page/frontend/Homepage/Homepage";
@@ -24,6 +26,8 @@ const App = () => {
           <Route path="/room_type" element={<RoomType />} />
           <Route path="/branches" element={<Branches />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/staff" element={<Staff />} />
+          <Route path="/walk_in_and_reg" element={<Walk_inAndReg />} />
         </Route>
       </Route>
 

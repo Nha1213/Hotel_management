@@ -19,17 +19,20 @@ body.dark-mode .dashboard-container .staff-Cleaning{
 }
 
 .staff-Cleaning .staff-Cleaning-btn{
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
     /* gap: 10px;    */
     /* margin-top: 10px; */
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    gap: 10px;
 }
 
 .staff-Cleaning .staff-Cleaning-btn button{
     background-color: #4CAF50;
     color: white;
-    padding: 5px 100px;
+    padding: 5px 0px;
     width: 100%;
     border: none;
     border-radius: 8px;
