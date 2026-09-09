@@ -31,12 +31,12 @@ function requireCheck(
       .json({ success: false, message: "Reservation date is required" });
     return false;
   }
-  // if (!check_in_date) {
-  //   res
-  //     .status(400)
-  //     .json({ success: false, message: "Check in date is required" });
-  //   return false;
-  // }
+  if (!check_in_date) {
+    res
+      .status(400)
+      .json({ success: false, message: "Check in date is required" });
+    return false;
+  }
   if (!check_out_date) {
     res
       .status(400)
@@ -162,6 +162,7 @@ const createReservation = async (req, res) => {
       price: detail.price,
       nights: detail.nights,
       subtotal: detail.subtotal,
+      room_number: detail.room_number,
     }));
 
     await ReservationDetail.bulkCreate(reservationDetails, {
@@ -205,6 +206,8 @@ const updateReservation = async (req, res) => {
       total_guest,
       status,
       reservation_details,
+      email,
+      guest_name,
     } = req.body;
 
     const isValid = requireCheck(
@@ -240,6 +243,8 @@ const updateReservation = async (req, res) => {
         check_out_date,
         total_guest,
         status,
+        email,
+        guest_name,
       },
       { transaction: t },
     );
@@ -256,6 +261,7 @@ const updateReservation = async (req, res) => {
       price: detail.price,
       nights: detail.nights,
       subtotal: detail.subtotal,
+      room_number: detail.room_number,
     }));
 
     await ReservationDetail.bulkCreate(reservationDetails, {
@@ -312,9 +318,33 @@ const deleteReservation = async (req, res) => {
   }
 };
 
+
+const updateReservationByStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const checkById = await Reservation.findByPk(id);
+    if (!checkById) {
+      return res.status(404).json({
+        success: false,
+        message: "Reservation not found",
+      });
+    }
+    await checkById.update({ status });
+    return res.status(200).json({
+      success: true,
+      message: "Reservation updated successfully",
+      data: checkById,
+    });
+  } catch (error) {
+    return logError("updateReservationByStatus", error, res);
+  }
+}
+
 module.exports = {
   getReservation,
   createReservation,
   updateReservation,
   deleteReservation,
+  updateReservationByStatus
 };

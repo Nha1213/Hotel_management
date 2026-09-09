@@ -84,6 +84,7 @@ const Hook = () => {
                     price: roomPrice,
                     nights,
                     subtotal: roomPrice * nights,
+                    room_number: room?.room_number,
                 },
             ],
             email: state.email,

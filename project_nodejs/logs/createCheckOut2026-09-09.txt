@@ -1,0 +1,24 @@
+[09/09/2026 23:32:06] [createCheckOut] employee is not defined
+ReferenceError: employee is not defined
+    at createCheckOut (D:\HotelManagement\Hotel_management\project_nodejs\controllers\CheckOut.controller.js:58:5)
+    at Layer.handleRequest (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at next (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\route.js:117:3)
+    at handle (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:295:15
+    at processParams (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:582:12)
+    at next (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:291:5)
+    at read (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\body-parser\lib\read.js:42:5)
+[09/09/2026 23:39:15] [createCheckOut] employee is not defined
+ReferenceError: employee is not defined
+    at createCheckOut (D:\HotelManagement\Hotel_management\project_nodejs\controllers\CheckOut.controller.js:58:5)
+    at Layer.handleRequest (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at next (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\route.js:117:3)
+    at handle (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\lib\layer.js:152:17)
+    at D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:295:15
+    at processParams (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:582:12)
+    at next (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\router\index.js:291:5)
+    at read (D:\HotelManagement\Hotel_management\project_nodejs\node_modules\body-parser\lib\read.js:42:5)

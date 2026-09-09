@@ -85,7 +85,7 @@ const Login = () => {
 
       navigate("/");
     } catch (error) {
-      console.error("Login error:", error);
+      // console.error("Login error:", error);
       alertError({
         title: "Error",
         text:
@@ -129,7 +129,7 @@ const Login = () => {
 
       setOtpSent(true);
     } catch (error) {
-      console.error("Send OTP error:", error);
+      // console.error("Send OTP error:", error);
       alertError({
         title: "Error",
         text:
@@ -174,7 +174,7 @@ const Login = () => {
 
       setOtpVerified(true);
     } catch (error) {
-      console.error("Verify OTP error:", error);
+      // console.error("Verify OTP error:", error);
       alertError({
         title: "Error",
         text:
@@ -237,7 +237,7 @@ const Login = () => {
       // Reset back to initial login state
       handleBackToLogin();
     } catch (error) {
-      console.error("Reset password error:", error);
+      // console.error("Reset password error:", error);
       alertError({
         title: "Error",
         text:

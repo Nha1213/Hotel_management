@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     room_id: DataTypes.INTEGER,
     price: DataTypes.DECIMAL,
     nights: DataTypes.INTEGER,
-    subtotal: DataTypes.DECIMAL
+    subtotal: DataTypes.DECIMAL,
+    room_number: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'ReservationDetail',

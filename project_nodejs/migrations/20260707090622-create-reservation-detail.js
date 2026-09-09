@@ -25,7 +25,9 @@ module.exports = {
           onDelete: "CASCADE",
         }
       },
-      
+      room_number: {
+        type: Sequelize.STRING
+      },
       price: {
         type: Sequelize.DECIMAL
       },

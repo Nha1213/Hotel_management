@@ -52,7 +52,9 @@ const getAllCheckIn = async (req, res) => {
 // ==========================================
 const createCheckIn = async (req, res) => {
   try {
-    const { reservation_id, employee_id, checkin_time, deposit } = req.body;
+    const { reservation_id,
+      // employee_id, 
+      checkin_time, deposit } = req.body;
 
     // Validate reservation_id
     if (!reservation_id) {
@@ -63,17 +65,17 @@ const createCheckIn = async (req, res) => {
     }
 
     // Validate employee_id
-    if (!employee_id) {
-      return res.status(400).json({
-        success: false,
-        message: "Employee ID is required",
-      });
-    }
+    // if (!employee_id) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Employee ID is required",
+    //   });
+    // }
 
     // Create check-in
     const checkIn = await CheckIn.create({
       reservation_id,
-      employee_id,
+      // employee_id,
       checkin_time,
       deposit,
       createdAt: new Date(),
@@ -143,24 +145,24 @@ const updateCheckIn = async (req, res) => {
 };
 
 const deleteCheckIn = async (req, res) => {
-    try{
-        const { id } = req.params;
-        const checkIn = await CheckIn.findByPk(id);
-        if(!checkIn){
-            return res.status(404).json({
-                success: false,
-                message: "CheckIn not found",
-            });
-        }
-        await checkIn.destroy();
-        return res.status(200).json({
-            success: true,
-            message: "CheckIn deleted successfully",
-            data: checkIn,
-        });
-    }catch(error){
-        logError("deleteCheckIn", error, res);
+  try {
+    const { id } = req.params;
+    const checkIn = await CheckIn.findByPk(id);
+    if (!checkIn) {
+      return res.status(404).json({
+        success: false,
+        message: "CheckIn not found",
+      });
     }
+    await checkIn.destroy();
+    return res.status(200).json({
+      success: true,
+      message: "CheckIn deleted successfully",
+      data: checkIn,
+    });
+  } catch (error) {
+    logError("deleteCheckIn", error, res);
+  }
 };
 module.exports = {
   getAllCheckIn,

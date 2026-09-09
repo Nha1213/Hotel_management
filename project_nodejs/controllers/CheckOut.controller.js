@@ -42,7 +42,7 @@ const createCheckOut = async (req, res) => {
   try {
     const {
       reservation_id,
-      eemployee_id,
+      // employee_id,
       checkout_time,
       total_amount,
       damage_fee,
@@ -55,16 +55,16 @@ const createCheckOut = async (req, res) => {
         message: "Reservation id is required",
       });
     }
-    if (!employee) {
-      return res.status(400).json({
-        success: false,
-        message: "Employee id is required",
-      });
-    }
+    // if (!employee) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Employee id is required",
+    //   });
+    // }
 
     const checkOut = await CheckOut.create({
       reservation_id,
-      eemployee_id,
+      // employee_id,
       checkout_time,
       total_amount,
       damage_fee,

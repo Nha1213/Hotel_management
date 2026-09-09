@@ -18,7 +18,7 @@ const HookUser = () => {
                     title: "Login Success",
                     text: "Login successfully"
                 })
-                console.log(res);
+                // console.log(res);
             }
         }catch(error){
             alertError({
