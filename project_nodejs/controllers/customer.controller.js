@@ -84,71 +84,21 @@ const getAllCustomers = async (req, res) => {
   }
 };
 
-function checkRequire(
-  first_name,
-  last_name,
-  gender,
-  phone,
-  email,
-  nationality,
-  address,
-  full_name,
-  password,
-) {
-  if (first_name) {
-    return res.status(400).json({
-      success: false,
-      message: "First name is required",
-    });
+function checkRequire({ phone, email, nationality, password }) {
+  if (!phone) {
+    return "Phone is required";
   }
-  if (last_name) {
-    return res.status(400).json({
-      success: false,
-      message: "Last name is required",
-    });
+  if (!email) {
+    return "Email is required";
   }
-  if (gender) {
-    return res.status(400).json({
-      success: false,
-      message: "Gender is required",
-    });
+  if (!nationality) {
+    return "Nationality is required";
   }
-  if (phone) {
-    return res.status(400).json({
-      success: false,
-      message: "Phone is required",
-    });
+  if (!password) {
+    return "Password is required";
   }
-  if (email) {
-    return res.status(400).json({
-      success: false,
-      message: "Email is required",
-    });
-  }
-  if (nationality) {
-    return res.status(400).json({
-      success: false,
-      message: "Nationality is required",
-    });
-  }
-  if (address) {
-    return res.status(400).json({
-      success: false,
-      message: "Address is required",
-    });
-  }
-  if (full_name) {
-    return res.status(400).json({
-      success: false,
-      message: "Full name is required",
-    });
-  }
-  if (password) {
-    return res.status(400).json({
-      success: false,
-      message: "Password is required",
-    });
-  }
+
+  return null;
 }
 
 const registerCustomer = async (req, res) => {
@@ -169,17 +119,14 @@ const registerCustomer = async (req, res) => {
     const file = req.files?.[0];
     const image = buildPhoto(file);
 
-    checkRequire(
-      first_name,
-      last_name,
-      gender,
-      phone,
-      email,
-      nationality,
-      address,
-      full_name,
-      password,
-    );
+    const missingField = checkRequire({ phone, email, nationality, password });
+
+    if (missingField) {
+      return res.status(400).json({
+        success: false,
+        message: missingField,
+      });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -232,18 +179,6 @@ const updateCustomer = async (req, res) => {
     const file = req.files?.[0];
     const image = buildPhoto(file);
 
-    checkRequire(
-      first_name,
-      last_name,
-      gender,
-      phone,
-      email,
-      nationality,
-      address,
-      full_name,
-      password,
-    );
-
     const customer = await Customer.findByPk(id);
 
     if (!customer) {
@@ -253,7 +188,9 @@ const updateCustomer = async (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = password
+      ? await bcrypt.hash(password, 10)
+      : customer.password;
 
     const updateCustomer = await customer.update(
       {
@@ -261,11 +198,11 @@ const updateCustomer = async (req, res) => {
         last_name: last_name || customer.last_name,
         gender: gender || customer.gender,
         phone: phone || customer.phone,
-        email: email || customer.emails,
+        email: email || customer.email,
         nationality: nationality || customer.nationality,
         address: address || customer.address,
         full_name: full_name || customer.full_name,
-        password: password || hashedPassword,
+        password: hashedPassword,
         image: image || customer.image,
       },
       {

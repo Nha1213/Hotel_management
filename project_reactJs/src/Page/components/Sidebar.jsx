@@ -23,12 +23,11 @@ const Sidebar = () => {
     },
 
     {
-      id: "guests & Walk-in",
-      label: "💳 Guests",
+      id: "guests_Walk_in",
+      label: "💳 Guests & CRM",
       path: "/guests",
       submenu: [
-        { id: "walk_in & reg", label: "Walk-in & Reg", path: "/walk_in_and_reg" },
-        { id: "walk_in_registration", label: "Walk-in Registration", path: "/walk_in_registration" },
+        { id: "walk_in & reg", label: "Walk-in & Reg", path: "/walk_in_and_reg"},
       ],
     },
 
@@ -40,6 +39,7 @@ const Sidebar = () => {
         { id: "complaints", label: "Complaints", path: "/complaints" },
         { id: "night_audit", label: "Night Audit", path: "/night_audit" },
         { id: "daily_summary", label: "Daily Summary", path: "/daily_summary" },
+        { id: "employees", label: "List of Employees", path: "/employees" },
       ],
     },
 

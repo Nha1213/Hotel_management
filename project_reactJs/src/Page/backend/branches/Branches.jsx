@@ -57,6 +57,8 @@ const Branches = () => {
     make_reservation_quick,
     loadingReservation,
     reservations,
+    handleCheckOut,
+    CheckOutloading
   } = Hook();
   // =========================================================
   // LOAD ALL ROOMS
@@ -103,7 +105,7 @@ const Branches = () => {
     }, 0);
 
     return () => window.clearTimeout(timer);
-  }, [loadRooms, loadingReservation]);
+  }, [loadRooms, loadingReservation, CheckOutloading]);
 
   // =========================================================
   // OPEN ROOM
@@ -161,14 +163,14 @@ const Branches = () => {
       setData((prevRooms) =>
         Array.isArray(prevRooms)
           ? prevRooms.map((room) =>
-              room.id === selectedRoom.id
-                ? {
-                    ...room,
-                    status,
-                    ...(status !== "Cleaning" ? { staffs: null } : {}),
-                  }
-                : room,
-            )
+            room.id === selectedRoom.id
+              ? {
+                ...room,
+                status,
+                ...(status !== "Cleaning" ? { staffs: null } : {}),
+              }
+              : room,
+          )
           : [],
       );
 
@@ -269,13 +271,13 @@ const Branches = () => {
       setData((prevRooms) =>
         Array.isArray(prevRooms)
           ? prevRooms.map((room) =>
-              room.id === selectedRoom.id
-                ? {
-                    ...room,
-                    staffs: selectedStaff || null,
-                  }
-                : room,
-            )
+            room.id === selectedRoom.id
+              ? {
+                ...room,
+                staffs: selectedStaff || null,
+              }
+              : room,
+          )
           : [],
       );
 
@@ -353,14 +355,14 @@ const Branches = () => {
       setData((prevRooms) =>
         Array.isArray(prevRooms)
           ? prevRooms.map((room) =>
-              room.id === selectedRoom.id
-                ? {
-                    ...room,
-                    status: "Available",
-                    staffs: null,
-                  }
-                : room,
-            )
+            room.id === selectedRoom.id
+              ? {
+                ...room,
+                status: "Available",
+                staffs: null,
+              }
+              : room,
+          )
           : [],
       );
 
@@ -404,10 +406,10 @@ const Branches = () => {
     filter === "All"
       ? rooms
       : rooms.filter(
-          (room) =>
-            String(room.status || "").toLowerCase() ===
-            String(filter).toLowerCase(),
-        );
+        (room) =>
+          String(room.status || "").toLowerCase() ===
+          String(filter).toLowerCase(),
+      );
 
   // =========================================================
   // FLOOR RANGE
@@ -427,13 +429,13 @@ const Branches = () => {
   const filteredRoomsByFloor = !selectedFloorRange
     ? filteredRooms
     : filteredRooms.filter((room) => {
-        const roomNumber = Number(room.room_number);
+      const roomNumber = Number(room.room_number);
 
-        return (
-          roomNumber >= selectedFloorRange[0] &&
-          roomNumber <= selectedFloorRange[1]
-        );
-      });
+      return (
+        roomNumber >= selectedFloorRange[0] &&
+        roomNumber <= selectedFloorRange[1]
+      );
+    });
 
   // =========================================================
   // ROOM COUNT
@@ -676,7 +678,7 @@ const Branches = () => {
 
                     if (reservedForRoom) {
                       return (
-                        <div className="guest-info">
+                        <div className="guest-info1">
                           <span className="guest-name">
                             {reservedForRoom?.guest_name}
                           </span>
@@ -719,12 +721,12 @@ const Branches = () => {
         ) : (
           <div
             style={{
-              width: "100%",
-              padding: "40px",
-              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <p>No rooms found</p>
+            <p style={{ textAlign: "center" }}>Empty rooms found</p>
           </div>
         )}
       </div>
@@ -732,7 +734,7 @@ const Branches = () => {
       {/* =====================================================
           ROOM MODAL
       ===================================================== */}
-      {selectedRoom && loadingReservation && (
+      {selectedRoom &&  (
         <div className="modal-overlay" onClick={closeRoom}>
           <div className="modal-container" onClick={(e) => e.stopPropagation()}>
             {/* =================================================
@@ -781,9 +783,8 @@ const Branches = () => {
             ================================================= */}
             <div className="modal-tabs">
               <button
-                className={`tab-btn ${
-                  activeTab === "Room & Guest" ? "active" : ""
-                }`}
+                className={`tab-btn ${activeTab === "Room & Guest" ? "active" : ""
+                  }`}
                 onClick={() => setActiveTab("Room & Guest")}
                 disabled={staffLoading || cleanLoading || !!loadingStatus}
               >
@@ -805,9 +806,8 @@ const Branches = () => {
                 )}
 
               <button
-                className={`tab-btn ${
-                  activeTab === "Smart Lock" ? "active" : ""
-                }`}
+                className={`tab-btn ${activeTab === "Smart Lock" ? "active" : ""
+                  }`}
                 onClick={() => setActiveTab("Smart Lock")}
                 disabled={staffLoading || cleanLoading || !!loadingStatus}
               >
@@ -876,8 +876,8 @@ const Branches = () => {
                       </div>
                     </div>
                   )}
-                  {selectedRoom.status === "Occupied" && (
-                    <div className="staff-Occupied">
+                  {selectedRoom.status === "Occupied" && CheckOutloading && (
+                    <div className="staff-Occupied">  
                       {/* Header */}
                       <div className="staff-Occupied-title">
                         <div className="staff-Occupied-guest">
@@ -903,7 +903,7 @@ const Branches = () => {
 
                       {/* Buttons */}
                       <div className="staff-Occupied-btn">
-                        <button className="checkout-btn">
+                        <button className="checkout-btn" onClick={() => handleCheckOut(selectedRoom)}>
                           <LogOut size={15} />
                           Check-Out Guest
                         </button>
@@ -926,11 +926,10 @@ const Branches = () => {
                   <div className="status-grid">
                     {/* AVAILABLE */}
                     <button
-                      className={`status-btn ${
-                        buttonActive === "Available"
+                      className={`status-btn ${buttonActive === "Available"
                           ? "btn-available"
                           : "btn-available-active"
-                      }`}
+                        }`}
                       onClick={() => loadRoomsByStatus("Available")}
                       disabled={!!loadingStatus || staffLoading || cleanLoading}
                     >
@@ -941,11 +940,10 @@ const Branches = () => {
 
                     {/* CLEANING */}
                     <button
-                      className={`status-btn ${
-                        buttonActive === "Cleaning"
+                      className={`status-btn ${buttonActive === "Cleaning"
                           ? "btn-cleaning"
                           : "btn-cleaning-active"
-                      }`}
+                        }`}
                       onClick={() => loadRoomsByStatus("Cleaning")}
                       disabled={!!loadingStatus || staffLoading || cleanLoading}
                     >
@@ -956,11 +954,10 @@ const Branches = () => {
 
                     {/* MAINTENANCE */}
                     <button
-                      className={`status-btn ${
-                        buttonActive === "Maintenance"
+                      className={`status-btn ${buttonActive === "Maintenance"
                           ? "btn-maintenance"
                           : "btn-maintenance-active"
-                      }`}
+                        }`}
                       onClick={() => loadRoomsByStatus("Maintenance")}
                       disabled={!!loadingStatus || staffLoading || cleanLoading}
                     >
@@ -971,11 +968,10 @@ const Branches = () => {
 
                     {/* BLOCKED */}
                     <button
-                      className={`status-btn ${
-                        buttonActive === "Blocked"
+                      className={`status-btn ${buttonActive === "Blocked"
                           ? "btn-block"
                           : "btn-block-active"
-                      }`}
+                        }`}
                       onClick={() => loadRoomsByStatus("Blocked")}
                       disabled={!!loadingStatus || staffLoading || cleanLoading}
                     >
@@ -986,11 +982,10 @@ const Branches = () => {
 
                     {/* RESERVED */}
                     <button
-                      className={`status-btn ${
-                        buttonActive === "Reserved"
+                      className={`status-btn ${buttonActive === "Reserved"
                           ? "btn-reserved"
                           : "btn-reserved-active"
-                      }`}
+                        }`}
                       onClick={() => loadRoomsByStatus("Reserved")}
                       disabled={!!loadingStatus || staffLoading || cleanLoading}
                     >
@@ -1042,7 +1037,7 @@ const Branches = () => {
               ================================================= */}
               {activeTab === "+ Quick Check-In" && (
                 <div className="tab-content-placeholder">
-                  <div className="guest-info">
+                  <div className="guest-info1">
                     <div>
                       <label>Guest Full name</label>
 
@@ -1084,7 +1079,7 @@ const Branches = () => {
                     </div>
                   </div>
 
-                  <div className="guest-info">
+                  <div className="guest-info1">
                     <div>
                       <label>Phone Number*</label>
 
@@ -1125,7 +1120,7 @@ const Branches = () => {
                     </div>
                   </div>
 
-                  <div className="guest-info">
+                  <div className="guest-info1">
                     <div>
                       <label>Check-Out Date</label>
 

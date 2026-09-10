@@ -159,6 +159,9 @@ body.dark-mode .dashboard-container .header-card {
   justify-content: space-between;
   box-sizing: border-box;
 }
+.room-card:hover{
+  cursor: pointer;
+}
 
 .card-header {
   display: flex;
@@ -540,13 +543,13 @@ body.dark-mode .dashboard-container .header-card .floor-btn.active {
 }
 
 
-.guest-info{
+.guest-info1{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin-bottom: 10px;
 }
-.guest-info div input, select{
+.guest-info1 div input, select{
   width: 100%;
   padding: 5px 10px;
   border-radius: 8px;
@@ -554,25 +557,25 @@ body.dark-mode .dashboard-container .header-card .floor-btn.active {
   background-color: #878e9218;
 }
 
-.guest-info div input:focus, select:focus{
+.guest-info1 div input:focus, select:focus{
   outline: none;
   border-color: #92969c;
   box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
 }
 
-.guest-info div input::placeholder{
+.guest-info1 div input::placeholder{
   font-size: 0.9rem;
 }
 
-.guest-info div select{
+.guest-info1 div select{
   cursor: pointer;
 }
 
-.guest-info div select option{
+.guest-info1 div select option{
   background-color: #ffffff;  
 }
 
-.guest-info div label{
+.guest-info1 div label{
   font-size: 0.9rem;
   font-weight: 600;
   color: #334155;

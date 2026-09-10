@@ -341,6 +341,18 @@ const updateReservationByStatus = async (req, res) => {
   }
 }
 
+
+// const createRelationshipWithCustomer = async (customer_id, reservation_id) => {
+//   try {
+//     const id
+//     await CustomerReservation.create({
+//       customer_id,
+//       reservation_id,
+//     });
+//   } catch (error) {
+//     return logError("createRelationshipWithCustomer", error);
+//   }
+// }
 module.exports = {
   getReservation,
   createReservation,
